@@ -30,7 +30,7 @@ class FlagOverlay(context: Context) : View(context) {
         val dy = (height - srcH * scale) / 2f
         val fw = f.width() * scale
         val tx = width - (f.centerX() * scale + dx)
-        val ts = fw * 0.95f
+        val ts = fw * 0.66f
         val ty = f.top * scale + dy - ts * 0.35f
         if (!hasPos) { cx = tx; cy = ty; size = ts; hasPos = true }
         else { cx += (tx - cx) * 0.45f; cy += (ty - cy) * 0.45f; size += (ts - size) * 0.3f }
