@@ -228,7 +228,7 @@ class MainActivity : ComponentActivity() {
     private fun showCreator() {
         AlertDialog.Builder(this)
             .setTitle("Find the flag")
-            .setMessage("Yaratuvchi:\n$CREATOR_NAME")
+            .setMessage("Yaratuvchilar:\n\n$CREATOR_NAME\n\n$CREATOR_NAME_2")
             .setPositiveButton("Telegram") { _, _ -> open(TG_URL) }
             .setNeutralButton("Instagram") { _, _ -> open(IG_URL) }
             .setNegativeButton("Yopish", null)
