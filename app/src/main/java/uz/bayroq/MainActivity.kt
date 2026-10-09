@@ -7,9 +7,9 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
-import android.net.Uri
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -96,7 +96,7 @@ class MainActivity : ComponentActivity() {
 
     private fun styleBtn(b: Button) { b.stateListAnimator = null; b.minHeight = 0; b.minimumHeight = 0 }
 
-    // ---------- Reklama ----------
+    // ---------- Internet va reklama ----------
     private fun isOnline(): Boolean {
         val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
@@ -240,6 +240,10 @@ class MainActivity : ComponentActivity() {
 
     // ---------- O'yin mantig'i ----------
     private fun restartGame() {
+        if (!isOnline()) {
+            Toast.makeText(this, "Internet bilan kiring", Toast.LENGTH_LONG).show()
+            return
+        }
         timer?.cancel(); shuffleRunnable?.let { handler.removeCallbacks(it) }
         state = State.DONE
         score = 0; total = 0
