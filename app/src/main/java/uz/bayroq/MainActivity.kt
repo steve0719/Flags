@@ -97,7 +97,14 @@ class MainActivity : ComponentActivity() {
     private fun styleBtn(b: Button) { b.stateListAnimator = null; b.minHeight = 0; b.minimumHeight = 0 }
 
     // ---------- Reklama ----------
+    private fun isOnline(): Boolean {
+        val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return false
+        return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
     private fun loadAd() {
+        if (!isOnline()) return
         InterstitialAd.load(this, AD_UNIT, AdRequest.Builder().build(),
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: InterstitialAd) { interstitial = ad }
@@ -106,6 +113,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun showAdThen(next: () -> Unit) {
+        if (!isOnline()) { next(); return }
         val ad = interstitial
         if (ad == null) { loadAd(); next(); return }
         interstitial = null
