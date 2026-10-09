@@ -28,4 +28,5 @@ dependencies {
     implementation("androidx.camera:camera-view:$camerax")
     implementation("com.google.mlkit:face-detection:16.1.6")
     implementation("com.google.android.gms:play-services-ads:23.3.0")
+    implementation("com.google.guava:guava:33.2.1-android")
 }
