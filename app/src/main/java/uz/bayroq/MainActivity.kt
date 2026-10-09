@@ -35,6 +35,7 @@ import java.util.concurrent.Executors
 
 // ====== SOZLAMALAR ======
 const val CREATOR_NAME = "Abdimamatov Jamshid"
+const val CREATOR_NAME_2 = "Engineer Omonjonov Shohijahon"
 const val TG_URL = "https://t.me/steve_empire"
 const val IG_URL = "https://www.instagram.com/_abdimamatov"
 // Test reklama ID (haqiqiy AdMob ID bilan keyin almashtiriladi)
