@@ -209,6 +209,46 @@ nav em{font-style:normal}
 .pfa{width:92px;height:92px;border-radius:50%;margin:0 auto 12px;background:radial-gradient(circle at 35% 30%,#3ea0ff,#0e49c0);background-size:cover;background-position:center;border:4px solid #fff;box-shadow:0 4px 10px rgba(0,40,120,.35);display:grid;place-items:center;font-size:44px}
 .inp{width:100%;box-sizing:border-box;border:3px solid #cfe0ff;border-radius:14px;padding:10px 12px;font:inherit;font-weight:800;font-size:18px;color:#0b3fa8;text-align:center;outline:none;margin-bottom:6px;background:#fff}
 .inp:focus{border-color:#1e90ff}
+.orb .cd{position:absolute;top:-8px;right:-14px;z-index:3;background:linear-gradient(#ffb84a,#ff9f0a);color:#fff;font-weight:800;font-size:12px;line-height:1;padding:5px 8px;border:2px solid #fff;border-radius:12px;box-shadow:0 2px 4px rgba(0,0,0,.25);text-shadow:0 1px 0 rgba(0,0,0,.3);font-variant-numeric:tabular-nums;pointer-events:none}
+.orb .cd.on{background:linear-gradient(#4be06a,#22b53a)}
+.adnote{margin:0 0 8px;text-align:center;color:#fff;font-weight:700;font-size:15px;min-height:20px;text-shadow:0 2px 0 rgba(11,63,168,.6)}
+.orb .cd:empty{display:none}
+#splash{position:absolute;inset:0;z-index:100;background:#fff;transition:opacity .35s}
+#splash.out{opacity:0;pointer-events:none}
+.sp1,.sp2{position:absolute;inset:0;transition:opacity .4s}
+.sp1{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff}
+.sp1 .logo{width:78%;max-width:420px;aspect-ratio:1;animation:spPop .9s cubic-bezier(.2,1.4,.4,1) both}
+.sp1 .logo img{width:100%;height:100%;display:block}
+.sp2{opacity:0;background:#2aa7f5}
+.sp2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#spfill{position:absolute;width:0;background:linear-gradient(#fffbd0 0%,#fdee28 14%,#fedf0a 42%,#fecb01 70%,#ffb301 92%,#f68807 100%)}
+@keyframes spPop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes spUp{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+#guide{position:absolute;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(#1a7df0,#4cc3fb 60%,#bff0ff);padding-top:env(safe-area-inset-top,0px)}
+#guide.show{display:flex}
+.gtop{display:flex;align-items:center;gap:10px;padding:12px 14px}
+.gback{width:46px;height:46px;border-radius:50%;border:4px solid #fff;background:linear-gradient(#3ea0ff,#0e49c0);color:#fff;font-size:30px;font-weight:800;line-height:1;padding:0 0 4px;flex:none}
+#gtitle{margin:0;color:#fff;font-size:28px;text-shadow:0 3px 0 #0b3fa8}
+#gbody{flex:1;overflow-y:auto;padding:6px 14px calc(18px + env(safe-area-inset-bottom,0px))}
+.gsec{display:flex;align-items:center;gap:14px;width:100%;background:#fff;border:0;border-radius:22px;padding:14px 16px;box-shadow:0 5px 0 rgba(10,50,140,.3);text-align:left;margin-bottom:14px;font:inherit}
+.gsec .gi{font-size:44px}
+.gsec b{display:block;font-size:22px;color:#0b3fa8}
+.gsec small{color:#5b7bb5;font-weight:700;font-size:14px}
+.gsec .ar{margin-left:auto;font-size:30px;color:#1e90ff;font-weight:800}
+.gsrch{width:100%;box-sizing:border-box;border:3px solid #fff;border-radius:16px;padding:10px 14px;font:inherit;font-weight:800;font-size:17px;color:#0b3fa8;outline:none;margin-bottom:12px}
+.ggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.cc{background:#fff;border:0;border-radius:18px;padding:10px 4px 8px;box-shadow:0 4px 0 rgba(10,50,140,.28);font:inherit;display:flex;flex-direction:column;align-items:center;gap:4px}
+.cc .fl{font-size:40px;line-height:1.1}
+.cc span:last-child{font-size:12.5px;font-weight:800;color:#0b3fa8;line-height:1.1;text-align:center;overflow-wrap:anywhere}
+#gdet{position:absolute;inset:0;z-index:45;display:none;align-items:center;justify-content:center;background:rgba(5,25,80,.6);padding:20px}
+#gdet.show{display:flex}
+.gcard{width:100%;max-width:420px;background:#fff;border-radius:28px;padding:22px 18px 18px;text-align:center;box-shadow:0 10px 0 rgba(10,50,140,.3);animation:up .22s ease-out;max-height:92%;overflow-y:auto}
+.gcard .bf{font-size:110px;line-height:1.1}
+.gcard h3{margin:4px 0 12px;font-size:28px;color:#0b3fa8}
+.grow{display:flex;gap:10px;text-align:left;padding:9px 12px;background:#eef5ff;border-radius:14px;margin-bottom:8px;color:#0b3fa8;align-items:center}
+.grow i{font-style:normal;font-size:24px}
+.grow small{display:block;color:#5b7bb5;font-weight:700;font-size:12px}
+.grow b{font-weight:800;font-size:17px;line-height:1.15}
 </style>
 </head>
 <body>
@@ -244,9 +284,15 @@ nav em{font-style:normal}
  <div id="intro"><div class="gbar"><button class="back" id="iback" data-i="back">‹ Orqaga</button></div>
  <div class="ibody"><div class="hero" id="ihero" style="--a:#1e90ff;--b:#6fd4ff"><span>🚩</span></div><h2 id="inm">Find the flag</h2><div class="tags"><b data-i="g_t1">⏱ 10 soniya</b><b data-i="g_t2">🎯 O'rtacha</b></div><p class="ids" data-i="g_desc"></p>
  <div class="how"><h3 data-i="how">Qanday o'ynaladi</h3><ol><li data-i="r1"></li><li data-i="r2"></li><li data-i="r3"></li><li data-i="r4"></li></ol></div></div>
- <div class="ifoot"><button class="go bigb" id="istart" data-i="start">Boshlash</button></div></div>
+ <div class="ifoot"><p id="adnote" class="adnote"></p><button class="go bigb" id="istart"></button></div></div>
  <div id="idscr"><div class="hero" style="--a:#22b53a;--b:#7df05a"><span>🌍</span></div><h2 data-i="id_t"></h2><p data-i="id_d"></p><p id="idmsg"></p><button class="go" id="idretry" data-i="retry"></button></div>
  <div id="sheet"><div class="scard" id="card"><div class="ic" id="sic">🎮</div><h2 id="st"></h2><p id="sd"></p><div id="sext"></div><button class="go" id="sg"></button><br><button class="x" id="sx" data-i="close">Yopish</button></div></div>
+ <div id="guide"><div class="gtop"><button class="gback" id="gback">‹</button><h2 id="gtitle"></h2></div><div id="gbody"></div></div>
+ <div id="gdet"><div class="gcard" id="gcard"></div></div>
+ <div id="splash">
+  <div class="sp1" id="sp1"><div class="logo"><img src="logo.png" alt=""></div></div>
+  <div class="sp2" id="sp2"><img src="loading.jpg" alt=""><div id="spfill"></div></div>
+ </div>
 </div>
 <script>
 const $=id=>document.getElementById(id);
@@ -264,21 +310,22 @@ function palm(cls){
 }
 document.querySelectorAll('.pslot').forEach(e=>{e.outerHTML=palm('big')+palm('sm')});
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
-const B=window.Bridge||{needsId:()=>false,getId:()=>'00000000000',fetchId:()=>setTimeout(()=>window.onIdOk('00000000000'),400),startFlag:()=>{},copy:()=>{},setPrefs:()=>{},tap:()=>{},pickPhoto:()=>{}};
+const B=window.Bridge||{needsId:()=>false,getId:()=>'00000000000',fetchId:()=>setTimeout(()=>window.onIdOk('00000000000'),400),startFlag:()=>{},copy:()=>{},setPrefs:()=>{},tap:()=>{},pickPhoto:()=>{},remaining:()=>0,watchAd:()=>setTimeout(()=>window.onAdResult('Bayroq','fail'),400)};
 const TX={
-uz:{profile:"Profil",level:"Daraja 1",photo:"Rasm tanlash",name_ph:"Ismingiz",save:"Saqlash",n_rating:"Reytingim",n_info:"Ma'lumotlar",n_home:"Home",n_guide:"Qo'llanma",n_prem:"Premium",soon:"Tez orada",soon_d:"Bu o'yin tez orada qo'shiladi.",sect_d:"Bu bo'lim keyingi yangilanishda qo'shiladi.",set:"Sozlamalar",snd:"Tovush",vib:"Vibratsiya",lite:"Yengil rejim",close:"Yopish",id_l:"ID raqamingiz",copy:"Nusxalash",copied:"Nusxalandi ✓",back:"‹ Orqaga",start:"Boshlash",how:"Qanday o'ynaladi",g_desc:"Old kamera yuzingizni topadi va boshingiz ustida bayroq paydo bo'ladi. 10 soniyada bu qaysi davlat ekanini toping.",g_t1:"⏱ 10 soniya",g_t2:"🎯 O'rtacha",r1:"Telefon kamerasiga yuzingizni qarating.",r2:"Bayroqlar tez almashadi, so'ng bittasi tanlanadi.",r3:"10 soniya ichida to'g'ri davlatni tanlang.",r4:"KEYINGISI tugmasi bilan yangi raundni boshlang.",id_t:"Internet bilan kiring",id_d:"Ilova birinchi marta ochilganda internetga ulanishi kerak. Shundan keyin oflayn ishlaydi.",retry:"Qayta urinish",loading:"Yuklanmoqda...",fail:"Ulanib bo'lmadi. Internetni tekshiring."},
-ru:{profile:"Профиль",level:"Уровень 1",photo:"Выбрать фото",name_ph:"Ваше имя",save:"Сохранить",n_rating:"Рейтинг",n_info:"Инфо",n_home:"Главная",n_guide:"Помощь",n_prem:"Премиум",soon:"Скоро",soon_d:"Эта игра скоро появится.",sect_d:"Этот раздел появится в следующем обновлении.",set:"Настройки",snd:"Звук",vib:"Вибрация",lite:"Лёгкий режим",close:"Закрыть",id_l:"Ваш ID",copy:"Копировать",copied:"Скопировано ✓",back:"‹ Назад",start:"Начать",how:"Как играть",g_desc:"Фронтальная камера находит ваше лицо, и над головой появляется флаг. За 10 секунд угадайте страну.",g_t1:"⏱ 10 секунд",g_t2:"🎯 Средне",r1:"Направьте камеру на своё лицо.",r2:"Флаги быстро сменяются, затем выбирается один.",r3:"Выберите правильную страну за 10 секунд.",r4:"Кнопкой «ДАЛЕЕ» начните новый раунд.",id_t:"Подключитесь к интернету",id_d:"При первом запуске приложению нужен интернет. Затем оно работает офлайн.",retry:"Повторить",loading:"Загрузка...",fail:"Не удалось подключиться. Проверьте интернет."},
-en:{profile:"Profile",level:"Level 1",photo:"Choose photo",name_ph:"Your name",save:"Save",n_rating:"Rating",n_info:"Info",n_home:"Home",n_guide:"Guide",n_prem:"Premium",soon:"Soon",soon_d:"This game is coming soon.",sect_d:"This section will be added in a future update.",set:"Settings",snd:"Sound",vib:"Vibration",lite:"Light mode",close:"Close",id_l:"Your ID",copy:"Copy",copied:"Copied ✓",back:"‹ Back",start:"Start",how:"How to play",g_desc:"The front camera finds your face and a flag appears above your head. Guess the country in 10 seconds.",g_t1:"⏱ 10 seconds",g_t2:"🎯 Medium",r1:"Point the camera at your face.",r2:"Flags flip fast, then one is picked.",r3:"Choose the right country within 10 seconds.",r4:"Tap NEXT to start a new round.",id_t:"Connect to the internet",id_d:"The app needs internet on first launch. After that it works offline.",retry:"Try again",loading:"Loading...",fail:"Could not connect. Check your internet."}
+uz:{profile:"Profil",level:"Daraja 1",photo:"Rasm tanlash",name_ph:"Ismingiz",save:"Saqlash",g_flags:"Bayroqlar",g_cnt:"ta davlat",g_search:"Qidirish...",g_cap:"Poytaxt",g_cur:"Pul birligi",g_cont:"Materik",g_lang:"Tili",g_langs:"Tillari",ad_btn:"Reklama ko'rib ochish",ad_note:"Reklamani ko'rsangiz o'yin 24 soatga ochiladi.",ad_loading:"Reklama yuklanmoqda...",ad_noconn:"Internet yo'q. Reklama uchun internetga ulaning.",ad_fail:"Reklama hozir mavjud emas. Keyinroq urinib ko'ring.",ad_skip:"Reklamani oxirigacha ko'ring.",open_left:"Ochiq:",n_rating:"Reytingim",n_info:"Ma'lumotlar",n_home:"Home",n_guide:"Qo'llanma",n_prem:"Premium",soon:"Tez orada",soon_d:"Bu o'yin tez orada qo'shiladi.",sect_d:"Bu bo'lim keyingi yangilanishda qo'shiladi.",set:"Sozlamalar",snd:"Tovush",vib:"Vibratsiya",lite:"Yengil rejim",close:"Yopish",id_l:"ID raqamingiz",copy:"Nusxalash",copied:"Nusxalandi ✓",back:"‹ Orqaga",start:"Boshlash",how:"Qanday o'ynaladi",g_desc:"Old kamera yuzingizni topadi va boshingiz ustida bayroq paydo bo'ladi. 10 soniyada bu qaysi davlat ekanini toping.",g_t1:"⏱ 10 soniya",g_t2:"🎯 O'rtacha",r1:"Telefon kamerasiga yuzingizni qarating.",r2:"Bayroqlar tez almashadi, so'ng bittasi tanlanadi.",r3:"10 soniya ichida to'g'ri davlatni tanlang.",r4:"KEYINGISI tugmasi bilan yangi raundni boshlang.",id_t:"Internet bilan kiring",id_d:"Ilova birinchi marta ochilganda internetga ulanishi kerak. Shundan keyin oflayn ishlaydi.",retry:"Qayta urinish",loading:"Yuklanmoqda...",fail:"Ulanib bo'lmadi. Internetni tekshiring."},
+ru:{profile:"Профиль",level:"Уровень 1",photo:"Выбрать фото",name_ph:"Ваше имя",save:"Сохранить",g_flags:"Флаги",g_cnt:"стран",g_search:"Поиск...",g_cap:"Столица",g_cur:"Валюта",g_cont:"Материк",g_lang:"Язык",g_langs:"Языки",ad_btn:"Открыть за рекламу",ad_note:"Посмотрите рекламу, и игра откроется на 24 часа.",ad_loading:"Загрузка рекламы...",ad_noconn:"Нет интернета. Подключитесь для показа рекламы.",ad_fail:"Реклама сейчас недоступна. Попробуйте позже.",ad_skip:"Досмотрите рекламу до конца.",open_left:"Открыто:",n_rating:"Рейтинг",n_info:"Инфо",n_home:"Главная",n_guide:"Помощь",n_prem:"Премиум",soon:"Скоро",soon_d:"Эта игра скоро появится.",sect_d:"Этот раздел появится в следующем обновлении.",set:"Настройки",snd:"Звук",vib:"Вибрация",lite:"Лёгкий режим",close:"Закрыть",id_l:"Ваш ID",copy:"Копировать",copied:"Скопировано ✓",back:"‹ Назад",start:"Начать",how:"Как играть",g_desc:"Фронтальная камера находит ваше лицо, и над головой появляется флаг. За 10 секунд угадайте страну.",g_t1:"⏱ 10 секунд",g_t2:"🎯 Средне",r1:"Направьте камеру на своё лицо.",r2:"Флаги быстро сменяются, затем выбирается один.",r3:"Выберите правильную страну за 10 секунд.",r4:"Кнопкой «ДАЛЕЕ» начните новый раунд.",id_t:"Подключитесь к интернету",id_d:"При первом запуске приложению нужен интернет. Затем оно работает офлайн.",retry:"Повторить",loading:"Загрузка...",fail:"Не удалось подключиться. Проверьте интернет."},
+en:{profile:"Profile",level:"Level 1",photo:"Choose photo",name_ph:"Your name",save:"Save",g_flags:"Flags",g_cnt:"countries",g_search:"Search...",g_cap:"Capital",g_cur:"Currency",g_cont:"Continent",g_lang:"Language",g_langs:"Languages",ad_btn:"Watch ad to unlock",ad_note:"Watch an ad to unlock this game for 24 hours.",ad_loading:"Loading ad...",ad_noconn:"No internet. Connect to watch the ad.",ad_fail:"No ad available right now. Try again later.",ad_skip:"Watch the ad to the end.",open_left:"Open:",n_rating:"Rating",n_info:"Info",n_home:"Home",n_guide:"Guide",n_prem:"Premium",soon:"Soon",soon_d:"This game is coming soon.",sect_d:"This section will be added in a future update.",set:"Settings",snd:"Sound",vib:"Vibration",lite:"Light mode",close:"Close",id_l:"Your ID",copy:"Copy",copied:"Copied ✓",back:"‹ Back",start:"Start",how:"How to play",g_desc:"The front camera finds your face and a flag appears above your head. Guess the country in 10 seconds.",g_t1:"⏱ 10 seconds",g_t2:"🎯 Medium",r1:"Point the camera at your face.",r2:"Flags flip fast, then one is picked.",r3:"Choose the right country within 10 seconds.",r4:"Tap NEXT to start a new round.",id_t:"Connect to the internet",id_d:"The app needs internet on first launch. After that it works offline.",retry:"Try again",loading:"Loading...",fail:"Could not connect. Check your internet."}
 };
 const LN={uz:"🇺🇿 O'zbek",ru:"🇷🇺 Русский",en:"🇬🇧 English"};
 let lang=store.get('lang');
 if(!TX[lang]){const n=(navigator.language||'uz').slice(0,2);lang=TX[n]?n:'uz'}
 let sound=store.get('snd')!=='0',vib=store.get('vib')!=='0';
 const t=k=>(TX[lang][k]??TX.uz[k]??k);
-function applyLang(){document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(e=>{e.textContent=t(e.dataset.i)});renderProfile()}
+let left={},adMsg='',adBusy=0;
+function applyLang(){document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(e=>{e.textContent=t(e.dataset.i)});renderProfile();updateIntro()}
 const sync=()=>{try{B.setPrefs(lang,sound,vib)}catch(e){}};
 
-function intro(k){const it=$('intro');it.classList.add('show');it.querySelector('.ibody').scrollTop=0}
+function intro(k){adMsg='';updateIntro();const it=$('intro');it.classList.add('show');it.querySelector('.ibody').scrollTop=0}
 /* ===== Hero (shared element) transition ===== */
 let busy=0,anims=[],flyEl,flyOrb,hs=0;
 const EZ='cubic-bezier(.45,0,.2,1)',DUR=560;
@@ -374,11 +421,31 @@ document.querySelector('.gear').onclick=()=>showSheet(settingsView,'blue');
 document.querySelector('.profile').onclick=()=>showSheet(profileView,'blue');
 const NI={rating:'🥇',info:'📋',guide:'📖',prem:'👑'};
 document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>{const n=b.dataset.n;if(!n)return;
+ if(n==='guide'){gOpen();return}
  showSheet(()=>setSheet(NI[n],t('n_'+n),t('sect_d'),'',''),'yellow')}));
 
 $('iback').onclick=goBack;
-$('istart').onclick=()=>B.startFlag();
+const GAMES=['Bayroq'];
+const fmt=x=>[Math.floor(x/3600),Math.floor(x%3600/60),x%60].map(v=>String(v).padStart(2,'0')).join(':');
+function updateIntro(){const sec=left.Bayroq||0,b=$('istart'),n=$('adnote');if(!b||!n)return;
+ if(sec>0){b.textContent=t('start');n.textContent=adMsg||(t('open_left')+' '+fmt(sec))}
+ else if(!adBusy){b.textContent='📺 '+t('ad_btn');n.textContent=adMsg||t('ad_note')}}
+function refreshLocks(){
+ GAMES.forEach(g=>{let sec=0;try{sec=B.remaining(g)}catch(e){}left[g]=sec;
+  const o=document.querySelector('.orb[data-k="'+g+'"]');if(!o)return;
+  let cd=o.querySelector('.cd');if(!cd){cd=document.createElement('span');cd.className='cd';o.appendChild(cd)}
+  cd.textContent=sec>0?fmt(sec):'';cd.classList.toggle('on',sec>0)});
+ updateIntro()}
+$('istart').onclick=()=>{
+ if((left.Bayroq||0)>0){B.startFlag();return}
+ if(adBusy)return;
+ adBusy=1;adMsg='';$('istart').disabled=true;$('adnote').textContent=t('ad_loading');B.watchAd('Bayroq')};
+window.onAdResult=(g,st)=>{adBusy=0;$('istart').disabled=false;
+ adMsg=st==='ok'?'':t(st==='noconn'?'ad_noconn':st==='skip'?'ad_skip':'ad_fail');refreshLocks()};
 window.nativeBack=()=>{
+ if(splashOn)return true;
+ if($('gdet').classList.contains('show')){$('gdet').classList.remove('show');return true}
+ if($('guide').classList.contains('show')){gBackStep();return true}
  if($('idscr').classList.contains('show'))return false;
  if(sheet.classList.contains('show')){closeSheet();return true}
  if($('intro').classList.contains('show')){goBack();return true}
@@ -394,7 +461,155 @@ window.onIdOk=id=>{fetching=0;$('idscr').classList.remove('show')};
 window.onIdFail=()=>{fetching=0;$('idmsg').textContent=t('fail');$('idretry').disabled=false};
 $('idretry').onclick=startId;
 
-applyLang();sync();
+const DATA=`UZ;O'zbekiston;Toshkent|Ташкент|Tashkent;UZS;AS;uz
+US;AQSh;Vashington|Вашингтон|Washington, D.C.;USD;NA;en
+RU;Rossiya;Moskva|Москва|Moscow;RUB;EU,AS;ru
+TR;Turkiya;Anqara|Анкара|Ankara;TRY;AS,EU;tr
+GB;Buyuk Britaniya;London|Лондон|London;GBP;EU;en
+DE;Germaniya;Berlin|Берлин|Berlin;EUR;EU;de
+FR;Fransiya;Parij|Париж|Paris;EUR;EU;fr
+JP;Yaponiya;Tokio|Токио|Tokyo;JPY;AS;ja
+KR;Janubiy Koreya;Seul|Сеул|Seoul;KRW;AS;ko
+CN;Xitoy;Pekin|Пекин|Beijing;CNY;AS;zh
+IT;Italiya;Rim|Рим|Rome;EUR;EU;it
+ES;Ispaniya;Madrid|Мадрид|Madrid;EUR;EU;es
+BR;Braziliya;Braziliya|Бразилиа|Brasília;BRL;SA;pt
+AR;Argentina;Buenos-Ayres|Буэнос-Айрес|Buenos Aires;ARS;SA;es
+CA;Kanada;Ottava|Оттава|Ottawa;CAD;NA;en,fr
+IN;Hindiston;Nyu-Dehli|Нью-Дели|New Delhi;INR;AS;hi,en
+EG;Misr;Qohira|Каир|Cairo;EGP;AF;ar
+SA;Saudiya Arabistoni;Ar-Riyod|Эр-Рияд|Riyadh;SAR;AS;ar
+AE;BAA;Abu-Dabi|Абу-Даби|Abu Dhabi;AED;AS;ar
+KZ;Qozog'iston;Ostona|Астана|Astana;KZT;AS;kk,ru
+KG;Qirg'iziston;Bishkek|Бишкек|Bishkek;KGS;AS;ky,ru
+TJ;Tojikiston;Dushanbe|Душанбе|Dushanbe;TJS;AS;tg
+TM;Turkmaniston;Ashxobod|Ашхабад|Ashgabat;TMT;AS;tk
+AZ;Ozarbayjon;Boku|Баку|Baku;AZN;AS,EU;az
+UA;Ukraina;Kiyev|Киев|Kyiv;UAH;EU;uk
+PL;Polsha;Varshava|Варшава|Warsaw;PLN;EU;pl
+NL;Niderlandiya;Amsterdam|Амстердам|Amsterdam;EUR;EU;nl
+SE;Shvetsiya;Stokgolm|Стокгольм|Stockholm;SEK;EU;sv
+CH;Shveytsariya;Bern|Берн|Bern;CHF;EU;de,fr,it
+AU;Avstraliya;Kanberra|Канберра|Canberra;AUD;OC;en
+MX;Meksika;Mexiko|Мехико|Mexico City;MXN;NA;es
+PT;Portugaliya;Lissabon|Лиссабон|Lisbon;EUR;EU;pt
+GR;Gretsiya;Afina|Афины|Athens;EUR;EU;el
+ID;Indoneziya;Jakarta|Джакарта|Jakarta;IDR;AS;id
+MY;Malayziya;Kuala-Lumpur|Куала-Лумпур|Kuala Lumpur;MYR;AS;ms
+AF;Afg'oniston;Kobul|Кабул|Kabul;AFN;AS;ps,fa
+AL;Albaniya;Tirana|Тирана|Tirana;ALL;EU;sq
+DZ;Jazoir;Jazoir|Алжир|Algiers;DZD;AF;ar
+AD;Andorra;Andorra-la-Vella|Андорра-ла-Велья|Andorra la Vella;EUR;EU;ca
+AO;Angola;Luanda|Луанда|Luanda;AOA;AF;pt
+AM;Armaniston;Yerevan|Ереван|Yerevan;AMD;AS;hy
+AT;Avstriya;Vena|Вена|Vienna;EUR;EU;de
+BH;Bahrayn;Manama|Манама|Manama;BHD;AS;ar
+BD;Bangladesh;Dakka|Дакка|Dhaka;BDT;AS;bn
+BY;Belarus;Minsk|Минск|Minsk;BYN;EU;be,ru
+BE;Belgiya;Bryussel|Брюссель|Brussels;EUR;EU;nl,fr,de
+BZ;Beliz;Belmopan|Бельмопан|Belmopan;BZD;NA;en
+BJ;Benin;Porto-Novo|Порто-Ново|Porto-Novo;XOF;AF;fr
+BT;Butan;Thimphu|Тхимпху|Thimphu;BTN;AS;dz
+BO;Boliviya;Sukre|Сукре|Sucre;BOB;SA;es
+BA;Bosniya va Gersegovina;Sarayevo|Сараево|Sarajevo;BAM;EU;bs,hr,sr
+BW;Botsvana;Gaborone|Габороне|Gaborone;BWP;AF;en,tn
+BN;Bruney;Bandar-Seri-Begavan|Бандар-Сери-Бегаван|Bandar Seri Begawan;BND;AS;ms
+BG;Bolgariya;Sofiya|София|Sofia;EUR;EU;bg
+BF;Burkina-Faso;Uagadugu|Уагадугу|Ouagadougou;XOF;AF;fr
+BI;Burundi;Gitega|Гитега|Gitega;BIF;AF;rn,fr
+KH;Kambodja;Pnompen|Пномпень|Phnom Penh;KHR;AS;km
+CM;Kamerun;Yaunde|Яунде|Yaoundé;XAF;AF;fr,en
+CV;Kabo-Verde;Praya|Прая|Praia;CVE;AF;pt
+CF;Markaziy Afrika Respublikasi;Bangi|Банги|Bangui;XAF;AF;fr,sg
+TD;Chad;Ndjamena|Нджамена|N'Djamena;XAF;AF;fr,ar
+CL;Chili;Santyago|Сантьяго|Santiago;CLP;SA;es
+CO;Kolumbiya;Bogota|Богота|Bogotá;COP;SA;es
+KM;Komor orollari;Moroni|Морони|Moroni;KMF;AF;ar,fr
+CG;Kongo Respublikasi;Brazzavil|Браззавиль|Brazzaville;XAF;AF;fr
+CD;Kongo Demokratik Respublikasi;Kinshasa|Киншаса|Kinshasa;CDF;AF;fr
+CR;Kosta-Rika;San-Xose|Сан-Хосе|San José;CRC;NA;es
+HR;Xorvatiya;Zagreb|Загреб|Zagreb;EUR;EU;hr
+CU;Kuba;Gavana|Гавана|Havana;CUP;NA;es
+CY;Kipr;Nikosiya|Никосия|Nicosia;EUR;EU,AS;el,tr
+CZ;Chexiya;Praga|Прага|Prague;CZK;EU;cs
+DK;Daniya;Kopengagen|Копенгаген|Copenhagen;DKK;EU;da
+DJ;Jibuti;Jibuti|Джибути|Djibouti;DJF;AF;fr,ar
+DM;Dominika;Rozo|Розо|Roseau;XCD;NA;en
+DO;Dominikan Respublikasi;Santo-Domingo|Санто-Доминго|Santo Domingo;DOP;NA;es
+EC;Ekvador;Kito|Кито|Quito;USD;SA;es
+SV;Salvador;San-Salvador|Сан-Сальвадор|San Salvador;USD;NA;es
+GQ;Ekvatorial Gvineya;Malabo|Малабо|Malabo;XAF;AF;es,fr,pt
+ER;Eritreya;Asmara|Асмэра|Asmara;ERN;AF;ti,ar,en
+EE;Estoniya;Tallin|Таллин|Tallinn;EUR;EU;et
+SZ;Esvatini;Mbabane|Мбабане|Mbabane;SZL;AF;en,ss
+ET;Efiopiya;Addis-Abeba|Аддис-Абеба|Addis Ababa;ETB;AF;am
+FJ;Fiji;Suva|Сува|Suva;FJD;OC;en
+FI;Finlyandiya;Xelsinki|Хельсинки|Helsinki;EUR;EU;fi,sv
+GA;Gabon;Librevil|Либревиль|Libreville;XAF;AF;fr
+GM;Gambiya;Banjul|Банжул|Banjul;GMD;AF;en
+GE;Gruziya;Tbilisi|Тбилиси|Tbilisi;GEL;AS,EU;ka
+GH;Gana;Akkra|Аккра|Accra;GHS;AF;en
+GD;Grenada;Sent-Jorjes|Сент-Джорджес|St. George's;XCD;NA;en
+GT;Gvatemala;Gvatemala|Гватемала|Guatemala City;GTQ;NA;es
+GN;Gvineya;Konakri|Конакри|Conakry;GNF;AF;fr
+GW;Gvineya-Bisau;Bisau|Бисау|Bissau;XOF;AF;pt
+GY;Gayana;Jorjtaun|Джорджтаун|Georgetown;GYD;SA;en
+HT;Gaiti;Port-o-Prens|Порт-о-Пренс|Port-au-Prince;HTG;NA;ht,fr
+HN;Gonduras;Tegusigalpa|Тегусигальпа|Tegucigalpa;HNL;NA;es
+HU;Vengriya;Budapesht|Будапешт|Budapest;HUF;EU;hu
+IS;Islandiya;Reykyavik|Рейкьявик|Reykjavik;ISK;EU;is
+IR;Eron;Tehron|Тегеран|Tehran;IRR;AS;fa
+IQ;Iroq;Bag'dod|Багдад|Baghdad;IQD;AS;ar,ku
+IE;Irlandiya;Dublin|Дублин|Dublin;EUR;EU;ga,en
+JM;Yamayka;Kingston|Кингстон|Kingston;JMD;NA;en`.trim().split('\n').map(l=>{const p=l.split(';');return{c:p[0],n:p[1],cap:p[2].split('|'),cur:p[3],ct:p[4].split(','),lg:p[5].split(',')}});
+const CONT={uz:{AS:'Osiyo',EU:'Yevropa',AF:'Afrika',NA:'Shimoliy Amerika',SA:'Janubiy Amerika',OC:'Avstraliya va Okeaniya'},ru:{AS:'Азия',EU:'Европа',AF:'Африка',NA:'Северная Америка',SA:'Южная Америка',OC:'Австралия и Океания'},en:{AS:'Asia',EU:'Europe',AF:'Africa',NA:'North America',SA:'South America',OC:'Oceania'}};
+const LI={uz:0,ru:1,en:2};
+const flagOf=c=>String.fromCodePoint(...[...c].map(x=>0x1F1E6+x.charCodeAt(0)-65));
+function dn(type){try{return new Intl.DisplayNames([lang],{type})}catch(e){return null}}
+function cname(d,R){if(lang==='uz')return d.n;try{return(R&&R.of(d.c))||d.n}catch(e){return d.n}}
+const grow=(i,l,v)=>'<div class="grow"><i>'+i+'</i><div><small>'+l+'</small><b>'+v+'</b></div></div>';
+let gmode='sec';
+function gOpen(){$('guide').classList.add('show');gSections()}
+function gClose(){$('guide').classList.remove('show')}
+function gSections(){gmode='sec';$('gtitle').textContent=t('n_guide');
+ $('gbody').innerHTML='<button class="gsec" data-g="flags"><span class="gi">🚩</span><div><b>'+t('g_flags')+'</b><small>'+DATA.length+' '+t('g_cnt')+'</small></div><span class="ar">›</span></button>'}
+function gFlags(){gmode='flags';$('gtitle').textContent=t('g_flags');
+ $('gbody').innerHTML='<input class="gsrch" id="gq" placeholder="'+t('g_search')+'" autocomplete="off"><div class="ggrid" id="ggrid"></div>';gGrid('')}
+function gGrid(q){const R=dn('region');q=q.trim().toLowerCase();
+ const rows=DATA.map(d=>({d,n:cname(d,R)})).filter(x=>!q||x.n.toLowerCase().includes(q)).sort((a,b)=>a.n.localeCompare(b.n,lang));
+ $('ggrid').innerHTML=rows.map(x=>'<button class="cc" data-c="'+x.d.c+'"><span class="fl">'+flagOf(x.d.c)+'</span><span>'+x.n+'</span></button>').join('')}
+function gDetail(code){const d=DATA.find(x=>x.c===code);if(!d)return;const R=dn('region'),C=dn('currency'),L=dn('language');
+ let cur=d.cur;try{if(C)cur=C.of(d.cur)+' ('+d.cur+')'}catch(e){}
+ const lg=d.lg.map(x=>{try{return L?L.of(x):x}catch(e){return x}}).map(s=>s.charAt(0).toUpperCase()+s.slice(1)).join(', ');
+ const ct=d.ct.map(k=>CONT[lang][k]).join(' / ');
+ $('gcard').innerHTML='<div class="bf">'+flagOf(d.c)+'</div><h3>'+cname(d,R)+'</h3>'+
+  grow('🏛',t('g_cap'),d.cap[LI[lang]])+grow('💰',t('g_cur'),cur)+grow('🌍',t('g_cont'),ct)+grow('🗣',d.lg.length>1?t('g_langs'):t('g_lang'),lg)+
+  '<button class="x" data-x="1">'+t('close')+'</button>';
+ $('gdet').classList.add('show')}
+function gBackStep(){if(gmode==='flags')gSections();else gClose()}
+$('gback').onclick=gBackStep;
+$('gbody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.g==='flags')gFlags();else if(b.dataset.c)gDetail(b.dataset.c)});
+$('gbody').addEventListener('input',e=>{if(e.target.id==='gq')gGrid(e.target.value)});
+$('gdet').addEventListener('click',e=>{if(e.target===$('gdet')||e.target.closest('[data-x]'))$('gdet').classList.remove('show')});
+
+let splashOn=true;
+(function(){
+ const sp=$('splash'),s1=$('sp1'),s2=$('sp2'),fill=$('spfill');
+ const IW=1024,IH=1536,X0=140,X1=883,Y0=1230,Y1=1289;let prog=0;
+ function lay(){const W=s2.clientWidth,H=s2.clientHeight,sc=Math.max(W/IW,H/IH),ox=(W-IW*sc)/2,oy=(H-IH*sc)/2;
+  fill.style.left=(ox+X0*sc)+'px';fill.style.top=(oy+Y0*sc)+'px';fill.style.height=((Y1-Y0)*sc)+'px';
+  fill.style.borderRadius=((Y1-Y0)*sc/2)+'px';fill.dataset.w=(X1-X0)*sc;fill.style.width=(fill.dataset.w*prog)+'px'}
+ addEventListener('resize',lay);lay();
+ setTimeout(()=>{s2.style.opacity=1;s1.style.opacity=0;lay();
+  const t0=performance.now(),D=10000;
+  (function step(now){const p=Math.min(1,(now-t0)/D);prog=p*p*(3-2*p);fill.style.width=(fill.dataset.w*prog)+'px';
+   if(p<1)requestAnimationFrame(step);
+   else setTimeout(()=>{sp.classList.add('out');setTimeout(()=>{sp.remove();splashOn=false},400)},250)})(t0)
+ },7000)
+})();
+
+applyLang();sync();refreshLocks();setInterval(refreshLocks,1000);
 if(B.needsId()){$('idscr').classList.add('show');startId()}
 
 </script>
