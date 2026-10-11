@@ -5,19 +5,13 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.Matrix
-import android.media.ExifInterface
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.util.Base64
 import android.view.SoundEffectConstants
 import android.view.View
 import android.view.WindowManager
@@ -26,19 +20,18 @@ import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import java.io.ByteArrayOutputStream
 
 class MenuActivity : ComponentActivity() {
 
     private lateinit var web: WebView
 
+    private fun js(code: String) = web.evaluateJavascript(code, null)
+
     private val photoPicker = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
             Thread {
-                val data = makeAvatar(uri)
-                runOnUiThread {
-                    if (data != null) web.evaluateJavascript("window.onPhoto('$data')", null)
-                }
+                val data = Avatar.make(this, uri)
+                runOnUiThread { if (data != null) js("window.onPhoto('$data')") }
             }.start()
         }
     }
@@ -60,6 +53,7 @@ class MenuActivity : ComponentActivity() {
             loadUrl("file:///android_asset/index.html")
         }
         setContentView(web)
+        Ads.init(this)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -87,40 +81,6 @@ class MenuActivity : ComponentActivity() {
         else v.vibrate(ms)
     }
 
-    // Galereyadan tanlangan rasmni kvadrat 200x200 qilib, base64 matnga aylantiradi
-    private fun makeAvatar(uri: Uri): String? {
-        try {
-            val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-            contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, bounds) }
-            var sample = 1
-            while (bounds.outWidth / (sample * 2) >= 400 && bounds.outHeight / (sample * 2) >= 400) sample *= 2
-
-            val opts = BitmapFactory.Options().apply { inSampleSize = sample }
-            val bmp = contentResolver.openInputStream(uri)?.use {
-                BitmapFactory.decodeStream(it, null, opts)
-            } ?: return null
-
-            val orient = contentResolver.openInputStream(uri)?.use {
-                ExifInterface(it).getAttributeInt(ExifInterface.TAG_ORIENTATION, 1)
-            } ?: 1
-            val m = Matrix()
-            when (orient) {
-                6 -> m.postRotate(90f)
-                3 -> m.postRotate(180f)
-                8 -> m.postRotate(270f)
-            }
-
-            val side = minOf(bmp.width, bmp.height)
-            val square = Bitmap.createBitmap(bmp, (bmp.width - side) / 2, (bmp.height - side) / 2, side, side, m, true)
-            val small = Bitmap.createScaledBitmap(square, 200, 200, true)
-            val out = ByteArrayOutputStream()
-            small.compress(Bitmap.CompressFormat.JPEG, 82, out)
-            return "data:image/jpeg;base64," + Base64.encodeToString(out.toByteArray(), Base64.NO_WRAP)
-        } catch (e: Exception) {
-            return null
-        }
-    }
-
     inner class Bridge {
         @JavascriptInterface
         fun needsId(): Boolean = Prefs.id(this@MenuActivity) == null
@@ -137,18 +97,40 @@ class MenuActivity : ComponentActivity() {
                 runOnUiThread {
                     if (id != null) {
                         Prefs.setId(this@MenuActivity, id)
-                        web.evaluateJavascript("window.onIdOk('$id')", null)
+                        js("window.onIdOk('$id')")
                     } else {
-                        web.evaluateJavascript("window.onIdFail()", null)
+                        js("window.onIdFail()")
                     }
                 }
             }.start()
         }
 
+        // O'yin necha soniya ochiq qolgan (0 bo'lsa, yopiq)
+        @JavascriptInterface
+        fun remaining(game: String): Int = Prefs.unlockLeft(this@MenuActivity, game)
+
+        // Reklama ko'rsatadi, oxirigacha ko'rilsa o'yinni 24 soatga ochadi
+        @JavascriptInterface
+        fun watchAd(game: String) {
+            if (game != "Bayroq") return
+            runOnUiThread {
+                if (!online()) {
+                    js("window.onAdResult('$game','noconn')")
+                    return@runOnUiThread
+                }
+                Ads.show(this@MenuActivity) { st ->
+                    if (st == "ok") Prefs.unlock(this@MenuActivity, game)
+                    js("window.onAdResult('$game','$st')")
+                }
+            }
+        }
+
         @JavascriptInterface
         fun startFlag() {
             runOnUiThread {
-                startActivity(Intent(this@MenuActivity, MainActivity::class.java))
+                if (Prefs.unlockLeft(this@MenuActivity, "Bayroq") > 0) {
+                    startActivity(Intent(this@MenuActivity, MainActivity::class.java))
+                }
             }
         }
 
