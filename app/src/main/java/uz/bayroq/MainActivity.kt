@@ -219,4 +219,142 @@ class MainActivity : ComponentActivity() {
         nextBtn = Button(this).apply {
             text = s("next"); textSize = 22f; typeface = Typeface.DEFAULT_BOLD
             setTextColor(Color.WHITE); styleBtn(this)
-            background = pill
+            background = pill("#4be06a", "#22b53a", 24, "#15862a")
+            visibility = View.GONE
+            setOnClickListener { startRound() }
+        }
+        bottom.addView(nextBtn, LinearLayout.LayoutParams(MATCH_PARENT, dp(70)).apply { topMargin = dp(10) })
+        root.addView(bottom, FrameLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT, Gravity.BOTTOM))
+        setContentView(root)
+    }
+
+    // ---------- O'yin mantig'i ----------
+    private fun restartGame() {
+        score = 0; total = 0
+        startRound()
+    }
+
+    private fun startRound() {
+        timer?.cancel(); shuffleRunnable?.let { handler.removeCallbacks(it) }
+        state = State.SHUFFLE
+        val prev = target
+        do { target = COUNTRIES.random() } while (target == prev)
+        resultText.visibility = View.GONE
+        nextBtn.visibility = View.GONE
+        optionsBox.visibility = View.INVISIBLE
+        timerText.text = "10"
+        timerText.background = circle("#1e90ff")
+        scoreText.text = "${s("score")}: $score/$total"
+
+        val start = System.currentTimeMillis()
+        shuffleRunnable = object : Runnable {
+            override fun run() {
+                if (System.currentTimeMillis() - start < 2000) {
+                    overlay.flag = COUNTRIES.random().flag
+                    handler.postDelayed(this, 70)
+                } else beginPlay()
+            }
+        }.also { handler.post(it) }
+    }
+
+    private fun beginPlay() {
+        state = State.PLAY
+        overlay.flag = target.flag
+        val choices = (COUNTRIES.filter { it != target }.shuffled().take(3) + target).shuffled()
+        optionBtns.forEachIndexed { i, b ->
+            b.tag = choices[i]
+            b.text = choices[i].nameIn(lang)
+            b.isEnabled = true
+            styleOption(b, 0)
+            b.setOnClickListener { answer(choices[i], b) }
+        }
+        optionsBox.visibility = View.VISIBLE
+        timer = object : CountDownTimer(10_000, 100) {
+            override fun onTick(ms: Long) {
+                timerText.text = ((ms + 999) / 1000).toString()
+                timerText.background = circle(if (ms <= 3000) "#ff4d4d" else "#1e90ff")
+            }
+            override fun onFinish() { timerText.text = "0"; finishRound(null) }
+        }.start()
+    }
+
+    private fun answer(choice: Country, btn: Button) {
+        if (state != State.PLAY) return
+        timer?.cancel()
+        finishRound(choice)
+        if (choice != target) styleOption(btn, 2)
+    }
+
+    private fun finishRound(choice: Country?) {
+        if (state != State.PLAY) return
+        state = State.DONE
+        total++
+        optionBtns.forEach { b ->
+            b.isEnabled = false
+            if (b.tag == target) styleOption(b, 1)
+        }
+        overlay.flag = target.flag
+        val answerText = "${s("its")}: ${target.flag} ${target.nameIn(lang)}"
+        when {
+            choice == null -> {
+                resultText.text = "${s("time")} $answerText"
+                resultText.setTextColor(Color.parseColor("#e68a00"))
+                buzz(120)
+            }
+            choice == target -> {
+                score++
+                resultText.text = "${s("ok")} ${target.flag} ${target.nameIn(lang)}"
+                resultText.setTextColor(Color.parseColor("#1a9a30"))
+                buzz(30)
+            }
+            else -> {
+                resultText.text = "${s("bad")} $answerText"
+                resultText.setTextColor(Color.parseColor("#e53935"))
+                buzz(120)
+            }
+        }
+        resultText.visibility = View.VISIBLE
+        scoreText.text = "${s("score")}: $score/$total"
+        nextBtn.visibility = View.VISIBLE
+    }
+
+    // ---------- Kamera + yuz aniqlash ----------
+    private fun startCamera() {
+        val future = ProcessCameraProvider.getInstance(this)
+        future.addListener({
+            val provider = future.get()
+            val prev = Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_4_3).build()
+                .also { it.setSurfaceProvider(preview.surfaceProvider) }
+            val analysis = ImageAnalysis.Builder()
+                .setTargetAspectRatio(AspectRatio.RATIO_4_3)
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .build()
+            analysis.setAnalyzer(cameraExecutor) { proxy -> analyze(proxy) }
+            val selector = if (provider.hasCamera(CameraSelector.DEFAULT_FRONT_CAMERA))
+                CameraSelector.DEFAULT_FRONT_CAMERA else CameraSelector.DEFAULT_BACK_CAMERA
+            provider.unbindAll()
+            provider.bindToLifecycle(this, selector, prev, analysis)
+        }, ContextCompat.getMainExecutor(this))
+    }
+
+    @androidx.annotation.OptIn(ExperimentalGetImage::class)
+    private fun analyze(proxy: ImageProxy) {
+        val media = proxy.image
+        if (media == null) { proxy.close(); return }
+        val rot = proxy.imageInfo.rotationDegrees
+        val w = if (rot % 180 == 0) proxy.width else proxy.height
+        val h = if (rot % 180 == 0) proxy.height else proxy.width
+        detector.process(InputImage.fromMediaImage(media, rot))
+            .addOnSuccessListener { faces ->
+                val main = faces.maxByOrNull { it.boundingBox.width() }
+                runOnUiThread { overlay.update(main?.boundingBox, w, h) }
+            }
+            .addOnCompleteListener { proxy.close() }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        timer?.cancel(); handler.removeCallbacksAndMessages(null)
+        cameraExecutor.shutdown(); detector.close()
+    }
+}
