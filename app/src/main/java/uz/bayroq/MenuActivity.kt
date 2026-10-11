@@ -5,18 +5,24 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.view.Gravity
 import android.view.SoundEffectConstants
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
+import android.widget.FrameLayout
+import android.widget.ImageView
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,6 +30,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 class MenuActivity : ComponentActivity() {
 
     private lateinit var web: WebView
+    private var logoView: ImageView? = null
 
     private fun js(code: String) = web.evaluateJavascript(code, null)
 
@@ -41,10 +48,11 @@ class MenuActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         window.statusBarColor = Color.parseColor("#1a7df0")
         window.navigationBarColor = Color.parseColor("#0f3fae")
+        window.setBackgroundDrawable(ColorDrawable(Color.WHITE))
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         web = WebView(this).apply {
-            setBackgroundColor(Color.parseColor("#0a2f7a"))
+            setBackgroundColor(Color.WHITE)
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             settings.textZoom = 100
@@ -52,7 +60,11 @@ class MenuActivity : ComponentActivity() {
             addJavascriptInterface(Bridge(), "Bridge")
             loadUrl("file:///android_asset/index.html")
         }
-        setContentView(web)
+
+        val root = FrameLayout(this).apply { setBackgroundColor(Color.WHITE) }
+        root.addView(web, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+        addLogo(root)
+        setContentView(root)
         Ads.init(this)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
@@ -65,6 +77,28 @@ class MenuActivity : ComponentActivity() {
                 }
             }
         })
+    }
+
+    // Sahifa tayyor bo'lguncha ekranda oq fon va logotip turadi
+    private fun addLogo(root: FrameLayout) {
+        try {
+            val bmp = assets.open("logo.png").use { BitmapFactory.decodeStream(it) } ?: return
+            val maxPx = (420 * resources.displayMetrics.density).toInt()
+            val side = minOf((resources.displayMetrics.widthPixels * 0.78f).toInt(), maxPx)
+            val iv = ImageView(this).apply {
+                setImageBitmap(bmp)
+                scaleType = ImageView.ScaleType.FIT_CENTER
+            }
+            root.addView(iv, FrameLayout.LayoutParams(side, side, Gravity.CENTER))
+            logoView = iv
+            iv.postDelayed({ hideLogo() }, 6000)
+        } catch (e: Exception) {
+        }
+    }
+
+    private fun hideLogo() {
+        logoView?.let { (it.parent as? ViewGroup)?.removeView(it) }
+        logoView = null
     }
 
     private fun online(): Boolean {
@@ -82,6 +116,12 @@ class MenuActivity : ComponentActivity() {
     }
 
     inner class Bridge {
+        // Sahifadagi logotip chizildi: ustidagi vaqtinchalik logotipni olib tashlaymiz
+        @JavascriptInterface
+        fun ready() {
+            runOnUiThread { hideLogo() }
+        }
+
         @JavascriptInterface
         fun needsId(): Boolean = Prefs.id(this@MenuActivity) == null
 
