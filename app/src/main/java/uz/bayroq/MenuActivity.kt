@@ -12,6 +12,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.Gravity
@@ -31,6 +32,8 @@ class MenuActivity : ComponentActivity() {
 
     private lateinit var web: WebView
     private var logoView: ImageView? = null
+    private var revealed = false
+    private val t0 = SystemClock.elapsedRealtime()
 
     private fun js(code: String) = web.evaluateJavascript(code, null)
 
@@ -53,6 +56,8 @@ class MenuActivity : ComponentActivity() {
 
         web = WebView(this).apply {
             setBackgroundColor(Color.WHITE)
+            // Sahifa tayyor bo'lguncha deyarli ko'rinmaydi (0 emas, chunki brauzer chizishda davom etishi kerak)
+            alpha = 0.01f
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             settings.textZoom = 100
@@ -66,6 +71,9 @@ class MenuActivity : ComponentActivity() {
         addLogo(root)
         setContentView(root)
         Ads.init(this)
+
+        // Biror sabab bilan signal kelmasa, 5 soniyadan keyin baribir ko'rsatamiz
+        web.postDelayed({ reveal() }, 5000)
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -91,12 +99,15 @@ class MenuActivity : ComponentActivity() {
             }
             root.addView(iv, FrameLayout.LayoutParams(side, side, Gravity.CENTER))
             logoView = iv
-            iv.postDelayed({ hideLogo() }, 6000)
         } catch (e: Exception) {
         }
     }
 
-    private fun hideLogo() {
+    // Sahifa chizildi: uni to'liq ko'rsatamiz va vaqtinchalik logotipni olib tashlaymiz
+    private fun reveal() {
+        if (revealed) return
+        revealed = true
+        web.alpha = 1f
         logoView?.let { (it.parent as? ViewGroup)?.removeView(it) }
         logoView = null
     }
@@ -116,11 +127,14 @@ class MenuActivity : ComponentActivity() {
     }
 
     inner class Bridge {
-        // Sahifadagi logotip chizildi: ustidagi vaqtinchalik logotipni olib tashlaymiz
         @JavascriptInterface
         fun ready() {
-            runOnUiThread { hideLogo() }
+            runOnUiThread { reveal() }
         }
+
+        // Ilova ochilganidan beri o'tgan millisekundlar (logotip aynan 7 soniya turishi uchun)
+        @JavascriptInterface
+        fun elapsed(): Int = (SystemClock.elapsedRealtime() - t0).toInt()
 
         @JavascriptInterface
         fun needsId(): Boolean = Prefs.id(this@MenuActivity) == null
