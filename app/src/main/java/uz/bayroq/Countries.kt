@@ -1,7 +1,12 @@
 package uz.bayroq
 
+import java.util.Locale
+
 data class Country(val code: String, val name: String) {
     val flag: String = code.map { String(Character.toChars(0x1F1E6 + (it - 'A'))) }.joinToString("")
+
+    fun nameIn(lang: String): String =
+        if (lang == "uz") name else Locale("", code).getDisplayCountry(Locale(lang))
 }
 
 val COUNTRIES = listOf(
