@@ -5,29 +5,50 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Base64
 import android.view.SoundEffectConstants
 import android.view.View
+import android.view.WindowManager
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
+import java.io.ByteArrayOutputStream
 
 class MenuActivity : ComponentActivity() {
 
     private lateinit var web: WebView
+
+    private val photoPicker = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        if (uri != null) {
+            Thread {
+                val data = makeAvatar(uri)
+                runOnUiThread {
+                    if (data != null) web.evaluateJavascript("window.onPhoto('$data')", null)
+                }
+            }.start()
+        }
+    }
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.statusBarColor = Color.parseColor("#1a7df0")
         window.navigationBarColor = Color.parseColor("#0f3fae")
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         web = WebView(this).apply {
             setBackgroundColor(Color.parseColor("#0a2f7a"))
@@ -66,6 +87,40 @@ class MenuActivity : ComponentActivity() {
         else v.vibrate(ms)
     }
 
+    // Galereyadan tanlangan rasmni kvadrat 200x200 qilib, base64 matnga aylantiradi
+    private fun makeAvatar(uri: Uri): String? {
+        try {
+            val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, bounds) }
+            var sample = 1
+            while (bounds.outWidth / (sample * 2) >= 400 && bounds.outHeight / (sample * 2) >= 400) sample *= 2
+
+            val opts = BitmapFactory.Options().apply { inSampleSize = sample }
+            val bmp = contentResolver.openInputStream(uri)?.use {
+                BitmapFactory.decodeStream(it, null, opts)
+            } ?: return null
+
+            val orient = contentResolver.openInputStream(uri)?.use {
+                ExifInterface(it).getAttributeInt(ExifInterface.TAG_ORIENTATION, 1)
+            } ?: 1
+            val m = Matrix()
+            when (orient) {
+                6 -> m.postRotate(90f)
+                3 -> m.postRotate(180f)
+                8 -> m.postRotate(270f)
+            }
+
+            val side = minOf(bmp.width, bmp.height)
+            val square = Bitmap.createBitmap(bmp, (bmp.width - side) / 2, (bmp.height - side) / 2, side, side, m, true)
+            val small = Bitmap.createScaledBitmap(square, 200, 200, true)
+            val out = ByteArrayOutputStream()
+            small.compress(Bitmap.CompressFormat.JPEG, 82, out)
+            return "data:image/jpeg;base64," + Base64.encodeToString(out.toByteArray(), Base64.NO_WRAP)
+        } catch (e: Exception) {
+            return null
+        }
+    }
+
     inner class Bridge {
         @JavascriptInterface
         fun needsId(): Boolean = Prefs.id(this@MenuActivity) == null
@@ -95,6 +150,11 @@ class MenuActivity : ComponentActivity() {
             runOnUiThread {
                 startActivity(Intent(this@MenuActivity, MainActivity::class.java))
             }
+        }
+
+        @JavascriptInterface
+        fun pickPhoto() {
+            runOnUiThread { photoPicker.launch("image/*") }
         }
 
         @JavascriptInterface
