@@ -227,12 +227,12 @@ nav em{font-style:normal}
 #spfill{position:absolute;width:0;background:linear-gradient(#fffbd0 0%,#fdee28 14%,#fedf0a 42%,#fecb01 70%,#ffb301 92%,#f68807 100%)}
 @keyframes spPop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes spUp{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
-#guide{position:absolute;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(#1a7df0,#4cc3fb 60%,#bff0ff);padding-top:env(safe-area-inset-top,0px)}
-#guide.show{display:flex}
+#guide,#pg{position:absolute;inset:0;z-index:40;display:none;flex-direction:column;background:linear-gradient(#1a7df0,#4cc3fb 60%,#bff0ff);padding-top:env(safe-area-inset-top,0px)}
+#guide.show,#pg.show{display:flex}
 .gtop{display:flex;align-items:center;gap:10px;padding:12px 14px}
 .gback{width:46px;height:46px;border-radius:50%;border:4px solid #fff;background:linear-gradient(#3ea0ff,#0e49c0);color:#fff;font-size:30px;font-weight:800;line-height:1;padding:0 0 4px;flex:none}
-#gtitle{margin:0;color:#fff;font-size:28px;text-shadow:0 3px 0 #0b3fa8}
-#gbody{flex:1;overflow-y:auto;padding:6px 14px calc(18px + env(safe-area-inset-bottom,0px))}
+#gtitle,#ptitle{margin:0;color:#fff;font-size:28px;text-shadow:0 3px 0 #0b3fa8}
+#gbody,#pbody{flex:1;overflow-y:auto;padding:6px 14px calc(18px + env(safe-area-inset-bottom,0px))}
 .gsec{display:flex;align-items:center;gap:14px;width:100%;background:#fff;border:0;border-radius:22px;padding:14px 16px;box-shadow:0 5px 0 rgba(10,50,140,.3);text-align:left;margin-bottom:14px;font:inherit}
 .gsec .gi{font-size:44px}
 .gsec b{display:block;font-size:22px;color:#0b3fa8}
@@ -252,6 +252,19 @@ nav em{font-style:normal}
 .grow i{font-style:normal;font-size:24px}
 .grow small{display:block;color:#5b7bb5;font-weight:700;font-size:12px}
 .grow b{font-weight:800;font-size:17px;line-height:1.15}
+.prl2{color:#5b7bb5;font-weight:700;font-size:14px}
+.prc{font-size:32px;font-weight:800;color:#0b3fa8;margin:2px 0 4px}
+.prd{color:#5b7bb5;font-weight:700;font-size:14px;margin:4px 0}
+.prp{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.prp span{background:#eef5ff;color:#0b3fa8;font-weight:800;font-size:13px;border-radius:12px;padding:5px 9px}
+.prnet{color:#d93025;font-weight:800;font-size:14px;margin:8px 0 2px}
+.pcard{background:#fff;border-radius:22px;padding:16px;margin-bottom:14px;box-shadow:0 5px 0 rgba(10,50,140,.3);text-align:center;color:#0b3fa8}
+.pcard .big{font-size:64px;line-height:1.1}
+.pcard h3{margin:4px 0 6px;font-size:24px;color:#0b3fa8}
+#pfoot{padding:10px 14px calc(14px + env(safe-area-inset-bottom,0px))}
+#pfoot:empty{display:none}
+.buy{width:100%;border:0;border-radius:22px;padding:15px;font:inherit;font-weight:800;font-size:22px;color:#fff;background:linear-gradient(#4be06a,#22b53a);box-shadow:0 5px 0 #15862a;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.prnet{background:#fff;border-radius:12px;padding:7px 10px;margin:0 0 10px;text-align:center}
 </style>
 </head>
 <body>
@@ -291,6 +304,7 @@ nav em{font-style:normal}
  <div id="idscr"><div class="hero" style="--a:#22b53a;--b:#7df05a"><span>🌍</span></div><h2 data-i="id_t"></h2><p data-i="id_d"></p><p id="idmsg"></p><button class="go" id="idretry" data-i="retry"></button></div>
  <div id="sheet"><div class="scard" id="card"><div class="ic" id="sic">🎮</div><h2 id="st"></h2><p id="sd"></p><div id="sext"></div><button class="go" id="sg"></button><br><button class="x" id="sx" data-i="close">Yopish</button></div></div>
  <div id="guide"><div class="gtop"><button class="gback" id="gback">‹</button><h2 id="gtitle"></h2></div><div id="gbody"></div></div>
+ <div id="pg"><div class="gtop"><button class="gback" id="pback">‹</button><h2 id="ptitle"></h2></div><div id="pbody"></div><div id="pfoot"></div></div>
  <div id="gdet"><div class="gcard" id="gcard"></div></div>
  <div id="splash">
   <div class="sp1" id="sp1"><div class="logo"><img src="logo.png" alt=""></div></div>
@@ -313,18 +327,18 @@ function palm(cls){
 }
 document.querySelectorAll('.pslot').forEach(e=>{e.outerHTML=palm('big')+palm('sm')});
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
-const B=window.Bridge||{needsId:()=>false,getId:()=>'00000000000',fetchId:()=>setTimeout(()=>window.onIdOk('00000000000'),400),startFlag:()=>{},copy:()=>{},setPrefs:()=>{},tap:()=>{},pickPhoto:()=>{},remaining:()=>0,ready:()=>{},elapsed:()=>0,watchAd:()=>setTimeout(()=>window.onAdResult('Bayroq','fail'),400)};
+const B=window.Bridge||{needsId:()=>false,getId:()=>'00000000000',fetchId:()=>setTimeout(()=>window.onIdOk('00000000000'),400),startFlag:()=>{},copy:()=>{},setPrefs:()=>{},tap:()=>{},pickPhoto:()=>{},remaining:()=>0,ready:()=>{},elapsed:()=>0,isPremium:()=>false,premiumLeft:()=>0,premiumUntil:()=>'0',syncPremium:()=>{},openBot:()=>{},watchAd:()=>setTimeout(()=>window.onAdResult('Bayroq','fail'),400)};
 const TX={
-uz:{profile:"Profil",level:"Daraja 1",photo:"Rasm tanlash",name_ph:"Ismingiz",save:"Saqlash",g_flags:"Bayroqlar",g_cnt:"ta davlat",g_search:"Qidirish...",g_cap:"Poytaxt",g_cur:"Pul birligi",g_cont:"Materik",g_lang:"Tili",g_langs:"Tillari",ad_btn:"Reklama ko'rib ochish",ad_note:"Reklamani ko'rsangiz o'yin 24 soatga ochiladi.",ad_loading:"Reklama yuklanmoqda...",ad_noconn:"Internet yo'q. Reklama uchun internetga ulaning.",ad_fail:"Reklama hozir mavjud emas. Keyinroq urinib ko'ring.",ad_skip:"Reklamani oxirigacha ko'ring.",open_left:"Ochiq:",n_rating:"Reytingim",n_info:"Ma'lumotlar",n_home:"Home",n_guide:"Qo'llanma",n_prem:"Premium",soon:"Tez orada",soon_d:"Bu o'yin tez orada qo'shiladi.",sect_d:"Bu bo'lim keyingi yangilanishda qo'shiladi.",set:"Sozlamalar",snd:"Tovush",vib:"Vibratsiya",lite:"Yengil rejim",close:"Yopish",id_l:"ID raqamingiz",copy:"Nusxalash",copied:"Nusxalandi ✓",back:"‹ Orqaga",start:"Boshlash",how:"Qanday o'ynaladi",g_desc:"Old kamera yuzingizni topadi va boshingiz ustida bayroq paydo bo'ladi. 10 soniyada bu qaysi davlat ekanini toping.",g_t1:"⏱ 10 soniya",g_t2:"🎯 O'rtacha",r1:"Telefon kamerasiga yuzingizni qarating.",r2:"Bayroqlar tez almashadi, so'ng bittasi tanlanadi.",r3:"10 soniya ichida to'g'ri davlatni tanlang.",r4:"KEYINGISI tugmasi bilan yangi raundni boshlang.",id_t:"Internet bilan kiring",id_d:"Ilova birinchi marta ochilganda internetga ulanishi kerak. Shundan keyin oflayn ishlaydi.",retry:"Qayta urinish",loading:"Yuklanmoqda...",fail:"Ulanib bo'lmadi. Internetni tekshiring."},
-ru:{profile:"Профиль",level:"Уровень 1",photo:"Выбрать фото",name_ph:"Ваше имя",save:"Сохранить",g_flags:"Флаги",g_cnt:"стран",g_search:"Поиск...",g_cap:"Столица",g_cur:"Валюта",g_cont:"Материк",g_lang:"Язык",g_langs:"Языки",ad_btn:"Открыть за рекламу",ad_note:"Посмотрите рекламу, и игра откроется на 24 часа.",ad_loading:"Загрузка рекламы...",ad_noconn:"Нет интернета. Подключитесь для показа рекламы.",ad_fail:"Реклама сейчас недоступна. Попробуйте позже.",ad_skip:"Досмотрите рекламу до конца.",open_left:"Открыто:",n_rating:"Рейтинг",n_info:"Инфо",n_home:"Главная",n_guide:"Помощь",n_prem:"Премиум",soon:"Скоро",soon_d:"Эта игра скоро появится.",sect_d:"Этот раздел появится в следующем обновлении.",set:"Настройки",snd:"Звук",vib:"Вибрация",lite:"Лёгкий режим",close:"Закрыть",id_l:"Ваш ID",copy:"Копировать",copied:"Скопировано ✓",back:"‹ Назад",start:"Начать",how:"Как играть",g_desc:"Фронтальная камера находит ваше лицо, и над головой появляется флаг. За 10 секунд угадайте страну.",g_t1:"⏱ 10 секунд",g_t2:"🎯 Средне",r1:"Направьте камеру на своё лицо.",r2:"Флаги быстро сменяются, затем выбирается один.",r3:"Выберите правильную страну за 10 секунд.",r4:"Кнопкой «ДАЛЕЕ» начните новый раунд.",id_t:"Подключитесь к интернету",id_d:"При первом запуске приложению нужен интернет. Затем оно работает офлайн.",retry:"Повторить",loading:"Загрузка...",fail:"Не удалось подключиться. Проверьте интернет."},
-en:{profile:"Profile",level:"Level 1",photo:"Choose photo",name_ph:"Your name",save:"Save",g_flags:"Flags",g_cnt:"countries",g_search:"Search...",g_cap:"Capital",g_cur:"Currency",g_cont:"Continent",g_lang:"Language",g_langs:"Languages",ad_btn:"Watch ad to unlock",ad_note:"Watch an ad to unlock this game for 24 hours.",ad_loading:"Loading ad...",ad_noconn:"No internet. Connect to watch the ad.",ad_fail:"No ad available right now. Try again later.",ad_skip:"Watch the ad to the end.",open_left:"Open:",n_rating:"Rating",n_info:"Info",n_home:"Home",n_guide:"Guide",n_prem:"Premium",soon:"Soon",soon_d:"This game is coming soon.",sect_d:"This section will be added in a future update.",set:"Settings",snd:"Sound",vib:"Vibration",lite:"Light mode",close:"Close",id_l:"Your ID",copy:"Copy",copied:"Copied ✓",back:"‹ Back",start:"Start",how:"How to play",g_desc:"The front camera finds your face and a flag appears above your head. Guess the country in 10 seconds.",g_t1:"⏱ 10 seconds",g_t2:"🎯 Medium",r1:"Point the camera at your face.",r2:"Flags flip fast, then one is picked.",r3:"Choose the right country within 10 seconds.",r4:"Tap NEXT to start a new round.",id_t:"Connect to the internet",id_d:"The app needs internet on first launch. After that it works offline.",retry:"Try again",loading:"Loading...",fail:"Could not connect. Check your internet."}
+uz:{profile:"Profil",level:"Daraja 1",photo:"Rasm tanlash",name_ph:"Ismingiz",save:"Saqlash",pr_on:"Premium faol",pr_off:"Premium faol emas",pr_left:"Qolgan vaqt",pr_until:"Tugash vaqti",pr_perks:"👑 Reklamasiz, barcha o'yinlar doim ochiq",pr_buy:"💎 Premium olish",pr_net:"Premium olish uchun internet kerak!",pr_id:"Sizning ID",pr_fail:"Botni ochib bo'lmadi. Internetni tekshiring.",u_y:"yil",u_m:"oy",u_d:"kun",g_flags:"Bayroqlar",g_cnt:"ta davlat",g_search:"Qidirish...",g_cap:"Poytaxt",g_cur:"Pul birligi",g_cont:"Materik",g_lang:"Tili",g_langs:"Tillari",ad_btn:"Reklama ko'rib ochish",ad_note:"Reklamani ko'rsangiz o'yin 24 soatga ochiladi.",ad_loading:"Reklama yuklanmoqda...",ad_noconn:"Internet yo'q. Reklama uchun internetga ulaning.",ad_fail:"Reklama hozir mavjud emas. Keyinroq urinib ko'ring.",ad_skip:"Reklamani oxirigacha ko'ring.",open_left:"Ochiq:",n_rating:"Reytingim",n_info:"Ma'lumotlar",n_home:"Home",n_guide:"Qo'llanma",n_prem:"Premium",soon:"Tez orada",soon_d:"Bu o'yin tez orada qo'shiladi.",sect_d:"Bu bo'lim keyingi yangilanishda qo'shiladi.",set:"Sozlamalar",snd:"Tovush",vib:"Vibratsiya",lite:"Yengil rejim",close:"Yopish",id_l:"ID raqamingiz",copy:"Nusxalash",copied:"Nusxalandi ✓",back:"‹ Orqaga",start:"Boshlash",how:"Qanday o'ynaladi",g_desc:"Old kamera yuzingizni topadi va boshingiz ustida bayroq paydo bo'ladi. 10 soniyada bu qaysi davlat ekanini toping.",g_t1:"⏱ 10 soniya",g_t2:"🎯 O'rtacha",r1:"Telefon kamerasiga yuzingizni qarating.",r2:"Bayroqlar tez almashadi, so'ng bittasi tanlanadi.",r3:"10 soniya ichida to'g'ri davlatni tanlang.",r4:"KEYINGISI tugmasi bilan yangi raundni boshlang.",id_t:"Internet bilan kiring",id_d:"Ilova birinchi marta ochilganda internetga ulanishi kerak. Shundan keyin oflayn ishlaydi.",retry:"Qayta urinish",loading:"Yuklanmoqda...",fail:"Ulanib bo'lmadi. Internetni tekshiring."},
+ru:{profile:"Профиль",level:"Уровень 1",photo:"Выбрать фото",name_ph:"Ваше имя",save:"Сохранить",pr_on:"Premium активен",pr_off:"Premium не активен",pr_left:"Осталось",pr_until:"Действует до",pr_perks:"👑 Без рекламы, все игры всегда открыты",pr_buy:"💎 Купить Premium",pr_net:"Для покупки Premium нужен интернет!",pr_id:"Ваш ID",pr_fail:"Не удалось открыть бота. Проверьте интернет.",u_y:"г.",u_m:"мес.",u_d:"дн.",g_flags:"Флаги",g_cnt:"стран",g_search:"Поиск...",g_cap:"Столица",g_cur:"Валюта",g_cont:"Материк",g_lang:"Язык",g_langs:"Языки",ad_btn:"Открыть за рекламу",ad_note:"Посмотрите рекламу, и игра откроется на 24 часа.",ad_loading:"Загрузка рекламы...",ad_noconn:"Нет интернета. Подключитесь для показа рекламы.",ad_fail:"Реклама сейчас недоступна. Попробуйте позже.",ad_skip:"Досмотрите рекламу до конца.",open_left:"Открыто:",n_rating:"Рейтинг",n_info:"Инфо",n_home:"Главная",n_guide:"Помощь",n_prem:"Премиум",soon:"Скоро",soon_d:"Эта игра скоро появится.",sect_d:"Этот раздел появится в следующем обновлении.",set:"Настройки",snd:"Звук",vib:"Вибрация",lite:"Лёгкий режим",close:"Закрыть",id_l:"Ваш ID",copy:"Копировать",copied:"Скопировано ✓",back:"‹ Назад",start:"Начать",how:"Как играть",g_desc:"Фронтальная камера находит ваше лицо, и над головой появляется флаг. За 10 секунд угадайте страну.",g_t1:"⏱ 10 секунд",g_t2:"🎯 Средне",r1:"Направьте камеру на своё лицо.",r2:"Флаги быстро сменяются, затем выбирается один.",r3:"Выберите правильную страну за 10 секунд.",r4:"Кнопкой «ДАЛЕЕ» начните новый раунд.",id_t:"Подключитесь к интернету",id_d:"При первом запуске приложению нужен интернет. Затем оно работает офлайн.",retry:"Повторить",loading:"Загрузка...",fail:"Не удалось подключиться. Проверьте интернет."},
+en:{profile:"Profile",level:"Level 1",photo:"Choose photo",name_ph:"Your name",save:"Save",pr_on:"Premium is active",pr_off:"Premium is not active",pr_left:"Time left",pr_until:"Valid until",pr_perks:"👑 No ads, all games always unlocked",pr_buy:"💎 Get Premium",pr_net:"Internet is required to get Premium!",pr_id:"Your ID",pr_fail:"Could not open the bot. Check your internet.",u_y:"y",u_m:"mo",u_d:"d",g_flags:"Flags",g_cnt:"countries",g_search:"Search...",g_cap:"Capital",g_cur:"Currency",g_cont:"Continent",g_lang:"Language",g_langs:"Languages",ad_btn:"Watch ad to unlock",ad_note:"Watch an ad to unlock this game for 24 hours.",ad_loading:"Loading ad...",ad_noconn:"No internet. Connect to watch the ad.",ad_fail:"No ad available right now. Try again later.",ad_skip:"Watch the ad to the end.",open_left:"Open:",n_rating:"Rating",n_info:"Info",n_home:"Home",n_guide:"Guide",n_prem:"Premium",soon:"Soon",soon_d:"This game is coming soon.",sect_d:"This section will be added in a future update.",set:"Settings",snd:"Sound",vib:"Vibration",lite:"Light mode",close:"Close",id_l:"Your ID",copy:"Copy",copied:"Copied ✓",back:"‹ Back",start:"Start",how:"How to play",g_desc:"The front camera finds your face and a flag appears above your head. Guess the country in 10 seconds.",g_t1:"⏱ 10 seconds",g_t2:"🎯 Medium",r1:"Point the camera at your face.",r2:"Flags flip fast, then one is picked.",r3:"Choose the right country within 10 seconds.",r4:"Tap NEXT to start a new round.",id_t:"Connect to the internet",id_d:"The app needs internet on first launch. After that it works offline.",retry:"Try again",loading:"Loading...",fail:"Could not connect. Check your internet."}
 };
 const LN={uz:"🇺🇿 O'zbek",ru:"🇷🇺 Русский",en:"🇬🇧 English"};
 let lang=store.get('lang');
 if(!TX[lang]){const n=(navigator.language||'uz').slice(0,2);lang=TX[n]?n:'uz'}
 let sound=store.get('snd')!=='0',vib=store.get('vib')!=='0';
 const t=k=>(TX[lang][k]??TX.uz[k]??k);
-let left={},adMsg='',adBusy=0;
+let left={},adMsg='',adBusy=0,prem={left:0,until:0};
 function applyLang(){document.documentElement.lang=lang;document.querySelectorAll('[data-i]').forEach(e=>{e.textContent=t(e.dataset.i)});renderProfile();updateIntro()}
 const sync=()=>{try{B.setPrefs(lang,sound,vib)}catch(e){}};
 
@@ -425,19 +439,52 @@ document.querySelector('.profile').onclick=()=>showSheet(profileView,'blue');
 const NI={rating:'🥇',info:'📋',guide:'📖',prem:'👑'};
 document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>{const n=b.dataset.n;if(!n)return;
  if(n==='guide'){gOpen();return}
- showSheet(()=>setSheet(NI[n],t('n_'+n),t('sect_d'),'',''),'yellow')}));
+ if(n==='prem'){pgOpen(t('n_prem'),premPage);try{B.syncPremium()}catch(e){}return}
+ pgOpen(t('n_'+n),soonPage(NI[n],'n_'+n))}));
 
 $('iback').onclick=goBack;
 const GAMES=['Bayroq'];
 const fmt=x=>[Math.floor(x/3600),Math.floor(x%3600/60),x%60].map(v=>String(v).padStart(2,'0')).join(':');
+function loadPremium(){try{prem.left=B.premiumLeft();prem.until=+B.premiumUntil()}catch(e){}}
+function ymd(a,b){let y=0,m=0,t0=new Date(a.getTime());
+ const add=(d,yy,mm)=>new Date(Date.UTC(d.getUTCFullYear()+yy,d.getUTCMonth()+mm,d.getUTCDate(),d.getUTCHours(),d.getUTCMinutes(),d.getUTCSeconds()));
+ for(let i=0;i<200;i++){const n=add(t0,1,0);if(n<=b){y++;t0=n}else break}
+ for(let i=0;i<24;i++){const n=add(t0,0,1);if(n<=b){m++;t0=n}else break}
+ return{y,m,d:Math.floor((b-t0)/86400000)}}
+function premText(){
+ if(!(prem.left>0))return '';
+ if(prem.left<86400){const h=Math.floor(prem.left/3600),m=Math.floor(prem.left%3600/60),s=prem.left%60;return[h,m,s].map(v=>String(v).padStart(2,'0')).join(':')}
+ const r=ymd(new Date((prem.until-prem.left)*1000),new Date(prem.until*1000)),p=[];
+ if(r.y)p.push(r.y+' '+t('u_y'));if(r.m)p.push(r.m+' '+t('u_m'));if(r.d||!p.length)p.push(r.d+' '+t('u_d'));
+ return p.join(' ')}
+const PRICES=[[1,5],[3,12],[6,25],[25,85]];
+let pgView=null;
+function pgOpen(title,fn){$('ptitle').textContent=title;pgView=fn;fn();$('pg').classList.add('show')}
+function pgClose(){$('pg').classList.remove('show');pgView=null}
+$('pback').onclick=pgClose;
+function soonPage(ic,key){return()=>{$('pbody').innerHTML='<div class="pcard"><div class="big">'+ic+'</div><h3>'+t(key)+'</h3><div class="prd">'+t('sect_d')+'</div></div>';$('pfoot').innerHTML=''}}
+function premPage(){
+ const on=prem.left>0;
+ $('pbody').innerHTML=
+  '<div class="pcard"><div class="big">👑</div><h3>'+(on?t('pr_on'):t('pr_off'))+'</h3>'+
+  (on?'<div class="prl2">'+t('pr_left')+'</div><div class="prc" id="prc">'+premText()+'</div><div class="prd">'+t('pr_until')+': '+new Date(prem.until*1000).toLocaleString()+'</div>':'')+'</div>'+
+  '<div class="pcard"><div class="prd">'+t('pr_perks')+'</div><div class="prp">'+PRICES.map(p=>'<span>'+p[0]+' '+t('u_m')+' · '+p[1]+' ⭐</span>').join('')+'</div></div>'+
+  '<div class="pcard"><div class="tg"><span>'+t('pr_id')+': <b>'+(B.getId()||'—')+'</b></span><button class="lg" data-p="copy" style="flex:none;padding:6px 12px">'+t('copy')+'</button></div></div>';
+ $('pfoot').innerHTML='<div class="prnet" id="prmsg">'+t('pr_net')+'</div><button class="buy" id="pbuy">'+t('pr_buy')+'</button>'}
+$('pbody').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.dataset.p==='copy'){B.copy(B.getId());b.textContent=t('copied')}});
+$('pfoot').addEventListener('click',e=>{if(e.target.closest('#pbuy')){try{B.openBot()}catch(x){}}});
+window.onBot=st=>{const m=$('prmsg');if(!m||st==='ok')return;m.textContent=st==='offline'?t('pr_net'):t('pr_fail')};
+window.onPremium=()=>{loadPremium();refreshLocks();if(pgView===premPage&&$('pg').classList.contains('show'))premPage()};
 function updateIntro(){const sec=left.Bayroq||0,b=$('istart'),n=$('adnote');if(!b||!n)return;
- if(sec>0){b.textContent=t('start');n.textContent=adMsg||(t('open_left')+' '+fmt(sec))}
+ if(sec>0){b.textContent=t('start');n.textContent=adMsg||(prem.left>0?'👑 Premium':t('open_left')+' '+fmt(sec))}
  else if(!adBusy){b.textContent='📺 '+t('ad_btn');n.textContent=adMsg||t('ad_note')}}
 function refreshLocks(){
- GAMES.forEach(g=>{let sec=0;try{sec=B.remaining(g)}catch(e){}left[g]=sec;
+ loadPremium();
+ GAMES.forEach(g=>{let sec=0;try{sec=B.remaining(g)}catch(e){}const P=prem.left>0;left[g]=P?1e9:sec;
   const o=document.querySelector('.orb[data-k="'+g+'"]');if(!o)return;
   let cd=o.querySelector('.cd');if(!cd){cd=document.createElement('span');cd.className='cd';o.appendChild(cd)}
-  cd.textContent=sec>0?fmt(sec):'';cd.classList.toggle('on',sec>0)});
+  cd.textContent=(sec>0&&!P)?fmt(sec):'';cd.classList.toggle('on',sec>0)});
+ if(pgView===premPage&&$('pg').classList.contains('show')){const e=$('prc');if(e)e.textContent=premText()}
  updateIntro()}
 $('istart').onclick=()=>{
  if((left.Bayroq||0)>0){B.startFlag();return}
@@ -449,6 +496,7 @@ window.nativeBack=()=>{
  if(splashOn)return true;
  if($('gdet').classList.contains('show')){$('gdet').classList.remove('show');return true}
  if($('guide').classList.contains('show')){gBackStep();return true}
+ if($('pg').classList.contains('show')){pgClose();return true}
  if($('idscr').classList.contains('show'))return false;
  if(sheet.classList.contains('show')){closeSheet();return true}
  if($('intro').classList.contains('show')){goBack();return true}
