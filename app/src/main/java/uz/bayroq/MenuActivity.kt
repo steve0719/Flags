@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
@@ -87,6 +88,17 @@ class MenuActivity : ComponentActivity() {
         })
     }
 
+    // Botda to'lov qilib ilovaga qaytilganda Premium holatini yangilaymiz
+    override fun onResume() {
+        super.onResume()
+        Thread {
+            if (online()) {
+                Premium.sync(this)
+                runOnUiThread { js("window.onPremium&&window.onPremium()") }
+            }
+        }.start()
+    }
+
     // Sahifa tayyor bo'lguncha ekranda oq fon va logotip turadi
     private fun addLogo(root: FrameLayout) {
         try {
@@ -159,6 +171,53 @@ class MenuActivity : ComponentActivity() {
             }.start()
         }
 
+        // ---------- Premium ----------
+        @JavascriptInterface
+        fun isPremium(): Boolean = Prefs.isPremium(this@MenuActivity)
+
+        @JavascriptInterface
+        fun premiumLeft(): Int = Prefs.premiumLeft(this@MenuActivity)
+
+        @JavascriptInterface
+        fun premiumUntil(): String = Prefs.premiumUntil(this@MenuActivity).toString()
+
+        @JavascriptInterface
+        fun syncPremium() {
+            Thread {
+                if (online()) Premium.sync(this@MenuActivity)
+                runOnUiThread { js("window.onPremium&&window.onPremium()") }
+            }.start()
+        }
+
+        // Premium olish: Telegram botni ochadi (internet shart)
+        @JavascriptInterface
+        fun openBot() {
+            Thread {
+                if (!online()) {
+                    runOnUiThread { js("window.onBot('offline')") }
+                    return@Thread
+                }
+                var bot = Prefs.bot(this@MenuActivity)
+                if (bot.isEmpty()) {
+                    Premium.sync(this@MenuActivity)
+                    bot = Prefs.bot(this@MenuActivity)
+                }
+                runOnUiThread {
+                    if (bot.isEmpty()) {
+                        js("window.onBot('fail')")
+                    } else {
+                        try {
+                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/$bot")))
+                            js("window.onBot('ok')")
+                        } catch (e: Exception) {
+                            js("window.onBot('fail')")
+                        }
+                    }
+                }
+            }.start()
+        }
+
+        // ---------- O'yinni ochish ----------
         // O'yin necha soniya ochiq qolgan (0 bo'lsa, yopiq)
         @JavascriptInterface
         fun remaining(game: String): Int = Prefs.unlockLeft(this@MenuActivity, game)
@@ -168,6 +227,10 @@ class MenuActivity : ComponentActivity() {
         fun watchAd(game: String) {
             if (game != "Bayroq") return
             runOnUiThread {
+                if (Prefs.isPremium(this@MenuActivity)) {
+                    js("window.onAdResult('$game','ok')")
+                    return@runOnUiThread
+                }
                 if (!online()) {
                     js("window.onAdResult('$game','noconn')")
                     return@runOnUiThread
@@ -182,7 +245,8 @@ class MenuActivity : ComponentActivity() {
         @JavascriptInterface
         fun startFlag() {
             runOnUiThread {
-                if (Prefs.unlockLeft(this@MenuActivity, "Bayroq") > 0) {
+                val open = Prefs.isPremium(this@MenuActivity) || Prefs.unlockLeft(this@MenuActivity, "Bayroq") > 0
+                if (open) {
                     startActivity(Intent(this@MenuActivity, MainActivity::class.java))
                 }
             }
