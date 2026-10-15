@@ -88,13 +88,17 @@ class MenuActivity : ComponentActivity() {
         })
     }
 
-    // Botda to'lov qilib ilovaga qaytilganda Premium holatini yangilaymiz
+    // Ilovaga qaytilganda (botdan yoki o'yindan): Premium va faol o'yin vaqtini yangilaymiz
     override fun onResume() {
         super.onResume()
         Thread {
             if (online()) {
                 Premium.sync(this)
-                runOnUiThread { js("window.onPremium&&window.onPremium()") }
+                PlayTime.sync(this)
+            }
+            runOnUiThread {
+                js("window.onPremium&&window.onPremium()")
+                js("window.onPlay&&window.onPlay()")
             }
         }.start()
     }
@@ -169,6 +173,26 @@ class MenuActivity : ComponentActivity() {
                     }
                 }
             }.start()
+        }
+
+        // ---------- Rank: faol o'yin vaqti ----------
+        // Jami faol o'yin vaqti (soniya)
+        @JavascriptInterface
+        fun playSec(): Int = minOf(Prefs.playTotal(this@MenuActivity), Int.MAX_VALUE.toLong()).toInt()
+
+        // Vaqtni serverga yuboradi va yangilaydi
+        @JavascriptInterface
+        fun syncPlay() {
+            Thread {
+                if (online()) PlayTime.sync(this@MenuActivity)
+                runOnUiThread { js("window.onPlay&&window.onPlay()") }
+            }.start()
+        }
+
+        // Profil ma'lumotlari (reyting jadvali uchun)
+        @JavascriptInterface
+        fun setProfile(name: String, country: String) {
+            Prefs.setProfile(this@MenuActivity, name, country)
         }
 
         // ---------- Premium ----------

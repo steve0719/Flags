@@ -62,4 +62,65 @@ object Prefs {
     // Botning username i (serverdan keladi)
     fun setBot(c: Context, v: String) = sp(c).edit().putString("bot", v).apply()
     fun bot(c: Context): String = sp(c).getString("bot", "") ?: ""
+
+    // ---------- Faol o'yin vaqti (Rank tizimi) ----------
+    // Jami vaqt = serverdagi asos + yuborilayotgan paket + hali yuborilmaganlar.
+    private val playLock = Any()
+
+    fun playTotal(c: Context): Long {
+        val s = sp(c)
+        return s.getLong("p_base", 0L) + s.getLong("p_inflight", 0L) + s.getLong("p_pend", 0L)
+    }
+
+    // Faol o'yin soniyalarini qo'shadi
+    fun addPlay(c: Context, sec: Int) {
+        if (sec <= 0) return
+        synchronized(playLock) {
+            val s = sp(c)
+            s.edit().putLong("p_pend", s.getLong("p_pend", 0L) + sec).apply()
+        }
+    }
+
+    // Serverga yuboriladigan paket: (raqami, soniyalar). Soniya 0 bo'lsa, yuboradigan narsa yo'q.
+    fun playBatch(c: Context): Pair<Int, Long> {
+        synchronized(playLock) {
+            val s = sp(c)
+            var infl = s.getLong("p_inflight", 0L)
+            if (infl == 0L) {
+                val pend = s.getLong("p_pend", 0L)
+                if (pend > 0L) {
+                    infl = pend
+                    s.edit()
+                        .putLong("p_inflight", infl)
+                        .putLong("p_pend", 0L)
+                        .putInt("p_iseq", s.getInt("p_nextseq", 1))
+                        .apply()
+                }
+            }
+            return Pair(s.getInt("p_iseq", s.getInt("p_nextseq", 1)), infl)
+        }
+    }
+
+    // Server javobi: jami soniya va oxirgi qabul qilingan paket raqami
+    fun playAck(c: Context, serverSec: Long, serverSeq: Int) {
+        synchronized(playLock) {
+            val s = sp(c)
+            val e = s.edit()
+            e.putLong("p_base", serverSec).putInt("p_nextseq", serverSeq + 1)
+            val infl = s.getLong("p_inflight", 0L)
+            val iseq = s.getInt("p_iseq", 1)
+            if (infl > 0L) {
+                if (serverSeq >= iseq) e.putLong("p_inflight", 0L)
+                else e.putInt("p_iseq", serverSeq + 1)
+            }
+            e.apply()
+        }
+    }
+
+    // Profil (reyting jadvali uchun serverga yuboriladi)
+    fun setProfile(c: Context, name: String, country: String) {
+        sp(c).edit().putString("pname", name).putString("pcountry", country).apply()
+    }
+    fun pname(c: Context): String = sp(c).getString("pname", "") ?: ""
+    fun pcountry(c: Context): String = sp(c).getString("pcountry", "XX") ?: "XX"
 }

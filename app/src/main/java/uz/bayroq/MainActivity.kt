@@ -13,6 +13,7 @@ import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -53,6 +54,7 @@ class MainActivity : ComponentActivity() {
     private enum class State { SHUFFLE, PLAY, DONE }
 
     private lateinit var lang: String
+    private lateinit var clock: PlayTime
     private lateinit var preview: PreviewView
     private lateinit var overlay: FlagOverlay
     private lateinit var timerText: TextView
@@ -88,10 +90,27 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lang = Prefs.lang(this).let { if (STR.containsKey(it)) it else "uz" }
+        clock = PlayTime(this)
         buildUi()
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
             startCamera() else permLauncher.launch(Manifest.permission.CAMERA)
         startRound()
+    }
+
+    // ---------- Faol o'yin vaqti (Rank tizimi) ----------
+    override fun onResume() {
+        super.onResume()
+        clock.resume()
+    }
+
+    override fun onPause() {
+        clock.pause()
+        super.onPause()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        clock.touch()
+        return super.dispatchTouchEvent(ev)
     }
 
     private fun s(k: String): String = STR[lang]?.get(k) ?: STR.getValue("uz").getValue(k)
@@ -354,6 +373,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        clock.pause()
         timer?.cancel(); handler.removeCallbacksAndMessages(null)
         cameraExecutor.shutdown(); detector.close()
     }
