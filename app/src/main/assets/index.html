@@ -426,9 +426,9 @@ Object.assign(TX.en,{rt_lvl:"Level ranking",rt_games:"Games ranking",rt_rank:"Pl
 Object.assign(TX.uz,{gm_s:"s",gm_rec:"Rekord",gm_cnt:"Xatosiz bayroqlar",gm_time:"Vaqt",gm_pos:"O'yin reytingidagi o'rni",gm_info:"Xato qilmasdan ketma-ket topilgan bayroqlar soni. Ko'p bayroq yuqori, teng bo'lsa kam vaqt yuqori.",rt_anon:"Anonim (davlat yo'q)"});
 Object.assign(TX.ru,{gm_s:"с",gm_rec:"Рекорд",gm_cnt:"Флаги без ошибок",gm_time:"Время",gm_pos:"Место в рейтинге игры",gm_info:"Число флагов подряд без ошибок. Больше флагов — выше, при равенстве — меньше времени.",rt_anon:"Аноним (без страны)"});
 Object.assign(TX.en,{gm_s:"s",gm_rec:"Record",gm_cnt:"Flags without mistakes",gm_time:"Time",gm_pos:"Game ranking position",gm_info:"Flags found in a row without a mistake. More flags rank higher; ties go to less time.",rt_anon:"Anonymous (no country)"});
-Object.assign(TX.uz,{u_hh:"soat",u_mm:"daqiqa",rk_next:"Keyingi darajagacha",rk_total:"Jami faol o'yin vaqti",rk_max:"Eng yuqori daraja!",rk_up:"Tabriklaymiz! 🎉",rk_up2:"Siz {n}-darajaga ko'tarildingiz",rk_newrank:"Yangi rank: {r}",rk_ok:"Davom etish"});
-Object.assign(TX.ru,{u_hh:"ч",u_mm:"мин",rk_next:"До следующего уровня",rk_total:"Всего активного времени в играх",rk_max:"Максимальный уровень!",rk_up:"Поздравляем! 🎉",rk_up2:"Вы достигли {n}-го уровня",rk_newrank:"Новый ранг: {r}",rk_ok:"Продолжить"});
-Object.assign(TX.en,{u_hh:"h",u_mm:"min",rk_next:"To next level",rk_total:"Total active play time",rk_max:"Max level reached!",rk_up:"Congratulations! 🎉",rk_up2:"You reached level {n}",rk_newrank:"New rank: {r}",rk_ok:"Continue"});
+Object.assign(TX.uz,{u_hh:"soat",u_mm:"daqiqa",u_ss:"soniya",rk_next:"Keyingi darajagacha",rk_total:"Jami faol o'yin vaqti",rk_max:"Eng yuqori daraja!",rk_up:"Tabriklaymiz! 🎉",rk_up2:"Siz {n}-darajaga ko'tarildingiz",rk_newrank:"Yangi rank: {r}",rk_ok:"Davom etish"});
+Object.assign(TX.ru,{u_hh:"ч",u_mm:"мин",u_ss:"сек",rk_next:"До следующего уровня",rk_total:"Всего активного времени в играх",rk_max:"Максимальный уровень!",rk_up:"Поздравляем! 🎉",rk_up2:"Вы достигли {n}-го уровня",rk_newrank:"Новый ранг: {r}",rk_ok:"Продолжить"});
+Object.assign(TX.en,{u_hh:"h",u_mm:"min",u_ss:"s",rk_next:"To next level",rk_total:"Total active play time",rk_max:"Max level reached!",rk_up:"Congratulations! 🎉",rk_up2:"You reached level {n}",rk_newrank:"New rank: {r}",rk_ok:"Continue"});
 const LN={uz:"🇺🇿 O'zbek",ru:"🇷🇺 Русский",en:"🇬🇧 English"};
 let lang=store.get('lang');
 if(!TX[lang]){const n=(navigator.language||'uz').slice(0,2);lang=TX[n]?n:'uz'}
@@ -518,7 +518,7 @@ function profilePage(){
   '<span class="rklv">⭐ '+t('rt_lv')+' '+info.lv+'</span>'+
   '<div class="rbar big"><i style="width:'+info.pct.toFixed(1)+'%"></i></div>'+
   '<div class="rkline"><span>'+(info.max?t('rk_max'):t('rk_next')+': '+fmtDur(info.left))+'</span><span>'+Math.floor(info.pct)+'%</span></div>'+
-  '<div class="rtime"><small>⏱ '+t('rk_total')+'</small><b>'+fmtDur(s.time)+'</b></div></div>'+
+  '<div class="rtime"><small>⏱ '+t('rk_total')+'</small><b>'+fmtDur(s.time)+'</b></div>'+(TS<3600?'<div class="prd">🧪 TEST: 1 soat = '+TS+' soniya</div>':'')+'</div>'+
   '<div class="pcard">'+countrySel()+'<div class="tg"><span>'+t('pr_id')+': <b>'+(B.getId()||'—')+'</b></span><button class="lg" data-p="copy" style="flex:none;padding:6px 12px">'+t('copy')+'</button></div></div>';
  $('pfoot').innerHTML='';
  $('pfn').value=store.get('name')||''}
@@ -632,7 +632,8 @@ const RANKS=[
 const RANK_IMG=['','','','','','','','','',''];
 const MAXLV=100;
 const rankIdx=lv=>Math.min(9,Math.floor((Math.max(1,lv)-1)/10));
-const lvReq=lv=>Math.round(RANKS[rankIdx(lv)][3]*3600);
+const TS=20;/* 1 soat = TS soniya (haqiqiy: 3600) */
+const lvReq=lv=>Math.round(RANKS[rankIdx(lv)][3]*TS);
 const LV_TH=(()=>{const a=[0,0];for(let l=1;l<MAXLV;l++)a.push(a[l]+lvReq(l));return a})();
 function lvOf(sec){sec=Math.max(0,+sec||0);let lo=1,hi=MAXLV;while(lo<hi){const m=(lo+hi+1)>>1;if(LV_TH[m]<=sec)lo=m;else hi=m-1}return lo}
 function lvInfo(sec){sec=Math.max(0,+sec||0);const lv=lvOf(sec);
@@ -641,7 +642,7 @@ function lvInfo(sec){sec=Math.max(0,+sec||0);const lv=lvOf(sec);
 function rankOf(lv){const i=rankIdx(lv),R=RANKS[i];return{name:R[LI[lang]],icon:R[4],img:RANK_IMG[i]||''}}
 const rankGlyph=k=>k.img?'<img class="rkimg" src="'+k.img+'" alt="">':k.icon;
 const rankChip=k=>rankGlyph(k)+' '+esc(k.name);
-function fmtDur(sec){sec=Math.max(0,Math.round(sec));const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60);
+function fmtDur(sec){sec=Math.max(0,Math.round(sec));if(TS<3600)return sec+' '+t('u_ss');const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60);
  if(h>0)return h+' '+t('u_hh')+(m?' '+m+' '+t('u_mm'):'');
  return Math.max(1,m)+' '+t('u_mm')}
 function ratingPage(){
