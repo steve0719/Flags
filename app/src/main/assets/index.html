@@ -265,6 +265,92 @@ nav em{font-style:normal}
 #pfoot:empty{display:none}
 .buy{width:100%;border:0;border-radius:22px;padding:15px;font:inherit;font-weight:800;font-size:22px;color:#fff;background:linear-gradient(#4be06a,#22b53a);box-shadow:0 5px 0 #15862a;text-shadow:0 2px 0 rgba(0,0,0,.25)}
 .prnet{background:#fff;border-radius:12px;padding:7px 10px;margin:0 0 10px;text-align:center}
+
+/* ===== Reyting ===== */
+.rhead{background:#fff;border-radius:22px;padding:16px 14px 14px;margin-bottom:14px;box-shadow:0 5px 0 rgba(10,50,140,.3);text-align:center;color:#0b3fa8}
+.rhead .pfa{margin-bottom:18px}
+.rhead h3{margin:0;font-size:24px;line-height:1.1;color:#0b3fa8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rchips{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.rchips span{display:flex;align-items:center;gap:4px;background:#eef5ff;color:#0b3fa8;font-weight:800;font-size:15px;border-radius:14px;padding:3px 12px}
+.rchips span.rk{background:linear-gradient(#ffb84a,#ff9f0a);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.25)}
+.rtabs{display:flex;gap:8px;margin-bottom:14px}
+.rtab{flex:1;border:3px solid #fff;border-radius:16px;background:linear-gradient(#2a7bf5,#1255cf);color:#cfe2ff;font:inherit;font-weight:800;font-size:15px;line-height:1.1;padding:9px 4px;box-shadow:0 4px 0 rgba(10,50,140,.3);cursor:pointer}
+.rtab.on{background:linear-gradient(#35d655,#1a9e36);color:#fff;box-shadow:0 4px 0 #11702a}
+.rlist{background:#fff;border-radius:22px;padding:8px;box-shadow:0 5px 0 rgba(10,50,140,.3)}
+.rrow{display:flex;align-items:center;gap:10px;padding:8px 8px;border-radius:16px;color:#0b3fa8}
+.rrow+.rrow{margin-top:2px}
+.rrow.me{background:#e3f1ff;box-shadow:inset 0 0 0 3px #1e90ff}
+.rno{width:34px;flex:none;text-align:center;font-weight:800;font-size:18px;color:#5b7bb5}
+.rav{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:22px;border:3px solid #fff;background:radial-gradient(circle at 35% 30%,#3ea0ff,#0e49c0);background-size:cover;background-position:center;box-shadow:0 2px 6px rgba(0,40,120,.3)}
+.rmid{flex:1;min-width:0}
+.rmid b{display:block;font-size:17px;line-height:1.1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rmid small{display:block;color:#5b7bb5;font-weight:700;font-size:12px;margin-top:2px}
+.rval{flex:none;font-weight:800;font-size:16px;color:#0b3fa8;background:#eef5ff;border-radius:12px;padding:4px 10px;font-variant-numeric:tabular-nums}
+.rbar{height:8px;border-radius:4px;background:#dbe8ff;margin-top:5px;overflow:hidden}
+.rbar i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#4be06a,#22b53a)}
+.rgi{width:48px;height:48px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:24px;color:#fff;background:radial-gradient(circle at 50% 100%,var(--b),var(--a));box-shadow:inset 0 -4px 8px rgba(0,0,0,.18),0 2px 6px rgba(0,40,120,.25)}
+.rrow.soon{opacity:.55}
+.rchips span.rkn{background:linear-gradient(#b27bff,#8a3ff0);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.25)}
+.rkimg{width:22px;height:22px;object-fit:contain}
+.rtime{margin-top:10px;background:#eef5ff;border-radius:14px;padding:7px 10px;color:#0b3fa8;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.rtime small{color:#5b7bb5;font-weight:700;font-size:13px}
+.rtime b{font-size:17px;font-variant-numeric:tabular-nums}
+#pfoot .rlist{box-shadow:0 -4px 14px rgba(0,30,110,.25),0 5px 0 rgba(10,50,140,.3)}
+.rchips{flex-wrap:wrap}
+.avatar,.pfa,.rav{position:relative}
+.pfa{margin-bottom:20px}
+.flg{position:absolute;right:-6px;bottom:-3px;font-size:var(--ff,16px);line-height:1;z-index:3;pointer-events:none;filter:drop-shadow(0 1px 2px rgba(0,30,100,.4))}
+.avatar .flg{--ff:19px;right:-7px;bottom:-3px}
+.pfa .flg{--ff:30px;right:-10px;bottom:-4px}
+.rav .flg{--ff:15px;right:-6px;bottom:-3px}
+.rav,.rhead .pfa{cursor:pointer}
+.rrow{gap:8px}
+.rvs{display:flex;gap:5px;flex:none;align-items:center}
+.rvs .rval{font-size:13px;padding:4px 8px;white-space:nowrap}
+.rvs .rval.rrk{background:#f1e6ff;color:#6a2fc0;display:flex;align-items:center;gap:3px}
+.rvs .rkimg{width:16px;height:16px}
+.rhead .rchips span{font-size:14px;padding:3px 9px}
+.rhead.dim{animation:rdim .45s ease both;pointer-events:none}
+@keyframes rdim{to{opacity:.38;filter:saturate(.6) brightness(.9)}}
+.rstage{position:relative;aspect-ratio:3/4;margin-bottom:14px}
+.rcore{position:absolute;left:50%;top:50%;width:46%;transform:translate(-50%,-50%);background:#fff;border-radius:22px;padding:12px 8px 10px;text-align:center;color:#0b3fa8;box-shadow:0 6px 0 rgba(10,50,140,.3),0 0 0 5px rgba(255,255,255,.55);z-index:2}
+.rct{font-size:12px;font-weight:800;color:#5b7bb5;line-height:1.1;margin-bottom:6px}
+.rcore .rgi{width:46px;height:46px;margin:0 auto 4px;font-size:24px}
+.rcn{display:block;font-size:16px;line-height:1.1;margin-bottom:2px}
+.rcv{font-size:34px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.rcore small{display:block;color:#5b7bb5;font-weight:700;font-size:11px;margin:1px 0 4px}
+.rcs{display:flex;justify-content:center;gap:6px;margin-top:7px;font-weight:800;font-size:13px}
+.rcs span{background:#eef5ff;border-radius:10px;padding:2px 8px}
+.ro{position:absolute;width:56px;height:56px;transform:translate(-50%,-50%);scale:.2;opacity:0;border-radius:50%;border:0;padding:0;background:linear-gradient(#fff,#d9ecff);box-shadow:0 5px 0 rgba(10,50,140,.28),0 9px 14px rgba(0,0,0,.3);cursor:pointer;z-index:3;transition:left .42s cubic-bezier(.2,1.25,.4,1),top .42s cubic-bezier(.2,1.25,.4,1),scale .32s,opacity .25s;transition-delay:var(--d,0ms)}
+#rmenu.open .ro{scale:1;opacity:1}
+#rmenu{position:absolute;inset:0;z-index:6}
+.rdim{position:absolute;inset:0;background:rgba(4,20,70,0);transition:background .3s,backdrop-filter .3s}
+#rmenu.open .rdim{background:rgba(4,20,70,.62);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.rhub{position:absolute;z-index:4;margin:0;transition:left .42s cubic-bezier(.3,1.1,.4,1),top .42s cubic-bezier(.3,1.1,.4,1)}
+.rlbl{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:6px;white-space:nowrap;font-weight:800;font-size:12px;color:#fff;text-shadow:0 2px 0 rgba(0,20,90,.75);pointer-events:none}
+.ro .in{position:absolute;inset:6%;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:radial-gradient(circle at 50% 100%,var(--b),var(--a));box-shadow:inset 0 -6px 10px rgba(0,0,0,.18)}
+.ro .in:before{content:"";position:absolute;left:14%;top:9%;width:30%;height:16%;border-radius:50%;background:rgba(255,255,255,.55);transform:rotate(-35deg)}
+.ro .ic{font-size:26px;line-height:1;filter:drop-shadow(0 2px 0 rgba(0,0,0,.2))}
+.ro.soon .in{filter:saturate(.6) brightness(.92)}
+.ro.sel{box-shadow:0 0 0 4px #ffe03a,0 5px 0 rgba(10,50,140,.28),0 9px 14px rgba(0,40,120,.25)}
+.rbd{position:absolute;top:-5px;right:-6px;min-width:24px;height:24px;border-radius:12px;background:#ff3b5c;border:2px solid #fff;color:#fff;font-size:13px;font-weight:800;display:grid;place-items:center;padding:0 5px;z-index:4}
+.rkcard .big{font-size:60px;line-height:1.1}
+.rkcard h3{margin:2px 0 8px}
+.rklv{display:inline-block;background:linear-gradient(#ffb84a,#ff9f0a);color:#fff;font-weight:800;border-radius:14px;padding:3px 14px;font-size:15px;text-shadow:0 1px 0 rgba(0,0,0,.25)}
+.rbar.big{height:16px;border-radius:8px;margin:12px 0 6px}
+.rbar.big i{border-radius:8px}
+.rkline{display:flex;justify-content:space-between;color:#5b7bb5;font-weight:700;font-size:13px}
+#lvup{position:absolute;inset:0;z-index:70;display:none;align-items:center;justify-content:center;background:rgba(4,20,70,.72);padding:24px;overflow:hidden}
+#lvup.show{display:flex}
+.lvcard{position:relative;width:100%;max-width:360px;background:#fff;border-radius:28px;padding:26px 18px 20px;text-align:center;color:#0b3fa8;box-shadow:0 10px 0 rgba(10,50,140,.3);animation:lvpop .5s cubic-bezier(.2,1.4,.4,1) both}
+.lvcard .big{font-size:84px;line-height:1;animation:lvbob 1.4s ease-in-out infinite}
+.lvcard h2{margin:6px 0 4px;font-size:28px}
+.lvcard p{margin:4px 0 12px;font-weight:700;font-size:17px;color:#5b7bb5}
+.lvcard p b{color:#0b3fa8}
+.cf{position:absolute;top:-14px;width:9px;height:14px;border-radius:2px;opacity:0;animation:cfall 1.9s linear forwards;pointer-events:none}
+@keyframes lvpop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes lvbob{50%{transform:translateY(-6px) scale(1.05)}}
+@keyframes cfall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(560px) rotate(540deg);opacity:0}}
 </style>
 </head>
 <body>
@@ -306,6 +392,7 @@ nav em{font-style:normal}
  <div id="guide"><div class="gtop"><button class="gback" id="gback">‹</button><h2 id="gtitle"></h2></div><div id="gbody"></div></div>
  <div id="pg"><div class="gtop"><button class="gback" id="pback">‹</button><h2 id="ptitle"></h2></div><div id="pbody"></div><div id="pfoot"></div></div>
  <div id="gdet"><div class="gcard" id="gcard"></div></div>
+ <div id="lvup"><div class="lvcard" id="lvbody"></div></div>
  <div id="splash">
   <div class="sp1" id="sp1"><div class="logo"><img src="logo.png" alt=""></div></div>
   <div class="sp2" id="sp2"><img id="spimg" src="loading.jpg" alt=""><div id="spfill"></div></div>
@@ -327,12 +414,21 @@ function palm(cls){
 }
 document.querySelectorAll('.pslot').forEach(e=>{e.outerHTML=palm('big')+palm('sm')});
 const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
-const B=window.Bridge||{needsId:()=>false,getId:()=>'00000000000',fetchId:()=>setTimeout(()=>window.onIdOk('00000000000'),400),startFlag:()=>{},copy:()=>{},setPrefs:()=>{},tap:()=>{},pickPhoto:()=>{},remaining:()=>0,ready:()=>{},elapsed:()=>0,isPremium:()=>false,premiumLeft:()=>0,premiumUntil:()=>'0',syncPremium:()=>{},openBot:()=>{},watchAd:()=>setTimeout(()=>window.onAdResult('Bayroq','fail'),400)};
+const B=window.Bridge||{needsId:()=>false,getId:()=>'00000000000',fetchId:()=>setTimeout(()=>window.onIdOk('00000000000'),400),startFlag:()=>{},copy:()=>{},setPrefs:()=>{},tap:()=>{},pickPhoto:()=>{},playSec:()=>0,syncPlay:()=>{},setProfile:()=>{},remaining:()=>0,ready:()=>{},elapsed:()=>0,isPremium:()=>false,premiumLeft:()=>0,premiumUntil:()=>'0',syncPremium:()=>{},openBot:()=>{},watchAd:()=>setTimeout(()=>window.onAdResult('Bayroq','fail'),400)};
 const TX={
 uz:{profile:"Profil",level:"Daraja 1",photo:"Rasm tanlash",name_ph:"Ismingiz",save:"Saqlash",pr_on:"Premium faol",pr_off:"Premium faol emas",pr_left:"Qolgan vaqt",pr_until:"Tugash vaqti",pr_perks:"👑 Reklamasiz, barcha o'yinlar doim ochiq",pr_buy:"💎 Premium olish",pr_net:"Premium olish uchun internet kerak!",pr_id:"Sizning ID",pr_fail:"Botni ochib bo'lmadi. Internetni tekshiring.",u_y:"yil",u_m:"oy",u_d:"kun",g_flags:"Bayroqlar",g_cnt:"ta davlat",g_search:"Qidirish...",g_cap:"Poytaxt",g_cur:"Pul birligi",g_cont:"Materik",g_lang:"Tili",g_langs:"Tillari",ad_btn:"Reklama ko'rib ochish",ad_note:"Reklamani ko'rsangiz o'yin 24 soatga ochiladi.",ad_loading:"Reklama yuklanmoqda...",ad_noconn:"Internet yo'q. Reklama uchun internetga ulaning.",ad_fail:"Reklama hozir mavjud emas. Keyinroq urinib ko'ring.",ad_skip:"Reklamani oxirigacha ko'ring.",open_left:"Ochiq:",n_rating:"Reytingim",n_info:"Ma'lumotlar",n_home:"Home",n_guide:"Qo'llanma",n_prem:"Premium",soon:"Tez orada",soon_d:"Bu o'yin tez orada qo'shiladi.",sect_d:"Bu bo'lim keyingi yangilanishda qo'shiladi.",set:"Sozlamalar",snd:"Tovush",vib:"Vibratsiya",lite:"Yengil rejim",close:"Yopish",id_l:"ID raqamingiz",copy:"Nusxalash",copied:"Nusxalandi ✓",back:"‹ Orqaga",start:"Boshlash",how:"Qanday o'ynaladi",g_desc:"Old kamera yuzingizni topadi va boshingiz ustida bayroq paydo bo'ladi. 10 soniyada bu qaysi davlat ekanini toping.",g_t1:"⏱ 10 soniya",g_t2:"🎯 O'rtacha",r1:"Telefon kamerasiga yuzingizni qarating.",r2:"Bayroqlar tez almashadi, so'ng bittasi tanlanadi.",r3:"10 soniya ichida to'g'ri davlatni tanlang.",r4:"KEYINGISI tugmasi bilan yangi raundni boshlang.",id_t:"Internet bilan kiring",id_d:"Ilova birinchi marta ochilganda internetga ulanishi kerak. Shundan keyin oflayn ishlaydi.",retry:"Qayta urinish",loading:"Yuklanmoqda...",fail:"Ulanib bo'lmadi. Internetni tekshiring."},
 ru:{profile:"Профиль",level:"Уровень 1",photo:"Выбрать фото",name_ph:"Ваше имя",save:"Сохранить",pr_on:"Premium активен",pr_off:"Premium не активен",pr_left:"Осталось",pr_until:"Действует до",pr_perks:"👑 Без рекламы, все игры всегда открыты",pr_buy:"💎 Купить Premium",pr_net:"Для покупки Premium нужен интернет!",pr_id:"Ваш ID",pr_fail:"Не удалось открыть бота. Проверьте интернет.",u_y:"г.",u_m:"мес.",u_d:"дн.",g_flags:"Флаги",g_cnt:"стран",g_search:"Поиск...",g_cap:"Столица",g_cur:"Валюта",g_cont:"Материк",g_lang:"Язык",g_langs:"Языки",ad_btn:"Открыть за рекламу",ad_note:"Посмотрите рекламу, и игра откроется на 24 часа.",ad_loading:"Загрузка рекламы...",ad_noconn:"Нет интернета. Подключитесь для показа рекламы.",ad_fail:"Реклама сейчас недоступна. Попробуйте позже.",ad_skip:"Досмотрите рекламу до конца.",open_left:"Открыто:",n_rating:"Рейтинг",n_info:"Инфо",n_home:"Главная",n_guide:"Помощь",n_prem:"Премиум",soon:"Скоро",soon_d:"Эта игра скоро появится.",sect_d:"Этот раздел появится в следующем обновлении.",set:"Настройки",snd:"Звук",vib:"Вибрация",lite:"Лёгкий режим",close:"Закрыть",id_l:"Ваш ID",copy:"Копировать",copied:"Скопировано ✓",back:"‹ Назад",start:"Начать",how:"Как играть",g_desc:"Фронтальная камера находит ваше лицо, и над головой появляется флаг. За 10 секунд угадайте страну.",g_t1:"⏱ 10 секунд",g_t2:"🎯 Средне",r1:"Направьте камеру на своё лицо.",r2:"Флаги быстро сменяются, затем выбирается один.",r3:"Выберите правильную страну за 10 секунд.",r4:"Кнопкой «ДАЛЕЕ» начните новый раунд.",id_t:"Подключитесь к интернету",id_d:"При первом запуске приложению нужен интернет. Затем оно работает офлайн.",retry:"Повторить",loading:"Загрузка...",fail:"Не удалось подключиться. Проверьте интернет."},
 en:{profile:"Profile",level:"Level 1",photo:"Choose photo",name_ph:"Your name",save:"Save",pr_on:"Premium is active",pr_off:"Premium is not active",pr_left:"Time left",pr_until:"Valid until",pr_perks:"👑 No ads, all games always unlocked",pr_buy:"💎 Get Premium",pr_net:"Internet is required to get Premium!",pr_id:"Your ID",pr_fail:"Could not open the bot. Check your internet.",u_y:"y",u_m:"mo",u_d:"d",g_flags:"Flags",g_cnt:"countries",g_search:"Search...",g_cap:"Capital",g_cur:"Currency",g_cont:"Continent",g_lang:"Language",g_langs:"Languages",ad_btn:"Watch ad to unlock",ad_note:"Watch an ad to unlock this game for 24 hours.",ad_loading:"Loading ad...",ad_noconn:"No internet. Connect to watch the ad.",ad_fail:"No ad available right now. Try again later.",ad_skip:"Watch the ad to the end.",open_left:"Open:",n_rating:"Rating",n_info:"Info",n_home:"Home",n_guide:"Guide",n_prem:"Premium",soon:"Soon",soon_d:"This game is coming soon.",sect_d:"This section will be added in a future update.",set:"Settings",snd:"Sound",vib:"Vibration",lite:"Light mode",close:"Close",id_l:"Your ID",copy:"Copy",copied:"Copied ✓",back:"‹ Back",start:"Start",how:"How to play",g_desc:"The front camera finds your face and a flag appears above your head. Guess the country in 10 seconds.",g_t1:"⏱ 10 seconds",g_t2:"🎯 Medium",r1:"Point the camera at your face.",r2:"Flags flip fast, then one is picked.",r3:"Choose the right country within 10 seconds.",r4:"Tap NEXT to start a new round.",id_t:"Connect to the internet",id_d:"The app needs internet on first launch. After that it works offline.",retry:"Try again",loading:"Loading...",fail:"Could not connect. Check your internet."}
 };
+Object.assign(TX.uz,{rt_lvl:"Daraja reytingi",rt_games:"O'yinlar reytingi",rt_rank:"O'rin",rt_lv:"Daraja",rt_times:"marta o'ynalgan",rt_total:"Jami",rt_xp:"ball",rt_time:"Butun o'yin davomida o'ynalgan vaqt",rt_rk:"Rank",rt_h:"soat",rt_hl:"Vaqt",rt_pos:"Daraja reytingidagi o'rni"});
+Object.assign(TX.ru,{rt_lvl:"Рейтинг уровней",rt_games:"Рейтинг игр",rt_rank:"Место",rt_lv:"Уровень",rt_times:"раз сыграно",rt_total:"Всего",rt_xp:"очков",rt_time:"Время в игре за всё время",rt_rk:"Rank",rt_h:"ч",rt_hl:"Время",rt_pos:"Место в рейтинге уровней"});
+Object.assign(TX.en,{rt_lvl:"Level ranking",rt_games:"Games ranking",rt_rank:"Place",rt_lv:"Level",rt_times:"times played",rt_total:"Total",rt_xp:"pts",rt_time:"Total time played in the game",rt_rk:"Rank",rt_h:"h",rt_hl:"Time",rt_pos:"Level ranking position"});
+Object.assign(TX.uz,{gm_s:"s",gm_rec:"Rekord",gm_cnt:"Xatosiz bayroqlar",gm_time:"Vaqt",gm_pos:"O'yin reytingidagi o'rni",gm_info:"Xato qilmasdan ketma-ket topilgan bayroqlar soni. Ko'p bayroq yuqori, teng bo'lsa kam vaqt yuqori.",rt_anon:"Anonim (davlat yo'q)"});
+Object.assign(TX.ru,{gm_s:"с",gm_rec:"Рекорд",gm_cnt:"Флаги без ошибок",gm_time:"Время",gm_pos:"Место в рейтинге игры",gm_info:"Число флагов подряд без ошибок. Больше флагов — выше, при равенстве — меньше времени.",rt_anon:"Аноним (без страны)"});
+Object.assign(TX.en,{gm_s:"s",gm_rec:"Record",gm_cnt:"Flags without mistakes",gm_time:"Time",gm_pos:"Game ranking position",gm_info:"Flags found in a row without a mistake. More flags rank higher; ties go to less time.",rt_anon:"Anonymous (no country)"});
+Object.assign(TX.uz,{u_hh:"soat",u_mm:"daqiqa",rk_next:"Keyingi darajagacha",rk_total:"Jami faol o'yin vaqti",rk_max:"Eng yuqori daraja!",rk_up:"Tabriklaymiz! 🎉",rk_up2:"Siz {n}-darajaga ko'tarildingiz",rk_newrank:"Yangi rank: {r}",rk_ok:"Davom etish"});
+Object.assign(TX.ru,{u_hh:"ч",u_mm:"мин",rk_next:"До следующего уровня",rk_total:"Всего активного времени в играх",rk_max:"Максимальный уровень!",rk_up:"Поздравляем! 🎉",rk_up2:"Вы достигли {n}-го уровня",rk_newrank:"Новый ранг: {r}",rk_ok:"Продолжить"});
+Object.assign(TX.en,{u_hh:"h",u_mm:"min",rk_next:"To next level",rk_total:"Total active play time",rk_max:"Max level reached!",rk_up:"Congratulations! 🎉",rk_up2:"You reached level {n}",rk_newrank:"New rank: {r}",rk_ok:"Continue"});
 const LN={uz:"🇺🇿 O'zbek",ru:"🇷🇺 Русский",en:"🇬🇧 English"};
 let lang=store.get('lang');
 if(!TX[lang]){const n=(navigator.language||'uz').slice(0,2);lang=TX[n]?n:'uz'}
@@ -408,18 +504,29 @@ function renderProfile(){
  const n=store.get('name'),p=store.get('photo'),av=document.querySelector('.avatar');
  $('pnm').textContent=n||t('profile');
  if(p){av.style.backgroundImage="url('"+p+"')";av.style.backgroundSize='cover';av.style.backgroundPosition='center';av.textContent=''}
- else{av.style.backgroundImage='';av.textContent='🙂'}}
+ else{av.style.backgroundImage='';av.textContent='🙂'}
+ av.insertAdjacentHTML('beforeend',flagBadge());
+ const sm=document.querySelector('.pname small');if(sm)sm.textContent=t('rt_lv')+' '+myStats().lv;try{B.setProfile(store.get('name')||'',myCountry())}catch(e){}}
 function saveName(){store.set('name',$('pfn').value.trim().slice(0,16));renderProfile()}
-function profileView(){
- const p=store.get('photo');
- setSheet('',t('profile'),t('id_l')+': '+(B.getId()||'—'),
-  '<div class="pfa"'+(p?' style="background-image:url(\''+p+'\')"':'')+'>'+(p?'':'🙂')+'</div>'+
-  '<div class="row"><button class="lg" data-p="photo">📷 '+t('photo')+'</button><button class="lg" data-p="copy">'+t('copy')+'</button></div>'+
-  '<input id="pfn" class="inp" maxlength="16" placeholder="'+t('name_ph')+'" autocomplete="off">',
-  t('save'),()=>{saveName();closeSheet()});
+function profilePage(){
+ const p=store.get('photo'),s=myStats(),info=lvInfo(s.time),rk=rankOf(info.lv);
+ $('pbody').innerHTML=
+  '<div class="pcard"><div class="pfa"'+(p?' style="background-image:url(\''+p+'\')"':'')+'>'+(p?'':'🙂')+flagBadge()+'</div>'+
+  '<div class="row"><button class="lg" data-p="photo">📷 '+t('photo')+'</button></div>'+
+  '<input id="pfn" class="inp" maxlength="16" placeholder="'+t('name_ph')+'" autocomplete="off"></div>'+
+  '<div class="pcard rkcard"><div class="big">'+rankGlyph(rk)+'</div><h3>'+esc(rk.name)+'</h3>'+
+  '<span class="rklv">⭐ '+t('rt_lv')+' '+info.lv+'</span>'+
+  '<div class="rbar big"><i style="width:'+info.pct.toFixed(1)+'%"></i></div>'+
+  '<div class="rkline"><span>'+(info.max?t('rk_max'):t('rk_next')+': '+fmtDur(info.left))+'</span><span>'+Math.floor(info.pct)+'%</span></div>'+
+  '<div class="rtime"><small>⏱ '+t('rk_total')+'</small><b>'+fmtDur(s.time)+'</b></div></div>'+
+  '<div class="pcard">'+countrySel()+'<div class="tg"><span>'+t('pr_id')+': <b>'+(B.getId()||'—')+'</b></span><button class="lg" data-p="copy" style="flex:none;padding:6px 12px">'+t('copy')+'</button></div></div>';
+ $('pfoot').innerHTML='';
  $('pfn').value=store.get('name')||''}
 window.onPhoto=u=>{store.set('photo',u);renderProfile();
- if(cur===profileView&&sheet.classList.contains('show')){const n=$('pfn').value;cur();$('pfn').value=n}};
+ if(pgView===profilePage&&$('pg').classList.contains('show')){const n=$('pfn').value;profilePage();$('pfn').value=n}};
+$('pbody').addEventListener('input',e=>{if(e.target.id==='pfn')saveName()});
+$('pbody').addEventListener('change',e=>{if(e.target.id==='pfc'){store.set('country',e.target.value);renderProfile();
+ if(pgView===profilePage){const n=$('pfn').value;profilePage();$('pfn').value=n}}});
 $('sext').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
  if(b.dataset.p==='photo'){B.pickPhoto();return}
  if(b.dataset.p==='copy'){B.copy(B.getId());b.textContent=t('copied');return}
@@ -433,17 +540,194 @@ document.querySelectorAll('.orb').forEach(b=>b.addEventListener('click',()=>{
  if(b.dataset.k==='Bayroq'){heroOpen(b,'Bayroq');return}
  const col=[...b.querySelector('.in').classList].find(x=>COL[x]);
  showSheet(()=>setSheet('🔒',t('soon'),t('soon_d'),'',''),col)}));
-$('sext').addEventListener('input',e=>{if(e.target.id==='pfn')saveName()});
 document.querySelector('.gear').onclick=()=>showSheet(settingsView,'blue');
-document.querySelector('.profile').onclick=()=>showSheet(profileView,'blue');
+document.querySelector('.profile').onclick=()=>pgOpen(t('profile'),profilePage);
 const NI={rating:'🥇',info:'📋',guide:'📖',prem:'👑'};
 document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>{const n=b.dataset.n;if(!n)return;
  if(n==='guide'){gOpen();return}
+ if(n==='rating'){pgOpen(t('n_rating'),ratingPage);return}
  if(n==='prem'){pgOpen(t('n_prem'),premPage);try{B.syncPremium()}catch(e){}return}
  pgOpen(t('n_'+n),soonPage(NI[n],'n_'+n))}));
 
 $('iback').onclick=goBack;
 const GAMES=['Bayroq'];
+/* ===== Reyting ===== */
+const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* 7 ta o'yin tugmasi (bosh sahifadagi 7 doira bilan bir xil). k = o'yin kaliti, k yo'q = 'Tez orada' */
+const GL=[{k:'Bayroq',ic:'🚩',n:'Find the flag',c:'blue'},{c:'purple'},{c:'green'},{c:'yellow'},{c:'purple'},{c:'pink'},{c:'blue'}];
+const hrs=sec=>Math.floor(sec/3600)+' '+t('rt_h');
+/* Boshqa o'yinchilar: serverdan window.onRating([{n,sec,c,av}]) orqali keladi (sec = o'ynalgan soniya, c = davlat kodi). Hozircha namuna. */
+let RT_BOARD=[{n:'Aziza',sec:11040,c:'UZ',av:'👧'},{n:'Jasur',sec:9120,c:'UZ',av:'🧑'},{n:'Malika',sec:7260,c:'KZ',av:'👩'},{n:'Bekzod',sec:5760,c:'UZ',av:'👦'},{n:'Dilnoza',sec:3840,c:'TR',av:'🧒'},{n:'Sardor',sec:2280,c:'UZ',av:'🙂'},{n:'Zilola',sec:13860,c:'RU',av:'👩'},{n:'Otabek',sec:12300,c:'UZ',av:'🧔'},{n:'Madina',sec:10260,c:'KG',av:'👧'},{n:'Sherzod',sec:8340,c:'UZ',av:'🧑'},{n:'Nargiza',sec:6480,c:'TJ',av:'👩'},{n:'Umid',sec:4920,c:'UZ',av:'👦'},{n:'Shahlo',sec:4260,c:'US',av:'🧒'},{n:'Javohir',sec:3120,c:'UZ',av:'🙂'},{n:'Kamola',sec:1560,c:'DE',av:'👧'},{n:'Eldor',sec:840,c:'XX',av:'👦'}];
+window.onRating=a=>{if(Array.isArray(a)){RT_BOARD=a;if(pgView===ratingPage&&$('pg').classList.contains('show'))ratingPage()}};
+let rtab='lvl',RT_ALL=[],rsel=0;
+/* ===== DAVLATNI ANIQLASH (vaqt zonasi bo'yicha) =====
+   Tartib: 1) foydalanuvchi profilda tanlagan davlat (localStorage 'country')
+           2) telefon vaqt zonasi (Intl ... timeZone, masalan "Asia/Tashkent") -> TZC jadvali
+           3) telefon tilidagi mintaqa (masalan ru-RU -> RU)
+           4) hech narsa topilmasa 'XX' = anonim -> 🏴‍☠️ qaroqchi bayrog'i (hech qaysi davlat emas)
+   Native tomondan aniq davlat berish: window.onCountry('UZ') (ISO-3166 alpha-2).
+   Jadval formati: 'DAVLAT:zona,zona;DAVLAT:zona'. Yangi zona qo'shish uchun shu qatorga qo'shing. */
+const TZC={};
+('UZ:Asia/Tashkent,Asia/Samarkand;KZ:Asia/Almaty,Asia/Qostanay,Asia/Kostanay,Asia/Qyzylorda,Asia/Aqtobe,Asia/Aqtau,Asia/Atyrau,Asia/Oral;KG:Asia/Bishkek;TJ:Asia/Dushanbe;TM:Asia/Ashgabat,Asia/Ashkhabad;AZ:Asia/Baku;GE:Asia/Tbilisi;AM:Asia/Yerevan;TR:Europe/Istanbul,Asia/Istanbul,Turkey;'+
+ 'RU:Europe/Moscow,Europe/Kaliningrad,Europe/Samara,Europe/Volgograd,Europe/Kirov,Europe/Saratov,Europe/Ulyanovsk,Europe/Astrakhan,Europe/Simferopol,Asia/Yekaterinburg,Asia/Omsk,Asia/Novosibirsk,Asia/Barnaul,Asia/Tomsk,Asia/Novokuznetsk,Asia/Krasnoyarsk,Asia/Irkutsk,Asia/Chita,Asia/Yakutsk,Asia/Khandyga,Asia/Vladivostok,Asia/Ust-Nera,Asia/Magadan,Asia/Sakhalin,Asia/Srednekolymsk,Asia/Kamchatka,Asia/Anadyr;'+
+ 'UA:Europe/Kyiv,Europe/Kiev,Europe/Uzhgorod,Europe/Zaporozhye;BY:Europe/Minsk;MD:Europe/Chisinau;RO:Europe/Bucharest;BG:Europe/Sofia;GR:Europe/Athens;CY:Asia/Nicosia,Europe/Nicosia,Asia/Famagusta;PL:Europe/Warsaw;CZ:Europe/Prague;SK:Europe/Bratislava;HU:Europe/Budapest;AT:Europe/Vienna;DE:Europe/Berlin,Europe/Busingen;CH:Europe/Zurich;FR:Europe/Paris;BE:Europe/Brussels;NL:Europe/Amsterdam;LU:Europe/Luxembourg;GB:Europe/London,Europe/Belfast,GB;IE:Europe/Dublin,Eire;PT:Europe/Lisbon,Atlantic/Madeira,Atlantic/Azores;ES:Europe/Madrid,Africa/Ceuta,Atlantic/Canary;IT:Europe/Rome;MT:Europe/Malta;HR:Europe/Zagreb;SI:Europe/Ljubljana;RS:Europe/Belgrade;BA:Europe/Sarajevo;ME:Europe/Podgorica;MK:Europe/Skopje;AL:Europe/Tirane;DK:Europe/Copenhagen;SE:Europe/Stockholm;NO:Europe/Oslo;FI:Europe/Helsinki;EE:Europe/Tallinn;LV:Europe/Riga;LT:Europe/Vilnius;IS:Atlantic/Reykjavik;'+
+ 'CN:Asia/Shanghai,Asia/Chongqing,Asia/Harbin,Asia/Urumqi,Asia/Kashgar,PRC;HK:Asia/Hong_Kong,Hongkong;TW:Asia/Taipei;JP:Asia/Tokyo,Japan;KR:Asia/Seoul;KP:Asia/Pyongyang;MN:Asia/Ulaanbaatar,Asia/Hovd,Asia/Choibalsan;IN:Asia/Kolkata,Asia/Calcutta;PK:Asia/Karachi;BD:Asia/Dhaka;LK:Asia/Colombo;NP:Asia/Kathmandu,Asia/Katmandu;AF:Asia/Kabul;IR:Asia/Tehran,Iran;IQ:Asia/Baghdad;SY:Asia/Damascus;LB:Asia/Beirut;JO:Asia/Amman;IL:Asia/Jerusalem,Asia/Tel_Aviv,Israel;PS:Asia/Gaza,Asia/Hebron;SA:Asia/Riyadh;AE:Asia/Dubai;OM:Asia/Muscat;QA:Asia/Qatar;KW:Asia/Kuwait;BH:Asia/Bahrain;YE:Asia/Aden;TH:Asia/Bangkok;VN:Asia/Ho_Chi_Minh,Asia/Saigon;KH:Asia/Phnom_Penh;LA:Asia/Vientiane;MM:Asia/Yangon,Asia/Rangoon;MY:Asia/Kuala_Lumpur,Asia/Kuching;SG:Asia/Singapore,Singapore;ID:Asia/Jakarta,Asia/Pontianak,Asia/Makassar,Asia/Jayapura;PH:Asia/Manila;BN:Asia/Brunei;'+
+ 'AU:Australia/Sydney,Australia/Melbourne,Australia/Brisbane,Australia/Perth,Australia/Adelaide,Australia/Darwin,Australia/Hobart,Australia/Canberra;NZ:Pacific/Auckland,Pacific/Chatham;FJ:Pacific/Fiji;'+
+ 'EG:Africa/Cairo,Egypt;LY:Africa/Tripoli;TN:Africa/Tunis;DZ:Africa/Algiers;MA:Africa/Casablanca;NG:Africa/Lagos;GH:Africa/Accra;KE:Africa/Nairobi;ET:Africa/Addis_Ababa;TZ:Africa/Dar_es_Salaam;UG:Africa/Kampala;ZA:Africa/Johannesburg;SD:Africa/Khartoum;SN:Africa/Dakar;CI:Africa/Abidjan;CM:Africa/Douala;AO:Africa/Luanda;ZW:Africa/Harare;ZM:Africa/Lusaka;MZ:Africa/Maputo;CD:Africa/Kinshasa,Africa/Lubumbashi;'+
+ 'US:America/New_York,America/Chicago,America/Denver,America/Los_Angeles,America/Phoenix,America/Anchorage,America/Detroit,America/Boise,America/Juneau,America/Adak,America/Menominee,Pacific/Honolulu;CA:America/Toronto,America/Vancouver,America/Edmonton,America/Winnipeg,America/Halifax,America/St_Johns,America/Regina,America/Montreal,America/Whitehorse,America/Yellowknife,America/Iqaluit;MX:America/Mexico_City,America/Cancun,America/Monterrey,America/Tijuana,America/Merida,America/Chihuahua,America/Hermosillo,America/Mazatlan;BR:America/Sao_Paulo,America/Manaus,America/Fortaleza,America/Recife,America/Bahia,America/Belem,America/Cuiaba,America/Campo_Grande,America/Rio_Branco,America/Noronha;AR:America/Buenos_Aires;CL:America/Santiago,Pacific/Easter;CO:America/Bogota;PE:America/Lima;VE:America/Caracas;EC:America/Guayaquil;BO:America/La_Paz;PY:America/Asuncion;UY:America/Montevideo;CU:America/Havana;DO:America/Santo_Domingo;GT:America/Guatemala;CR:America/Costa_Rica;PA:America/Panama;JM:America/Jamaica;PR:America/Puerto_Rico;HN:America/Tegucigalpa;SV:America/El_Salvador;NI:America/Managua')
+ .split(';').forEach(g=>{const [c,z]=g.split(':');z.split(',').forEach(x=>TZC[x]=c)});
+const TZP={'America/Argentina/':'AR','America/Indiana/':'US','America/Kentucky/':'US','America/North_Dakota/':'US','Australia/':'AU','US/':'US','Canada/':'CA','Brazil/':'BR','Mexico/':'MX'};
+function detectCountry(){let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
+ if(TZC[tz])return TZC[tz];
+ for(const k in TZP)if(tz.indexOf(k)===0)return TZP[k];
+ const r=((navigator.language||'').split('-')[1]||'').toUpperCase();return/^[A-Z]{2}$/.test(r)?r:'XX'}
+function myCountry(){return store.get('country')||detectCountry()}
+/* davlat kodi -> bayroq. 'XX' yoki noto'g'ri kod = qaroqchi bayrog'i */
+const fl=c=>/^[A-Z]{2}$/.test(c||'')&&c!=='XX'?flagOf(c):'🏴‍☠️';
+const flagBadge=c=>'<span class="flg">'+fl(c||myCountry())+'</span>';
+window.onCountry=c=>{if(/^[A-Za-z]{2}$/.test(c||'')){store.set('country',c.toUpperCase());renderProfile()}};
+function countrySel(){const R=dn('region'),c=myCountry();
+ return '<select id="pfc" class="inp"><option value="XX"'+(c==='XX'?' selected':'')+'>🏴‍☠️ '+t('rt_anon')+'</option>'+DATA.map(d=>({d,n:cname(d,R)})).sort((a,b)=>a.n.localeCompare(b.n,lang)).map(x=>'<option value="'+x.d.c+'"'+(x.d.c===c?' selected':'')+'>'+flagOf(x.d.c)+' '+esc(x.n)+'</option>').join('')+'</select>'}
+/* Faol o'yin vaqti: native (o'yin ekrani) hisoblaydi va serverga sinxronlaydi. B.playSec() = jami soniya */
+function playSecNow(){try{return Math.max(0,+B.playSec()||0)}catch(e){return 0}}
+function myStats(){const plays={};GAMES.forEach(g=>plays[g]=+store.get('plays_'+g)||0);const time=playSecNow();return{time,lv:lvOf(time),plays}}
+function addPlay(g){store.set('plays_'+g,(+store.get('plays_'+g)||0)+1)}
+window.onGameEnd=()=>{};
+let pendingLv=false;
+function checkLevelUp(){
+ if(typeof splashOn!=='undefined'&&splashOn){pendingLv=true;return}
+ pendingLv=false;const lv=lvOf(playSecNow()),seen=+store.get('lv_seen')||0;
+ if(!seen){store.set('lv_seen',lv);return}
+ if(lv>seen){store.set('lv_seen',lv);celebrate(lv,seen)}}
+function celebrate(lv,old){
+ const r=rankOf(lv),nr=rankIdx(lv)!==rankIdx(old);
+ $('lvbody').innerHTML='<div class="big">'+rankGlyph(r)+'</div><h2>'+t('rk_up')+'</h2><p>'+t('rk_up2').replace('{n}',lv)+'</p>'+
+  (nr?'<p><b>'+t('rk_newrank').replace('{r}',esc(r.name))+'</b></p>':'')+'<button class="buy" id="lvok">'+t('rk_ok')+'</button>';
+ const L=$('lvup');L.classList.add('show');
+ if(!(RM||root.classList.contains('lite'))){const cols=['#ffb84a','#4be06a','#1e90ff','#ff4d4d','#b27bff'];
+  for(let i=0;i<14;i++){const c=document.createElement('i');c.className='cf';c.style.left=(6+Math.random()*88)+'%';
+   c.style.background=cols[i%5];c.style.animationDelay=(Math.random()*.6)+'s';L.appendChild(c);setTimeout(()=>c.remove(),2600)}}}
+$('lvup').addEventListener('click',e=>{if(e.target.id==='lvok'||e.target===$('lvup'))$('lvup').classList.remove('show')});
+/* Native vaqtni yangilaganda (o'yindan qaytganda, sinxronlashdan keyin) */
+window.onPlay=()=>{renderProfile();
+ if($('pg').classList.contains('show')){if(pgView===ratingPage)ratingPage();else if(pgView===profilePage){const n=$('pfn')?$('pfn').value:'';profilePage();if($('pfn'))$('pfn').value=n}}
+ checkLevelUp()};
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){try{B.syncPlay()}catch(e){}}});
+/* ===== RANK SYSTEM (yagona modul) =====
+   100 daraja, 10 ta rank. Har bir rank: [uz, ru, en, bir daraja uchun soat, belgi].
+   Daraja k ni tugatish uchun kerak vaqt = o'sha daraja rankining soati.
+   Daraja 1 dan 0 soniyada boshlanadi; 100-darajadan keyin oshmaydi. */
+const RANKS=[
+ ['Boshlovchi','Новичок','Beginner',1,'🌱'],
+ ['Shogird','Ученик','Apprentice',1.5,'📘'],
+ ['Havaskor','Любитель','Amateur',2,'🎯'],
+ ['Usta','Мастер','Skilled',2.5,'🛠️'],
+ ['Ekspert','Эксперт','Expert',3,'🧠'],
+ ['Elita','Элита','Elite',3.5,'💎'],
+ ['Afsonaviy','Легенда','Legendary',4,'🔥'],
+ ['Chempion','Чемпион','Champion',4.5,'🏆'],
+ ['Grandmaster','Grandmaster','Grandmaster',5,'🎖️'],
+ ['Master','Master','Master',6,'👑']];
+/* Rank rasmlari (ixtiyoriy): masalan RANK_IMG[0]='rank1.png' (assets papkasiga yuklanadi) */
+const RANK_IMG=['','','','','','','','','',''];
+const MAXLV=100;
+const rankIdx=lv=>Math.min(9,Math.floor((Math.max(1,lv)-1)/10));
+const lvReq=lv=>Math.round(RANKS[rankIdx(lv)][3]*3600);
+const LV_TH=(()=>{const a=[0,0];for(let l=1;l<MAXLV;l++)a.push(a[l]+lvReq(l));return a})();
+function lvOf(sec){sec=Math.max(0,+sec||0);let lo=1,hi=MAXLV;while(lo<hi){const m=(lo+hi+1)>>1;if(LV_TH[m]<=sec)lo=m;else hi=m-1}return lo}
+function lvInfo(sec){sec=Math.max(0,+sec||0);const lv=lvOf(sec);
+ if(lv>=MAXLV)return{lv,pct:100,left:0,max:1};
+ const req=lvReq(lv),done=sec-LV_TH[lv];return{lv,pct:Math.min(100,done*100/req),left:Math.max(0,LV_TH[lv+1]-sec),max:0}}
+function rankOf(lv){const i=rankIdx(lv),R=RANKS[i];return{name:R[LI[lang]],icon:R[4],img:RANK_IMG[i]||''}}
+const rankGlyph=k=>k.img?'<img class="rkimg" src="'+k.img+'" alt="">':k.icon;
+const rankChip=k=>rankGlyph(k)+' '+esc(k.name);
+function fmtDur(sec){sec=Math.max(0,Math.round(sec));const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60);
+ if(h>0)return h+' '+t('u_hh')+(m?' '+m+' '+t('u_mm'):'');
+ return Math.max(1,m)+' '+t('u_mm')}
+function ratingPage(){
+ const s=myStats(),ph=store.get('photo'),nm=store.get('name')||t('profile'),mc=myCountry();
+ const all=RT_BOARD.map(r=>({n:r.n,sec:r.sec||0,c:r.c,av:r.av||'🙂'})).concat([{n:nm,sec:s.time,c:mc,me:1}]).sort((a,b)=>b.sec-a.sec||(a.me?1:-1));
+ const rank=all.findIndex(r=>r.me)+1,rk=rankOf(s.lv);RT_ALL=all;
+ const head='<div class="rhead"><div class="pfa" data-pi="'+(rank-1)+'"'+(ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+(ph?'':'🙂')+flagBadge(mc)+'</div>'+
+  '<h3>'+esc(nm)+'</h3><div class="rchips"><span>⭐ '+t('rt_lv')+' '+s.lv+'</span><span class="rkn">'+rankChip(rk)+'</span><span class="rk">🏆 '+t('rt_rank')+' #'+rank+'</span></div>'+
+  '<div class="rtime"><small>⏱ '+t('rt_time')+'</small><b>'+hrs(s.time)+'</b></div></div>';
+ const tabs='<div class="rtabs"><button class="rtab on">🏅 '+t('rt_lvl')+'</button><button class="rtab" data-rm="1">🎮 '+t('rt_games')+'</button></div>';
+ const medal=['🥇','🥈','🥉'];
+ const row=(r,i,pinned)=>'<div class="rrow'+(r.me?' me':'')+'"><div class="rno">'+((!pinned&&medal[i])||(i+1))+'</div>'+
+  '<div class="rav" data-pi="'+i+'"'+(r.me&&ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+(r.me?(ph?'':'🙂'):r.av)+flagBadge(r.c)+'</div>'+
+  '<div class="rmid"><b>'+esc(r.n)+'</b><small>⏱ '+hrs(r.sec)+'</small></div>'+
+  '<div class="rvs"><span class="rval rrk">'+rankChip(rankOf(lvOf(r.sec)))+'</span><span class="rval">'+t('rt_lv')+' '+lvOf(r.sec)+'</span></div></div>';
+ $('pbody').innerHTML=head+tabs+'<div class="rlist">'+all.map((r,i)=>row(r,i,0)).join('')+'</div>';
+ $('pfoot').innerHTML='<div class="rlist">'+row(all[rank-1],rank-1,1)+'</div>'}
+function playerCard(r,rank){const ph=store.get('photo'),lv=lvOf(r.sec);
+ $('gcard').innerHTML='<div class="pfa"'+(r.me&&ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+(r.me?(ph?'':'🙂'):r.av)+flagBadge(r.c)+'</div><h3>'+esc(r.n)+'</h3>'+
+  grow('🎖',t('rt_rk'),rankChip(rankOf(lv)))+grow('⭐',t('rt_lv'),lv)+grow('⏱',t('rt_hl'),hrs(r.sec))+grow('🏆',t('rt_pos'),'#'+rank)+
+  '<button class="x" data-x="1">'+t('close')+'</button>';
+ $('gdet').classList.add('show')}
+const openPlayer=e=>{const a=e.target.closest('[data-pi]');if(!a)return;const i=+a.dataset.pi,r=RT_ALL[i];if(r)playerCard(r,i+1)};
+$('pbody').addEventListener('click',openPlayer);$('pfoot').addEventListener('click',openPlayer);
+
+/* ===== O'YIN REYTINGI: "O'yinlar reytingi" tugmasi bosilsa tugma atrofida 7 ta o'yin tugmasi chiqadi, qolgan joy xiralashadi ===== */
+$('pbody').addEventListener('click',e=>{if(e.target.closest('[data-rm]'))openRMenu()});
+function openRMenu(){
+ if($('rmenu'))return;const pg=$('pg'),btn=document.querySelector('.rtab[data-rm]');if(!btn)return;
+ $('pbody').scrollTop=0;
+ const P=pg.getBoundingClientRect(),r=btn.getBoundingClientRect(),W=P.width,H=P.height,bw=r.width,bh=r.height,bx=r.left-P.left,by=r.top-P.top;
+ const RX=Math.min(W/2-34,Math.max(135,bw/2+44)),RY=100,cx=W/2,cy=Math.max(RY+75,Math.min(H-RY-80,by+bh/2)),hx=bx+bw/2,hy=by+bh/2,n=GL.length;
+ const m=document.createElement('div');m.id='rmenu';m.dataset.bx=bx;m.dataset.by=by;m.dataset.hx=hx;m.dataset.hy=hy;
+ m.innerHTML='<div class="rdim"></div>'+GL.map((g,i)=>{const c=COL[g.c];
+  return '<button class="ro'+(g.k?'':' soon')+'" data-ro="'+i+'" style="left:'+hx+'px;top:'+hy+'px;--a:'+c[0]+';--b:'+c[1]+';--d:'+(i*35)+'ms" aria-label="'+esc(g.k?g.n:t('soon'))+'"><div class="in"><span class="ic">'+(g.k?g.ic:'🔒')+'</span></div>'+(g.k?'<span class="rlbl">'+esc(g.n)+'</span>':'')+'</button>'}).join('')+
+  '<button class="rtab on rhub" style="left:'+bx+'px;top:'+by+'px;width:'+bw+'px;height:'+bh+'px">🎮 '+t('rt_games')+'</button>';
+ pg.appendChild(m);
+ const hub=m.querySelector('.rhub'),os=[...m.querySelectorAll('.ro')];
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{m.classList.add('open');hub.style.left=(cx-bw/2)+'px';hub.style.top=(cy-bh/2)+'px';
+  os.forEach((o,i)=>{const a=(-90+i*360/n)*Math.PI/180;o.style.left=(cx+RX*Math.cos(a))+'px';o.style.top=(cy+RY*Math.sin(a))+'px'})}))}
+function closeRMenu(now){const m=$('rmenu');if(!m)return;if(now){m.remove();return}
+ m.classList.remove('open');m.querySelectorAll('.ro').forEach(o=>{o.style.left=m.dataset.hx+'px';o.style.top=m.dataset.hy+'px'});
+ const h=m.querySelector('.rhub');h.style.left=m.dataset.bx+'px';h.style.top=m.dataset.by+'px';setTimeout(()=>m.remove(),320)}
+$('pg').addEventListener('click',e=>{const m=$('rmenu');if(!m||!m.contains(e.target))return;
+ const o=e.target.closest('[data-ro]');if(o){openGameBoard(+o.dataset.ro);return}
+ if(e.target.closest('.rhub')||e.target.closest('.rdim'))closeRMenu()});
+
+/* ===== HAR BIR O'YIN UCHUN REKORD JADVALI (daraja reytingiga o'xshash, lekin rank o'rniga o'yindagi rekord) =====
+   Find the flag: o'yin ichida yashirin taymer ketadi. Rekord = xato qilmasdan ketma-ket topilgan bayroqlar soni (cnt) va shu uchun ketgan vaqt (sec).
+   Tartib: cnt ko'p = yuqori; cnt teng bo'lsa sec kam = yuqori.
+   NATIVE o'yin har raund (yoki xato qilingan joyda) tugaganda chaqiradi:  window.onGameResult('Bayroq', cnt, sec)
+   SERVER o'yinchilar ro'yxatini yuboradi:  window.onGameRating('Bayroq', [{n:'Ism', c:'UZ', av:'🙂', cnt:12, sec:41.5}])
+   Shaxsiy rekord localStorage 'rec_<o'yin>' da saqlanadi. */
+let GB={Bayroq:[{n:'Aziza',c:'UZ',av:'👧',cnt:31,sec:58.2},{n:'Zilola',c:'RU',av:'👩',cnt:31,sec:64},{n:'Otabek',c:'UZ',av:'🧔',cnt:28,sec:52.4},{n:'Jasur',c:'UZ',av:'🧑',cnt:27,sec:49.5},{n:'Madina',c:'KG',av:'👧',cnt:25,sec:47.1},{n:'Sherzod',c:'UZ',av:'🧑',cnt:22,sec:41.8},{n:'Malika',c:'KZ',av:'👩',cnt:22,sec:45.3},{n:'Bekzod',c:'UZ',av:'👦',cnt:19,sec:38.6},{n:'Nargiza',c:'TJ',av:'👩',cnt:17,sec:36},{n:'Dilnoza',c:'TR',av:'🧒',cnt:15,sec:33.7},{n:'Umid',c:'UZ',av:'👦',cnt:14,sec:31.2},{n:'Shahlo',c:'US',av:'🧒',cnt:12,sec:29.9},{n:'Sardor',c:'UZ',av:'🙂',cnt:11,sec:27.5},{n:'Javohir',c:'UZ',av:'🙂',cnt:9,sec:22.4},{n:'Kamola',c:'DE',av:'👧',cnt:7,sec:19.8},{n:'Eldor',c:'XX',av:'👦',cnt:5,sec:14.3}]};
+let gsel=0,GB_ALL=[];
+const recOf=g=>{try{const o=JSON.parse(store.get('rec_'+g)||'null');return o&&o.cnt>0?o:null}catch(e){return null}};
+window.onGameResult=(g,cnt,sec)=>{cnt=+cnt||0;sec=+sec||0;if(cnt<=0)return;const o=recOf(g);
+ if(!o||cnt>o.cnt||(cnt===o.cnt&&sec<o.sec)){store.set('rec_'+g,JSON.stringify({cnt,sec}));refreshGB()}};
+window.onGameRating=(g,a)=>{if(Array.isArray(a)){GB[g]=a;refreshGB()}};
+function refreshGB(){if(pgView===gameBoardPage&&$('pg').classList.contains('show'))gameBoardPage()}
+const fmtT=x=>x<60?(Math.round(x*10)/10).toFixed(1)+' '+t('gm_s'):Math.floor(x/60)+':'+String(Math.floor(x%60)).padStart(2,'0');
+function openGameBoard(i){closeRMenu(1);gsel=i;const g=GL[i];$('ptitle').textContent=g.k?g.n:t('soon');pgView=gameBoardPage;gameBoardPage();$('pbody').scrollTop=0}
+function gameBoardPage(){
+ const g=GL[gsel];
+ if(!g.k){$('pbody').innerHTML='<div class="pcard"><div class="big">🔒</div><h3>'+t('soon')+'</h3><div class="prd">'+t('soon_d')+'</div></div>';$('pfoot').innerHTML='';return}
+ const ph=store.get('photo'),nm=store.get('name')||t('profile'),mc=myCountry(),rec=recOf(g.k),ok=r=>r.cnt>0;
+ const all=(GB[g.k]||[]).map(r=>({n:r.n,c:r.c,av:r.av||'🙂',cnt:r.cnt||0,sec:r.sec||0})).concat([{n:nm,c:mc,me:1,cnt:rec?rec.cnt:0,sec:rec?rec.sec:0}])
+  .sort((a,b)=>(b.cnt-a.cnt)||(a.sec-b.sec)||(a.me?1:-1));
+ GB_ALL=all;const rank=all.findIndex(r=>r.me)+1,my=all[rank-1],medal=['🥇','🥈','🥉'];
+ const head='<div class="rhead"><div class="pfa" data-gi="'+(rank-1)+'"'+(ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+(ph?'':'🙂')+flagBadge(mc)+'</div><h3>'+esc(nm)+'</h3>'+
+  '<div class="rchips"><span>🚩 '+(ok(my)?my.cnt:'—')+'</span><span class="rkn">⏱ '+(ok(my)?fmtT(my.sec):'—')+'</span><span class="rk">🏆 '+t('rt_rank')+' #'+(ok(my)?rank:'—')+'</span></div>'+
+  '<div class="rtime"><small>ℹ️ '+t('gm_info')+'</small></div></div>';
+ const row=(r,i,pinned)=>'<div class="rrow'+(r.me?' me':'')+'"><div class="rno">'+(ok(r)?((!pinned&&medal[i])||(i+1)):'—')+'</div>'+
+  '<div class="rav" data-gi="'+i+'"'+(r.me&&ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+(r.me?(ph?'':'🙂'):r.av)+flagBadge(r.c)+'</div>'+
+  '<div class="rmid"><b>'+esc(r.n)+'</b><small>'+t('gm_rec')+'</small></div>'+
+  '<div class="rvs"><span class="rval rrk">'+(ok(r)?'🚩 '+r.cnt:'—')+'</span><span class="rval">'+(ok(r)?'⏱ '+fmtT(r.sec):'—')+'</span></div></div>';
+ $('pbody').innerHTML=head+'<div class="rlist">'+all.map((r,i)=>row(r,i,0)).join('')+'</div>';
+ $('pfoot').innerHTML='<div class="rlist">'+row(my,rank-1,1)+'</div>'}
+function gameCard(r,rank){const ph=store.get('photo'),ok=r.cnt>0;
+ $('gcard').innerHTML='<div class="pfa"'+(r.me&&ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+(r.me?(ph?'':'🙂'):r.av)+flagBadge(r.c)+'</div><h3>'+esc(r.n)+'</h3>'+
+  grow('🚩',t('gm_cnt'),ok?r.cnt:'—')+grow('⏱',t('gm_time'),ok?fmtT(r.sec):'—')+grow('🏆',t('gm_pos'),ok?'#'+rank:'—')+'<button class="x" data-x="1">'+t('close')+'</button>';
+ $('gdet').classList.add('show')}
+const openGC=e=>{const a=e.target.closest('[data-gi]');if(!a)return;const i=+a.dataset.gi,r=GB_ALL[i];if(r)gameCard(r,i+1)};
+$('pbody').addEventListener('click',openGC);$('pfoot').addEventListener('click',openGC);
+function pgBack(){closeRMenu(1);if(pgView===gameBoardPage){pgView=ratingPage;$('ptitle').textContent=t('n_rating');ratingPage();$('pbody').scrollTop=0}else pgClose()}
+
 const fmt=x=>[Math.floor(x/3600),Math.floor(x%3600/60),x%60].map(v=>String(v).padStart(2,'0')).join(':');
 function loadPremium(){try{prem.left=B.premiumLeft();prem.until=+B.premiumUntil()}catch(e){}}
 function ymd(a,b){let y=0,m=0,t0=new Date(a.getTime());
@@ -460,8 +744,8 @@ function premText(){
 const PRICES=[[1,5],[3,12],[6,25],[25,85]];
 let pgView=null;
 function pgOpen(title,fn){$('ptitle').textContent=title;pgView=fn;fn();$('pg').classList.add('show')}
-function pgClose(){$('pg').classList.remove('show');pgView=null}
-$('pback').onclick=pgClose;
+function pgClose(){closeRMenu(1);$('pg').classList.remove('show');pgView=null}
+$('pback').onclick=()=>pgBack();
 function soonPage(ic,key){return()=>{$('pbody').innerHTML='<div class="pcard"><div class="big">'+ic+'</div><h3>'+t(key)+'</h3><div class="prd">'+t('sect_d')+'</div></div>';$('pfoot').innerHTML=''}}
 function premPage(){
  const on=prem.left>0;
@@ -471,7 +755,7 @@ function premPage(){
   '<div class="pcard"><div class="prd">'+t('pr_perks')+'</div><div class="prp">'+PRICES.map(p=>'<span>'+p[0]+' '+t('u_m')+' · '+p[1]+' ⭐</span>').join('')+'</div></div>'+
   '<div class="pcard"><div class="tg"><span>'+t('pr_id')+': <b>'+(B.getId()||'—')+'</b></span><button class="lg" data-p="copy" style="flex:none;padding:6px 12px">'+t('copy')+'</button></div></div>';
  $('pfoot').innerHTML='<div class="prnet" id="prmsg">'+t('pr_net')+'</div><button class="buy" id="pbuy">'+t('pr_buy')+'</button>'}
-$('pbody').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.dataset.p==='copy'){B.copy(B.getId());b.textContent=t('copied')}});
+$('pbody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.p==='photo'){B.pickPhoto();return}if(b.dataset.p==='copy'){B.copy(B.getId());b.textContent=t('copied')}});
 $('pfoot').addEventListener('click',e=>{if(e.target.closest('#pbuy')){try{B.openBot()}catch(x){}}});
 window.onBot=st=>{const m=$('prmsg');if(!m||st==='ok')return;m.textContent=st==='offline'?t('pr_net'):t('pr_fail')};
 window.onPremium=()=>{loadPremium();refreshLocks();if(pgView===premPage&&$('pg').classList.contains('show'))premPage()};
@@ -487,7 +771,7 @@ function refreshLocks(){
  if(pgView===premPage&&$('pg').classList.contains('show')){const e=$('prc');if(e)e.textContent=premText()}
  updateIntro()}
 $('istart').onclick=()=>{
- if((left.Bayroq||0)>0){B.startFlag();return}
+ if((left.Bayroq||0)>0){addPlay('Bayroq');B.startFlag();return}
  if(adBusy)return;
  adBusy=1;adMsg='';$('istart').disabled=true;$('adnote').textContent=t('ad_loading');B.watchAd('Bayroq')};
 window.onAdResult=(g,st)=>{adBusy=0;$('istart').disabled=false;
@@ -496,7 +780,8 @@ window.nativeBack=()=>{
  if(splashOn)return true;
  if($('gdet').classList.contains('show')){$('gdet').classList.remove('show');return true}
  if($('guide').classList.contains('show')){gBackStep();return true}
- if($('pg').classList.contains('show')){pgClose();return true}
+ if($('rmenu')){closeRMenu();return true}
+ if($('pg').classList.contains('show')){pgBack();return true}
  if($('idscr').classList.contains('show'))return false;
  if(sheet.classList.contains('show')){closeSheet();return true}
  if($('intro').classList.contains('show')){goBack();return true}
@@ -658,7 +943,7 @@ let splashOn=true;
   const t0=performance.now(),D=10000;
   (function step(now){const p=Math.min(1,(now-t0)/D);prog=p*p*(3-2*p);fill.style.width=(fill.dataset.w*prog)+'px';
    if(p<1)requestAnimationFrame(step);
-   else setTimeout(()=>{sp.classList.add('out');setTimeout(()=>{sp.remove();splashOn=false},400)},250)})(t0)
+   else setTimeout(()=>{sp.classList.add('out');setTimeout(()=>{sp.remove();splashOn=false;try{checkLevelUp()}catch(e){}},400)},250)})(t0)
  },Math.max(0,7000-(B.elapsed?B.elapsed():0)))
 })();
 
