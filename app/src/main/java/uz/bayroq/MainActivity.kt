@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.Gravity
@@ -78,6 +79,9 @@ class MainActivity : ComponentActivity() {
     private var shuffleRunnable: Runnable? = null
     private var score = 0
     private var total = 0
+    private var streak = 0
+    private var streakMs = 0L
+    private var playStart = 0L
 
     private val permLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
         if (it) startCamera() else resultText.apply {
@@ -249,7 +253,7 @@ class MainActivity : ComponentActivity() {
 
     // ---------- O'yin mantig'i ----------
     private fun restartGame() {
-        score = 0; total = 0
+        score = 0; total = 0; streak = 0; streakMs = 0L
         startRound()
     }
 
@@ -278,6 +282,7 @@ class MainActivity : ComponentActivity() {
 
     private fun beginPlay() {
         state = State.PLAY
+        playStart = SystemClock.elapsedRealtime()
         overlay.flag = target.flag
         val choices = (COUNTRIES.filter { it != target }.shuffled().take(3) + target).shuffled()
         optionBtns.forEachIndexed { i, b ->
@@ -308,6 +313,7 @@ class MainActivity : ComponentActivity() {
         if (state != State.PLAY) return
         state = State.DONE
         total++
+        val took = SystemClock.elapsedRealtime() - playStart
         optionBtns.forEach { b ->
             b.isEnabled = false
             if (b.tag == target) styleOption(b, 1)
@@ -316,17 +322,21 @@ class MainActivity : ComponentActivity() {
         val answerText = "${s("its")}: ${target.flag} ${target.nameIn(lang)}"
         when {
             choice == null -> {
+                streak = 0; streakMs = 0L
                 resultText.text = "${s("time")} $answerText"
                 resultText.setTextColor(Color.parseColor("#e68a00"))
                 buzz(120)
             }
             choice == target -> {
                 score++
+                streak++; streakMs += took
+                Prefs.saveRec(this, streak, streakMs)
                 resultText.text = "${s("ok")} ${target.flag} ${target.nameIn(lang)}"
                 resultText.setTextColor(Color.parseColor("#1a9a30"))
                 buzz(30)
             }
             else -> {
+                streak = 0; streakMs = 0L
                 resultText.text = "${s("bad")} $answerText"
                 resultText.setTextColor(Color.parseColor("#e53935"))
                 buzz(120)

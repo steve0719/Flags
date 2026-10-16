@@ -99,6 +99,8 @@ class MenuActivity : ComponentActivity() {
             runOnUiThread {
                 js("window.onPremium&&window.onPremium()")
                 js("window.onPlay&&window.onPlay()")
+                val rc = Prefs.recCnt(this)
+                if (rc > 0) js("window.onGameResult&&window.onGameResult('Bayroq',$rc,${Prefs.recMs(this) / 1000.0})")
             }
         }.start()
     }

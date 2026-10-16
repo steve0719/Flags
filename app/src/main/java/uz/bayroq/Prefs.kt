@@ -123,4 +123,19 @@ object Prefs {
     }
     fun pname(c: Context): String = sp(c).getString("pname", "") ?: ""
     fun pcountry(c: Context): String = sp(c).getString("pcountry", "XX") ?: "XX"
+
+    // ---------- O'yin rekordi (Find the flag): xatosiz ketma-ket topilgan bayroqlar ----------
+    fun recCnt(c: Context): Int = sp(c).getInt("rec_cnt", 0)
+    fun recMs(c: Context): Long = sp(c).getLong("rec_ms", 0L)
+
+    // Yaxshiroq bo'lsa saqlaydi: ko'proq bayroq, teng bo'lsa kamroq vaqt
+    fun saveRec(c: Context, cnt: Int, ms: Long) {
+        if (cnt <= 0) return
+        val s = sp(c)
+        val oc = s.getInt("rec_cnt", 0)
+        val om = s.getLong("rec_ms", 0L)
+        if (cnt > oc || (cnt == oc && ms < om)) {
+            s.edit().putInt("rec_cnt", cnt).putLong("rec_ms", ms).apply()
+        }
+    }
 }
