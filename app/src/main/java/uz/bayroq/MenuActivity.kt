@@ -92,15 +92,18 @@ class MenuActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         Thread {
+            var lst: String? = null
             if (online()) {
                 Premium.sync(this)
                 PlayTime.sync(this)
+                lst = Records.sync(this)
             }
             runOnUiThread {
                 js("window.onPremium&&window.onPremium()")
                 js("window.onPlay&&window.onPlay()")
                 val rc = Prefs.recCnt(this)
                 if (rc > 0) js("window.onGameResult&&window.onGameResult('Bayroq',$rc,${Prefs.recMs(this) / 1000.0})")
+                if (lst != null) js("window.onGameRating&&window.onGameRating('Bayroq',$lst)")
             }
         }.start()
     }
@@ -188,6 +191,15 @@ class MenuActivity : ComponentActivity() {
             Thread {
                 if (online()) PlayTime.sync(this@MenuActivity)
                 runOnUiThread { js("window.onPlay&&window.onPlay()") }
+            }.start()
+        }
+
+        // O'yin rekordini yuboradi va reyting ro'yxatini yangilaydi
+        @JavascriptInterface
+        fun syncRating() {
+            Thread {
+                val lst = if (online()) Records.sync(this@MenuActivity) else null
+                if (lst != null) runOnUiThread { js("window.onGameRating&&window.onGameRating('Bayroq',$lst)") }
             }.start()
         }
 
