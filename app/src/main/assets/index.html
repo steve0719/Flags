@@ -704,7 +704,7 @@ window.onGameResult=(g,cnt,sec)=>{cnt=+cnt||0;sec=+sec||0;if(cnt<=0)return;const
 window.onGameRating=(g,a)=>{if(Array.isArray(a)){GB[g]=a;refreshGB()}};
 function refreshGB(){if(pgView===gameBoardPage&&$('pg').classList.contains('show'))gameBoardPage()}
 const fmtT=x=>x<60?(Math.round(x*10)/10).toFixed(1)+' '+t('gm_s'):Math.floor(x/60)+':'+String(Math.floor(x%60)).padStart(2,'0');
-function openGameBoard(i){closeRMenu(1);gsel=i;const g=GL[i];$('ptitle').textContent=g.k?g.n:t('soon');pgView=gameBoardPage;gameBoardPage();$('pbody').scrollTop=0}
+function openGameBoard(i){closeRMenu(1);gsel=i;try{B.syncRating&&B.syncRating()}catch(e){}const g=GL[i];$('ptitle').textContent=g.k?g.n:t('soon');pgView=gameBoardPage;gameBoardPage();$('pbody').scrollTop=0}
 function gameBoardPage(){
  const g=GL[gsel];
  if(!g.k){$('pbody').innerHTML='<div class="pcard"><div class="big">🔒</div><h3>'+t('soon')+'</h3><div class="prd">'+t('soon_d')+'</div></div>';$('pfoot').innerHTML='';return}
