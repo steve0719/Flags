@@ -632,7 +632,7 @@ const RANKS=[
 const RANK_IMG=['','','','','','','','','',''];
 const MAXLV=100;
 const rankIdx=lv=>Math.min(9,Math.floor((Math.max(1,lv)-1)/10));
-const TS=20;/* 1 soat = TS soniya (haqiqiy: 3600) */
+const TS=3600;/* 1 soat = TS soniya (haqiqiy: 3600) */
 const lvReq=lv=>Math.round(RANKS[rankIdx(lv)][3]*TS);
 const LV_TH=(()=>{const a=[0,0];for(let l=1;l<MAXLV;l++)a.push(a[l]+lvReq(l));return a})();
 function lvOf(sec){sec=Math.max(0,+sec||0);let lo=1,hi=MAXLV;while(lo<hi){const m=(lo+hi+1)>>1;if(LV_TH[m]<=sec)lo=m;else hi=m-1}return lo}
