@@ -92,18 +92,19 @@ class MenuActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         Thread {
-            var lst: String? = null
+            var rst = 0
             if (online()) {
                 Premium.sync(this)
                 PlayTime.sync(this)
-                lst = Records.sync(this)
+                rst = Records.upload(this)
             }
             runOnUiThread {
                 js("window.onPremium&&window.onPremium()")
                 js("window.onPlay&&window.onPlay()")
+                if (rst == 2) js("window.onRecReset&&window.onRecReset('Bayroq')")
                 val rc = Prefs.recCnt(this)
                 if (rc > 0) js("window.onGameResult&&window.onGameResult('Bayroq',$rc,${Prefs.recMs(this) / 1000.0})")
-                if (lst != null) js("window.onGameRating&&window.onGameRating('Bayroq',$lst)")
+                js("window.rtRefresh&&window.rtRefresh()")
             }
         }.start()
     }
@@ -194,12 +195,23 @@ class MenuActivity : ComponentActivity() {
             }.start()
         }
 
-        // O'yin rekordini yuboradi va reyting ro'yxatini yangilaydi
+        // Reyting sahifasini serverdan oladi (birinchi sahifada avval o'z natijamizni yuboramiz)
         @JavascriptInterface
-        fun syncRating() {
+        fun fetchRating(type: String, offset: Int, limit: Int, tag: Int) {
+            val ty = type.filter { it.isLetterOrDigit() }
             Thread {
-                val lst = if (online()) Records.sync(this@MenuActivity) else null
-                if (lst != null) runOnUiThread { js("window.onGameRating&&window.onGameRating('Bayroq',$lst)") }
+                var raw: String? = null
+                var rst = 0
+                if (online()) {
+                    if (offset == 0) {
+                        if (ty == "level") PlayTime.sync(this@MenuActivity) else rst = Records.upload(this@MenuActivity, ty)
+                    }
+                    raw = Records.fetch(this@MenuActivity, ty, offset, limit)
+                }
+                runOnUiThread {
+                    if (rst == 2) js("window.onRecReset&&window.onRecReset('$ty')")
+                    js("window.onRatingData&&window.onRatingData('$ty',$offset,$tag,${raw ?: "null"})")
+                }
             }.start()
         }
 

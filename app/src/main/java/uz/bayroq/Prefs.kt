@@ -138,4 +138,10 @@ object Prefs {
             s.edit().putInt("rec_cnt", cnt).putLong("rec_ms", ms).apply()
         }
     }
+
+    // Admin rekordni 0 qilganda server versiyasi o'zgaradi; telefondagi rekord ham o'chiriladi
+    fun recVer(c: Context): Int = sp(c).getInt("rec_ver", 0)
+    fun clearRec(c: Context, ver: Int) {
+        sp(c).edit().remove("rec_cnt").remove("rec_ms").putInt("rec_ver", ver).apply()
+    }
 }
