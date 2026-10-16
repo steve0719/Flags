@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.MediaPlayer
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
@@ -34,6 +35,8 @@ class MenuActivity : ComponentActivity() {
     private lateinit var web: WebView
     private var logoView: ImageView? = null
     private var revealed = false
+    private var music: MediaPlayer? = null
+    private var resumed = false
     private val t0 = SystemClock.elapsedRealtime()
 
     private fun js(code: String) = web.evaluateJavascript(code, null)
@@ -89,8 +92,49 @@ class MenuActivity : ComponentActivity() {
     }
 
     // Ilovaga qaytilganda (botdan yoki o'yindan): Premium va faol o'yin vaqtini yangilaymiz
+    // Menyu musiqasi: assets/menu_music.mp3. Fayl yo'q bo'lsa, jim o'tadi. O'yinga kirilganda (onPause) to'xtaydi.
+    private fun musicStart() {
+        if (!resumed || !Prefs.sound(this)) return
+        try {
+            if (music == null) {
+                val afd = assets.openFd("menu_music.mp3")
+                val mp = MediaPlayer()
+                mp.setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+                afd.close()
+                mp.isLooping = true
+                mp.setVolume(0.5f, 0.5f)
+                mp.prepare()
+                music = mp
+            }
+            music?.start()
+        } catch (e: Exception) {
+            try { music?.release() } catch (e2: Exception) {}
+            music = null
+        }
+    }
+
+    private fun musicPause() {
+        try {
+            if (music?.isPlaying == true) music?.pause()
+        } catch (e: Exception) {}
+    }
+
+    override fun onPause() {
+        resumed = false
+        musicPause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        try { music?.release() } catch (e: Exception) {}
+        music = null
+        super.onDestroy()
+    }
+
     override fun onResume() {
         super.onResume()
+        resumed = true
+        musicStart()
         Thread {
             var rst = 0
             if (online()) {
@@ -310,6 +354,7 @@ class MenuActivity : ComponentActivity() {
         @JavascriptInterface
         fun setPrefs(lang: String, sound: Boolean, vib: Boolean) {
             Prefs.set(this@MenuActivity, lang, sound, vib)
+            runOnUiThread { if (sound) musicStart() else musicPause() }
         }
 
         @JavascriptInterface
