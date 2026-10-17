@@ -305,6 +305,30 @@ class MenuActivity : ComponentActivity() {
             }
         }
 
+        // ---------- Ma'lumotlar bo'limi ----------
+        @JavascriptInterface
+        fun appVersion(): String = try {
+            packageManager.getPackageInfo(packageName, 0).versionName ?: "1.0"
+        } catch (e: Exception) {
+            "1.0"
+        }
+
+        // Faqat ma'lum havolalar ochiladi (JS dan keladigan matn ishlatilmaydi)
+        @JavascriptInterface
+        fun openLink(key: String) {
+            val url = when (key) {
+                "tg" -> "https://t.me/steve_empire"
+                "ig" -> "https://www.instagram.com/_abdimamatov"
+                else -> return
+            }
+            runOnUiThread {
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                } catch (e: Exception) {
+                }
+            }
+        }
+
         // ---------- Premium: Google Play Billing ----------
         @JavascriptInterface
         fun loadProducts() {
