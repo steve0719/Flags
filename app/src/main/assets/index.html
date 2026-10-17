@@ -285,6 +285,14 @@ nav em{font-style:normal}
 .rrow{display:flex;align-items:center;gap:10px;padding:8px 8px;border-radius:16px;color:#0b3fa8}
 .rrow+.rrow{margin-top:2px}
 .rrow.me{background:#e3f1ff;box-shadow:inset 0 0 0 3px #1e90ff}
+.rrow.hit{background:#fff3b0;box-shadow:inset 0 0 0 3px #ffb300}
+.rklist{max-height:58vh;overflow:auto;margin:8px 0;display:flex;flex-direction:column;gap:6px}
+.rkrow{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;text-align:left}
+.rkrow.me{background:#e3f1ff;box-shadow:inset 0 0 0 3px #1e90ff}
+.rkrow b{flex:1}
+.rkrow>span:last-child{opacity:.75;font-weight:700;white-space:nowrap}
+.rkg{width:36px;text-align:center;font-size:26px;line-height:1}
+.rkrow .rkimg{width:34px;height:34px}
 .rnote{padding:16px;text-align:center;color:#fff;font-weight:700;opacity:.92}
 .rno{width:34px;flex:none;text-align:center;font-weight:800;font-size:18px;color:#5b7bb5}
 .rav{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:22px;border:3px solid #fff;background:radial-gradient(circle at 35% 30%,#3ea0ff,#0e49c0);background-size:cover;background-position:center;box-shadow:0 2px 6px rgba(0,40,120,.3)}
@@ -398,7 +406,7 @@ nav em{font-style:normal}
  <div id="idscr"><button class="lg" id="idlang"></button><div class="hero" style="--a:#22b53a;--b:#7df05a"><span>🌍</span></div><h2 data-i="id_t"></h2><p data-i="id_d"></p><p id="idmsg"></p><button class="go" id="idretry" data-i="retry"></button></div>
  <div id="sheet"><div class="scard" id="card"><div class="ic" id="sic">🎮</div><h2 id="st"></h2><p id="sd"></p><div id="sext"></div><button class="go" id="sg"></button><br><button class="x" id="sx" data-i="close">Yopish</button></div></div>
  <div id="guide"><div class="gtop"><button class="gback" id="gback">‹</button><h2 id="gtitle"></h2></div><div id="gbody"></div></div>
- <div id="pg"><div class="gtop"><button class="gback" id="pback">‹</button><h2 id="ptitle"></h2></div><div id="pbody"></div><div id="pfoot"></div></div>
+ <div id="pg"><div class="gtop"><button class="gback" id="pback">‹</button><h2 id="ptitle"></h2><button class="gback" id="psrch" style="display:none;margin-left:auto;font-size:22px">🔍</button></div><div id="pbody"></div><div id="pfoot"></div></div>
  <div id="gdet"><div class="gcard" id="gcard"></div></div>
  <div id="lvup"><div class="lvcard" id="lvbody"></div></div>
  <div id="splash">
@@ -440,9 +448,9 @@ Object.assign(TX.en,{rt_id:"ID",rt_load:"Loading…",rt_off:"Couldn't load the r
 Object.assign(TX.uz,{pr_store:"Xarid Google Play orqali amalga oshiriladi.",pr_unavail:"Xaridlar hozir mavjud emas. Keyinroq urinib ko'ring.",pr_wait:"Tekshirilmoqda…",pr_pending:"To'lov kutilmoqda. Tasdiqlangach Premium qo'shiladi.",pr_done:"Premium faollashtirildi! 🎉",pr_verr:"Xarid qabul qilindi, lekin tekshirib bo'lmadi. Internetni yoqing, Premium avtomatik qo'shiladi.",pr_ferr:"Xarid amalga oshmadi."});
 Object.assign(TX.ru,{pr_store:"Покупка выполняется через Google Play.",pr_unavail:"Покупки сейчас недоступны. Попробуйте позже.",pr_wait:"Проверяем…",pr_pending:"Платёж ожидает подтверждения. Premium добавится после подтверждения.",pr_done:"Premium активирован! 🎉",pr_verr:"Покупка принята, но проверить не удалось. Включите интернет — Premium добавится автоматически.",pr_ferr:"Покупка не удалась."});
 Object.assign(TX.en,{pr_store:"Purchases are made through Google Play.",pr_unavail:"Purchases are unavailable right now. Try again later.",pr_wait:"Checking…",pr_pending:"Payment is pending. Premium will be added once it is confirmed.",pr_done:"Premium activated! 🎉",pr_verr:"Purchase accepted but couldn't be verified. Turn on the internet and Premium will be added automatically.",pr_ferr:"Purchase failed."});
-Object.assign(TX.uz,{inf_where:"O'zbekiston, Buxoro",inf_bio:"Assalomu alaykum! Find the flag ilovasini yaratdik. Shuningdek, biz turli ilova va o'yinlarni ham yaratib beramiz. Loyihangiz bo'lsa, quyidagi qo'llab-quvvatlash havolalari orqali yozing.",inf_sup:"Qo'llab-quvvatlash",inf_sup_d:"Savol, taklif yoki muammo bo'lsa, shu havolalar orqali yozing.",inf_dev2:"Yordamchi dasturchi",inf_thx:"Loyihaga qo'shgan hissasi uchun chuqur minnatdorchilik bildiramiz. Ilovadan foydalanayotgan har bir o'yinchiga ham katta rahmat! 🙏",inf_about:"Old kameradagi yuzingiz tepasida bayroq paydo bo'ladi — uning qaysi davlatniki ekanini 10 soniyada toping.",inf_ver:"Versiya",inf_creator:"Yaratuvchi",inf_co:"Kompaniya",inf_priv_t:"Maxfiylik",inf_cam:"📷 Kamera faqat yuzni telefonning o'zida aniqlash uchun ishlatiladi. Rasm yoki video saqlanmaydi va yuborilmaydi.",inf_ads:"📢 Reklamalar Google AdMob orqali ko'rsatiladi.",inf_data:"🌐 Reyting uchun serverga tasodifiy ID, ism, davlat, o'yin vaqti va rekordlar yuboriladi."});
-Object.assign(TX.ru,{inf_where:"Узбекистан, Бухара",inf_bio:"Ассалому алейкум! Мы создали приложение Find the flag. Также мы разрабатываем различные приложения и игры на заказ. Если у вас есть проект, напишите нам по ссылкам поддержки ниже.",inf_sup:"Поддержка",inf_sup_d:"Есть вопрос, предложение или проблема? Напишите нам по этим ссылкам.",inf_dev2:"Помощник разработчика",inf_thx:"Выражаем глубокую благодарность за вклад в проект. Спасибо каждому игроку! 🙏",inf_about:"Над вашим лицом на фронтальной камере появляется флаг — угадайте страну за 10 секунд.",inf_ver:"Версия",inf_creator:"Автор",inf_co:"Компания",inf_priv_t:"Конфиденциальность",inf_cam:"📷 Камера используется только для определения лица на самом телефоне. Фото и видео не сохраняются и не отправляются.",inf_ads:"📢 Реклама показывается через Google AdMob.",inf_data:"🌐 Для рейтинга на сервер отправляются случайный ID, имя, страна, игровое время и рекорды."});
-Object.assign(TX.en,{inf_where:"Uzbekistan, Bukhara",inf_bio:"Hello! We created Find the flag. We also build various apps and games for others. If you have a project, write to us through the support links below.",inf_sup:"Support",inf_sup_d:"Questions, ideas or problems? Reach us through these links.",inf_dev2:"Assistant developer",inf_thx:"We are deeply grateful for his contribution to the project. Thank you to every player! 🙏",inf_about:"A flag appears above your face on the front camera — guess its country in 10 seconds.",inf_ver:"Version",inf_creator:"Creator",inf_co:"Company",inf_priv_t:"Privacy",inf_cam:"📷 The camera is used only to detect your face on the phone itself. No photos or videos are saved or sent.",inf_ads:"📢 Ads are shown through Google AdMob.",inf_data:"🌐 For the ranking, a random ID, name, country, play time and records are sent to the server."});
+Object.assign(TX.uz,{rk_all:"Ranklar",sr_title:"ID bo'yicha qidirish",sr_ph:"11 xonali ID",sr_go:"Qidirish",sr_none:"Bu ID reytingda topilmadi.",sr_err:"Tekshirib bo'lmadi. Internetni tekshiring.",sr_bad:"ID 11 ta raqamdan iborat bo'lishi kerak.",inf_where:"O'zbekiston, Buxoro",inf_bio:"Assalomu alaykum! Find the flag ilovasini yaratdik. Shuningdek, biz turli ilova va o'yinlarni ham yaratib beramiz. Loyihangiz bo'lsa, quyidagi qo'llab-quvvatlash havolalari orqali yozing.",inf_sup:"Qo'llab-quvvatlash",inf_sup_d:"Savol, taklif yoki muammo bo'lsa, shu havolalar orqali yozing.",inf_dev2:"Yordamchi dasturchi",inf_thx:"Loyihaga qo'shgan hissasi uchun chuqur minnatdorchilik bildiramiz. Ilovadan foydalanayotgan har bir o'yinchiga ham katta rahmat! 🙏",inf_about:"Old kameradagi yuzingiz tepasida bayroq paydo bo'ladi — uning qaysi davlatniki ekanini 10 soniyada toping.",inf_ver:"Versiya",inf_creator:"Yaratuvchi",inf_co:"Kompaniya",inf_priv_t:"Maxfiylik",inf_cam:"📷 Kamera faqat yuzni telefonning o'zida aniqlash uchun ishlatiladi. Rasm yoki video saqlanmaydi va yuborilmaydi.",inf_ads:"📢 Reklamalar Google AdMob orqali ko'rsatiladi.",inf_data:"🌐 Reyting uchun serverga tasodifiy ID, ism, davlat, o'yin vaqti va rekordlar yuboriladi."});
+Object.assign(TX.ru,{rk_all:"Ранги",sr_title:"Поиск по ID",sr_ph:"ID из 11 цифр",sr_go:"Найти",sr_none:"Этот ID не найден в рейтинге.",sr_err:"Не удалось проверить. Проверьте интернет.",sr_bad:"ID должен состоять из 11 цифр.",inf_where:"Узбекистан, Бухара",inf_bio:"Ассалому алейкум! Мы создали приложение Find the flag. Также мы разрабатываем различные приложения и игры на заказ. Если у вас есть проект, напишите нам по ссылкам поддержки ниже.",inf_sup:"Поддержка",inf_sup_d:"Есть вопрос, предложение или проблема? Напишите нам по этим ссылкам.",inf_dev2:"Помощник разработчика",inf_thx:"Выражаем глубокую благодарность за вклад в проект. Спасибо каждому игроку! 🙏",inf_about:"Над вашим лицом на фронтальной камере появляется флаг — угадайте страну за 10 секунд.",inf_ver:"Версия",inf_creator:"Автор",inf_co:"Компания",inf_priv_t:"Конфиденциальность",inf_cam:"📷 Камера используется только для определения лица на самом телефоне. Фото и видео не сохраняются и не отправляются.",inf_ads:"📢 Реклама показывается через Google AdMob.",inf_data:"🌐 Для рейтинга на сервер отправляются случайный ID, имя, страна, игровое время и рекорды."});
+Object.assign(TX.en,{rk_all:"Ranks",sr_title:"Search by ID",sr_ph:"11-digit ID",sr_go:"Search",sr_none:"This ID was not found in the ranking.",sr_err:"Couldn't check. Check your internet.",sr_bad:"The ID must be 11 digits.",inf_where:"Uzbekistan, Bukhara",inf_bio:"Hello! We created Find the flag. We also build various apps and games for others. If you have a project, write to us through the support links below.",inf_sup:"Support",inf_sup_d:"Questions, ideas or problems? Reach us through these links.",inf_dev2:"Assistant developer",inf_thx:"We are deeply grateful for his contribution to the project. Thank you to every player! 🙏",inf_about:"A flag appears above your face on the front camera — guess its country in 10 seconds.",inf_ver:"Version",inf_creator:"Creator",inf_co:"Company",inf_priv_t:"Privacy",inf_cam:"📷 The camera is used only to detect your face on the phone itself. No photos or videos are saved or sent.",inf_ads:"📢 Ads are shown through Google AdMob.",inf_data:"🌐 For the ranking, a random ID, name, country, play time and records are sent to the server."});
 Object.assign(TX.uz,{u_hh:"soat",u_mm:"daqiqa",u_ss:"soniya",rk_next:"Keyingi darajagacha",rk_total:"Jami faol o'yin vaqti",rk_max:"Eng yuqori daraja!",rk_up:"Tabriklaymiz! 🎉",rk_up2:"Siz {n}-darajaga ko'tarildingiz",rk_newrank:"Yangi rank: {r}",rk_ok:"Davom etish"});
 Object.assign(TX.ru,{u_hh:"ч",u_mm:"мин",u_ss:"сек",rk_next:"До следующего уровня",rk_total:"Всего активного времени в играх",rk_max:"Максимальный уровень!",rk_up:"Поздравляем! 🎉",rk_up2:"Вы достигли {n}-го уровня",rk_newrank:"Новый ранг: {r}",rk_ok:"Продолжить"});
 Object.assign(TX.en,{u_hh:"h",u_mm:"min",u_ss:"s",rk_next:"To next level",rk_total:"Total active play time",rk_max:"Max level reached!",rk_up:"Congratulations! 🎉",rk_up2:"You reached level {n}",rk_newrank:"New rank: {r}",rk_ok:"Continue"});
@@ -672,10 +680,12 @@ function rtAuto(type){const s=rsOf(type);if(!s.busy&&!s.fail&&(!s.loaded||Date.n
 function rtMore(type){const s=rsOf(type);if(s.busy||s.fail||!s.loaded||s.rows.length>=s.total)return;
  const p=$('pbody');if(p.scrollTop+p.clientHeight>=p.scrollHeight-300)rtFetch(type,s.rows.length,RP)}
 function rtReset(type){const s=rsOf(type);s.rows=[];s.loaded=0;s.fail=0;s.busy=0;s.jump=0;rtRender(type)}
-function rtJump(type){const s=rsOf(type);if(!s.me||!s.me.rank)return;s.jump=1;rtJumpStep(type)}
-function rtJumpStep(type){const s=rsOf(type),m=s.me;if(!m)return;
- if(s.rows.length>=m.rank||s.rows.length>=s.total){s.jump=0;const el=$('pbody').querySelector('.rrow.me');if(el)el.scrollIntoView({block:'center',behavior:'smooth'});return}
- rtFetch(type,s.rows.length,Math.min(200,m.rank-s.rows.length+5))}
+function rtJump(type){const s=rsOf(type);if(!s.me||!s.me.rank)return;s.jrank=s.me.rank;s.jid='';s.jump=1;rtJumpStep(type)}
+function rtGoto(type,id,rank){const s=rsOf(type);s.jrank=rank;s.jid=id;s.jump=1;rtJumpStep(type)}
+function rtJumpStep(type){const s=rsOf(type);if(!s.jrank)return;
+ if(s.rows.length>=s.jrank||s.rows.length>=s.total){s.jump=0;const el=$('pbody').querySelector(s.jid?'[data-rid="'+s.jid+'"]':'.rrow.me');
+  if(el){el.scrollIntoView({block:'center',behavior:'smooth'});if(s.jid){el.classList.add('hit');setTimeout(()=>el.classList.remove('hit'),3500)}}return}
+ rtFetch(type,s.rows.length,Math.min(200,s.jrank-s.rows.length+5))}
 window.onRatingData=(type,off,tag,d)=>{const s=rsOf(type);s.busy=0;
  if(!d||!d.ok){s.fail=1;s.jump=0;rtRender(type);return}
  s.fail=0;s.t=Date.now();s.total=d.total;s.me=d.me;
@@ -689,15 +699,15 @@ const rtNote=(S)=>S.fail?'<div class="rnote" data-retry="1">'+t('rt_off')+'</div
 
 function ratingPage(){
  const s0=myStats(),ph=store.get('photo'),nm=store.get('name')||t('profile'),mc=myCountry(),me=myId(),S=rsOf('level');
- rtAuto('level');
+ $('psrch').style.display='block';rtAuto('level');
  const rows=S.rows.map(r=>({i:r.i,n:r.n,c:r.c,sec:r.sec||0,me:r.i===me})),mrank=S.me&&S.me.rank?S.me.rank:0,rk=rankOf(s0.lv),mine={i:me,n:nm,c:mc,sec:s0.time,me:1,rank:mrank};
  RT_ALL=rows;RT_ME=mine;
  const head='<div class="rhead"><div class="pfa" data-pi="me"'+(ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+(ph?'':'🙂')+flagBadge(mc)+'</div>'+
-  '<h3>'+esc(nm)+'</h3><div class="rchips"><span>⭐ '+t('rt_lv')+' '+s0.lv+'</span><span class="rkn">'+rankChip(rk)+'</span><span class="rk">🏆 '+t('rt_rank')+' #'+(mrank||'—')+'</span></div>'+
+  '<h3>'+esc(nm)+'</h3><div class="rchips"><span>⭐ '+t('rt_lv')+' '+s0.lv+'</span><span class="rkn" data-rkinfo="1" style="cursor:pointer">'+rankChip(rk)+'</span><span class="rk">🏆 '+t('rt_rank')+' #'+(mrank||'—')+'</span></div>'+
   '<div class="rtime"><small>⏱ '+t('rt_time')+'</small><b>'+hrs(s0.time)+'</b></div></div>';
  const tabs='<div class="rtabs"><button class="rtab on">🏅 '+t('rt_lvl')+'</button><button class="rtab" data-rm="1">🎮 '+t('rt_games')+'</button></div>';
  const medal=['🥇','🥈','🥉'];
- const row=(r,i,pinned)=>'<div class="rrow'+(r.me?' me':'')+'"'+(pinned?' data-jump="1"':' data-pi="'+i+'"')+'><div class="rno">'+(pinned?(r.rank||'—'):(medal[i]||(i+1)))+'</div>'+
+ const row=(r,i,pinned)=>'<div class="rrow'+(r.me?' me':'')+'"'+(pinned?' data-jump="1"':' data-pi="'+i+'" data-rid="'+esc(r.i)+'"')+'><div class="rno">'+(pinned?(r.rank||'—'):(medal[i]||(i+1)))+'</div>'+
   '<div class="rav"'+(r.me&&ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+((r.me&&ph)?'':'🙂')+flagBadge(r.c)+'</div>'+
   '<div class="rmid"><b>'+esc(r.n)+'</b><small>⏱ '+hrs(r.sec)+'</small></div>'+
   '<div class="rvs"><span class="rval rrk">'+rankChip(rankOf(lvOf(r.sec)))+'</span><span class="rval">'+t('rt_lv')+' '+lvOf(r.sec)+'</span></div></div>';
@@ -708,6 +718,22 @@ function playerCard(r,rank){const ph=store.get('photo'),lv=lvOf(r.sec);
   grow('🆔',t('rt_id'),esc(r.i||''))+grow('🎖',t('rt_rk'),rankChip(rankOf(lv)))+grow('⭐',t('rt_lv'),lv)+grow('⏱',t('rt_hl'),hrs(r.sec))+grow('🏆',t('rt_pos'),rank?'#'+rank:'—')+
   '<button class="x" data-x="1">'+t('close')+'</button>';
  $('gdet').classList.add('show')}
+function ranksCard(){const cur=rankIdx(myStats().lv);
+ $('gcard').innerHTML='<h3>'+t('rk_all')+'</h3><div class="rklist">'+RANKS.map((R,i)=>{const k=rankOf(i*10+1);return '<div class="rkrow'+(i===cur?' me':'')+'"><span class="rkg">'+rankGlyph(k)+'</span><b>'+esc(k.name)+'</b><span>'+t('rt_lv')+' '+(i*10+1)+'–'+(i*10+10)+'</span></div>'}).join('')+'</div><button class="x" data-x="1">'+t('close')+'</button>';
+ $('gdet').classList.add('show')}
+let srType='';
+function srchCard(){const k=curType();if(!k)return;srType=k;
+ $('gcard').innerHTML='<h3>'+t('sr_title')+'</h3><input id="srid" class="inp" inputmode="numeric" maxlength="11" placeholder="'+t('sr_ph')+'" autocomplete="off"><div class="prd" id="srmsg" style="min-height:22px"></div><button class="buy" data-sr="go">'+t('sr_go')+'</button><button class="x" data-x="1">'+t('close')+'</button>';
+ $('gdet').classList.add('show');setTimeout(()=>{try{$('srid').focus()}catch(e){}},60)}
+$('psrch').addEventListener('click',srchCard);
+$('gcard').addEventListener('click',e=>{if(!e.target.closest('[data-sr]'))return;const v=($('srid').value||'').replace(/\D/g,'');
+ if(v.length!==11){$('srmsg').textContent=t('sr_bad');return}
+ $('srmsg').textContent='…';try{B.findRating(srType,v)}catch(x){$('srmsg').textContent=t('sr_err')}});
+window.onRatingFind=(type,d)=>{const m=$('srmsg'),open=$('gdet').classList.contains('show')&&m;
+ if(!d||!d.ok){if(open)m.textContent=t('sr_err');return}
+ if(!d.found){if(open)m.textContent=t('sr_none');return}
+ $('gdet').classList.remove('show');if(curType()===type)rtGoto(type,d.found.i,d.found.rank)};
+$('pbody').addEventListener('click',e=>{if(pgView===ratingPage&&e.target.closest('[data-rkinfo]'))ranksCard()});
 const openPlayer=e=>{if(pgView!==ratingPage)return;const a=e.target.closest('[data-pi]');if(!a)return;
  if(a.dataset.pi==='me'){playerCard(RT_ME,RT_ME.rank);return}
  const i=+a.dataset.pi,r=RT_ALL[i];if(r)playerCard(r,i+1)};
@@ -754,8 +780,8 @@ const fmtT=x=>x<60?(Math.round(x*10)/10).toFixed(1)+' '+t('gm_s'):Math.floor(x/6
 function openGameBoard(i){closeRMenu(1);gsel=i;const g=GL[i];if(g.k)rsOf(g.k).t=0;$('ptitle').textContent=g.k?g.n:t('soon');pgView=gameBoardPage;gameBoardPage();$('pbody').scrollTop=0}
 function gameBoardPage(){
  const g=GL[gsel];
- if(!g.k){$('pbody').innerHTML='<div class="pcard"><div class="big">🔒</div><h3>'+t('soon')+'</h3><div class="prd">'+t('soon_d')+'</div></div>';$('pfoot').innerHTML='';return}
- const k=g.k,S=rsOf(k);rtAuto(k);
+ if(!g.k){$('psrch').style.display='none';$('pbody').innerHTML='<div class="pcard"><div class="big">🔒</div><h3>'+t('soon')+'</h3><div class="prd">'+t('soon_d')+'</div></div>';$('pfoot').innerHTML='';return}
+ const k=g.k,S=rsOf(k);$('psrch').style.display='block';rtAuto(k);
  const ph=store.get('photo'),nm=store.get('name')||t('profile'),mc=myCountry(),me=myId(),loc=recOf(k),ok=r=>r.cnt>0;
  const rows=S.rows.map(r=>({i:r.i,n:r.n,c:r.c,cnt:r.cnt||0,sec:r.sec||0,me:r.i===me}));
  const mr=(S.me&&S.loaded)?{cnt:S.me.cnt,sec:S.me.sec}:{cnt:loc?loc.cnt:0,sec:loc?loc.sec:0};
@@ -764,7 +790,7 @@ function gameBoardPage(){
  const head='<div class="rhead"><div class="pfa" data-gi="me"'+(ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+(ph?'':'🙂')+flagBadge(mc)+'</div><h3>'+esc(nm)+'</h3>'+
   '<div class="rchips"><span>🚩 '+(ok(mine)?mine.cnt:'—')+'</span><span class="rkn">⏱ '+(ok(mine)?fmtT(mine.sec):'—')+'</span><span class="rk">🏆 '+t('rt_rank')+' #'+(ok(mine)&&mrank?mrank:'—')+'</span></div>'+
   '<div class="rtime"><small>ℹ️ '+t('gm_info')+'</small></div></div>';
- const row=(r,i,pinned)=>'<div class="rrow'+(r.me?' me':'')+'"'+(pinned?' data-jump="1"':' data-gi="'+i+'"')+'><div class="rno">'+(ok(r)?(pinned?(r.rank||'—'):(medal[i]||(i+1))):'—')+'</div>'+
+ const row=(r,i,pinned)=>'<div class="rrow'+(r.me?' me':'')+'"'+(pinned?' data-jump="1"':' data-gi="'+i+'" data-rid="'+esc(r.i)+'"')+'><div class="rno">'+(ok(r)?(pinned?(r.rank||'—'):(medal[i]||(i+1))):'—')+'</div>'+
   '<div class="rav"'+(r.me&&ph?' style="background-image:url(\''+ph+'\')"':'')+'>'+((r.me&&ph)?'':'🙂')+flagBadge(r.c)+'</div>'+
   '<div class="rmid"><b>'+esc(r.n)+'</b><small>'+t('gm_rec')+'</small></div>'+
   '<div class="rvs"><span class="rval rrk">'+(ok(r)?'🚩 '+r.cnt:'—')+'</span><span class="rval">'+(ok(r)?'⏱ '+fmtT(r.sec):'—')+'</span></div></div>';
@@ -794,7 +820,7 @@ function premText(){
  if(r.y)p.push(r.y+' '+t('u_y'));if(r.m)p.push(r.m+' '+t('u_m'));if(r.d||!p.length)p.push(r.d+' '+t('u_d'));
  return p.join(' ')}
 let pgView=null;
-function pgOpen(title,fn){$('ptitle').textContent=title;pgView=fn;fn();$('pg').classList.add('show')}
+function pgOpen(title,fn){$('ptitle').textContent=title;pgView=fn;$('psrch').style.display='none';fn();$('pg').classList.add('show')}
 function pgClose(){closeRMenu(1);$('pg').classList.remove('show');pgView=null}
 $('pback').onclick=()=>pgBack();
 function infoPage(){
