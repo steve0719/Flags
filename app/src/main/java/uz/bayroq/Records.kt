@@ -8,7 +8,7 @@ import java.net.URLEncoder
 
 /** O'yin rekordini serverga yuboradi va reyting sahifalarini oladi. */
 object Records {
-    private fun post(path: String, body: String): String? {
+    fun post(path: String, body: String): String? {
         if (Api.BASE.isEmpty()) return null
         return try {
             val conn = URL(Api.BASE + path).openConnection() as HttpURLConnection

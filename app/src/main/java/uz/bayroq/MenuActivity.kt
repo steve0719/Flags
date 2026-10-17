@@ -37,6 +37,17 @@ class MenuActivity : ComponentActivity() {
     private var revealed = false
     private var music: MediaPlayer? = null
     private var resumed = false
+    private var splashOver = false
+    private var billing: PlayBilling? = null
+
+    private fun bill(): PlayBilling {
+        var b = billing
+        if (b == null) {
+            b = PlayBilling(this) { code -> js(code) }
+            billing = b
+        }
+        return b
+    }
     private val t0 = SystemClock.elapsedRealtime()
 
     private fun js(code: String) = web.evaluateJavascript(code, null)
@@ -94,7 +105,7 @@ class MenuActivity : ComponentActivity() {
     // Ilovaga qaytilganda (botdan yoki o'yindan): Premium va faol o'yin vaqtini yangilaymiz
     // Menyu musiqasi: assets/menu_music.mp3. Fayl yo'q bo'lsa, jim o'tadi. O'yinga kirilganda (onPause) to'xtaydi.
     private fun musicStart() {
-        if (!resumed || !Prefs.sound(this)) return
+        if (!resumed || !splashOver || !Prefs.sound(this)) return
         try {
             if (music == null) {
                 val afd = assets.openFd("menu_music.mp3")
@@ -128,6 +139,7 @@ class MenuActivity : ComponentActivity() {
     override fun onDestroy() {
         try { music?.release() } catch (e: Exception) {}
         music = null
+        billing?.close()
         super.onDestroy()
     }
 
@@ -135,6 +147,7 @@ class MenuActivity : ComponentActivity() {
         super.onResume()
         resumed = true
         musicStart()
+        bill().restore()
         Thread {
             var rst = 0
             if (online()) {
@@ -283,32 +296,24 @@ class MenuActivity : ComponentActivity() {
             }.start()
         }
 
-        // Premium olish: Telegram botni ochadi (internet shart)
+        // Loading oynasi tugadi: menyu musiqasi shundan keyin boshlanadi
         @JavascriptInterface
-        fun openBot() {
-            Thread {
-                if (!online()) {
-                    runOnUiThread { js("window.onBot('offline')") }
-                    return@Thread
-                }
-                var bot = Prefs.bot(this@MenuActivity)
-                if (bot.isEmpty()) {
-                    Premium.sync(this@MenuActivity)
-                    bot = Prefs.bot(this@MenuActivity)
-                }
-                runOnUiThread {
-                    if (bot.isEmpty()) {
-                        js("window.onBot('fail')")
-                    } else {
-                        try {
-                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/$bot")))
-                            js("window.onBot('ok')")
-                        } catch (e: Exception) {
-                            js("window.onBot('fail')")
-                        }
-                    }
-                }
-            }.start()
+        fun splashDone() {
+            runOnUiThread {
+                splashOver = true
+                musicStart()
+            }
+        }
+
+        // ---------- Premium: Google Play Billing ----------
+        @JavascriptInterface
+        fun loadProducts() {
+            runOnUiThread { bill().loadProducts() }
+        }
+
+        @JavascriptInterface
+        fun buyPremium(pid: String) {
+            runOnUiThread { bill().buy(pid) }
         }
 
         // ---------- O'yinni ochish ----------

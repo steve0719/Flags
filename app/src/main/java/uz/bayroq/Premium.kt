@@ -29,8 +29,6 @@ object Premium {
                     false
                 } else {
                     Prefs.setPremium(c, j.optLong("premium_until"), j.optLong("now"))
-                    val bot = j.optString("bot")
-                    if (bot.isNotEmpty()) Prefs.setBot(c, bot)
                     true
                 }
             }
