@@ -205,6 +205,9 @@ nav em{font-style:normal}
 #idscr.show{display:flex}
 #idlang{position:absolute;top:14px;right:14px;flex:none;width:auto;padding:8px 14px;box-shadow:0 3px 0 rgba(10,50,140,.3)}
 .prbuy{margin-bottom:10px}
+.lkb{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;border:0;background:none;padding:6px;font:inherit;font-weight:800;color:inherit;cursor:pointer}
+.lkb:active{transform:translateY(2px)}
+.lkimg{width:76px;height:76px;border-radius:20px;object-fit:cover;box-shadow:0 4px 0 rgba(0,0,0,.2)}
 #idscr h2{margin:0;font-size:30px;text-shadow:0 3px 0 #0b3fa8}
 #idscr p{margin:8px 0 14px;font-size:17px;font-weight:600;text-shadow:0 2px 0 rgba(11,63,168,.6)}
 #idmsg{color:#ffe27a;min-height:24px}
@@ -437,6 +440,9 @@ Object.assign(TX.en,{rt_id:"ID",rt_load:"Loading…",rt_off:"Couldn't load the r
 Object.assign(TX.uz,{pr_store:"Xarid Google Play orqali amalga oshiriladi.",pr_unavail:"Xaridlar hozir mavjud emas. Keyinroq urinib ko'ring.",pr_wait:"Tekshirilmoqda…",pr_pending:"To'lov kutilmoqda. Tasdiqlangach Premium qo'shiladi.",pr_done:"Premium faollashtirildi! 🎉",pr_verr:"Xarid qabul qilindi, lekin tekshirib bo'lmadi. Internetni yoqing, Premium avtomatik qo'shiladi.",pr_ferr:"Xarid amalga oshmadi."});
 Object.assign(TX.ru,{pr_store:"Покупка выполняется через Google Play.",pr_unavail:"Покупки сейчас недоступны. Попробуйте позже.",pr_wait:"Проверяем…",pr_pending:"Платёж ожидает подтверждения. Premium добавится после подтверждения.",pr_done:"Premium активирован! 🎉",pr_verr:"Покупка принята, но проверить не удалось. Включите интернет — Premium добавится автоматически.",pr_ferr:"Покупка не удалась."});
 Object.assign(TX.en,{pr_store:"Purchases are made through Google Play.",pr_unavail:"Purchases are unavailable right now. Try again later.",pr_wait:"Checking…",pr_pending:"Payment is pending. Premium will be added once it is confirmed.",pr_done:"Premium activated! 🎉",pr_verr:"Purchase accepted but couldn't be verified. Turn on the internet and Premium will be added automatically.",pr_ferr:"Purchase failed."});
+Object.assign(TX.uz,{inf_sup:"Qo'llab-quvvatlash",inf_sup_d:"Savol, taklif yoki muammo bo'lsa, shu havolalar orqali yozing.",inf_dev2:"Yordamchi dasturchi",inf_thx:"Loyihaga qo'shgan hissasi uchun chuqur minnatdorchilik bildiramiz. Ilovadan foydalanayotgan har bir o'yinchiga ham katta rahmat! 🙏",inf_about:"Old kameradagi yuzingiz tepasida bayroq paydo bo'ladi — uning qaysi davlatniki ekanini 10 soniyada toping.",inf_ver:"Versiya",inf_creator:"Yaratuvchi",inf_co:"Kompaniya",inf_priv_t:"Maxfiylik",inf_cam:"📷 Kamera faqat yuzni telefonning o'zida aniqlash uchun ishlatiladi. Rasm yoki video saqlanmaydi va yuborilmaydi.",inf_ads:"📢 Reklamalar Google AdMob orqali ko'rsatiladi.",inf_data:"🌐 Reyting uchun serverga tasodifiy ID, ism, davlat, o'yin vaqti va rekordlar yuboriladi."});
+Object.assign(TX.ru,{inf_sup:"Поддержка",inf_sup_d:"Есть вопрос, предложение или проблема? Напишите нам по этим ссылкам.",inf_dev2:"Помощник разработчика",inf_thx:"Выражаем глубокую благодарность за вклад в проект. Спасибо каждому игроку! 🙏",inf_about:"Над вашим лицом на фронтальной камере появляется флаг — угадайте страну за 10 секунд.",inf_ver:"Версия",inf_creator:"Автор",inf_co:"Компания",inf_priv_t:"Конфиденциальность",inf_cam:"📷 Камера используется только для определения лица на самом телефоне. Фото и видео не сохраняются и не отправляются.",inf_ads:"📢 Реклама показывается через Google AdMob.",inf_data:"🌐 Для рейтинга на сервер отправляются случайный ID, имя, страна, игровое время и рекорды."});
+Object.assign(TX.en,{inf_sup:"Support",inf_sup_d:"Questions, ideas or problems? Reach us through these links.",inf_dev2:"Assistant developer",inf_thx:"We are deeply grateful for his contribution to the project. Thank you to every player! 🙏",inf_about:"A flag appears above your face on the front camera — guess its country in 10 seconds.",inf_ver:"Version",inf_creator:"Creator",inf_co:"Company",inf_priv_t:"Privacy",inf_cam:"📷 The camera is used only to detect your face on the phone itself. No photos or videos are saved or sent.",inf_ads:"📢 Ads are shown through Google AdMob.",inf_data:"🌐 For the ranking, a random ID, name, country, play time and records are sent to the server."});
 Object.assign(TX.uz,{u_hh:"soat",u_mm:"daqiqa",u_ss:"soniya",rk_next:"Keyingi darajagacha",rk_total:"Jami faol o'yin vaqti",rk_max:"Eng yuqori daraja!",rk_up:"Tabriklaymiz! 🎉",rk_up2:"Siz {n}-darajaga ko'tarildingiz",rk_newrank:"Yangi rank: {r}",rk_ok:"Davom etish"});
 Object.assign(TX.ru,{u_hh:"ч",u_mm:"мин",u_ss:"сек",rk_next:"До следующего уровня",rk_total:"Всего активного времени в играх",rk_max:"Максимальный уровень!",rk_up:"Поздравляем! 🎉",rk_up2:"Вы достигли {n}-го уровня",rk_newrank:"Новый ранг: {r}",rk_ok:"Продолжить"});
 Object.assign(TX.en,{u_hh:"h",u_mm:"min",u_ss:"s",rk_next:"To next level",rk_total:"Total active play time",rk_max:"Max level reached!",rk_up:"Congratulations! 🎉",rk_up2:"You reached level {n}",rk_newrank:"New rank: {r}",rk_ok:"Continue"});
@@ -558,6 +564,7 @@ document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',(
  if(n==='guide'){gOpen();return}
  if(n==='rating'){pgOpen(t('n_rating'),ratingPage);return}
  if(n==='prem'){pgOpen(t('n_prem'),premPage);try{B.syncPremium()}catch(e){}return}
+ if(n==='info'){pgOpen(t('n_info'),infoPage);return}
  pgOpen(t('n_'+n),soonPage(NI[n],'n_'+n))}));
 
 $('iback').onclick=goBack;
@@ -790,6 +797,18 @@ let pgView=null;
 function pgOpen(title,fn){$('ptitle').textContent=title;pgView=fn;fn();$('pg').classList.add('show')}
 function pgClose(){closeRMenu(1);$('pg').classList.remove('show');pgView=null}
 $('pback').onclick=()=>pgBack();
+function infoPage(){
+ let v='1.0';try{v=B.appVersion()||v}catch(e){}
+ const lk=(k,f,ic,n)=>'<button class="lkb '+k+'" data-lk="'+k+'"><img class="lkimg" src="'+f+'" alt="" data-f="'+ic+'" onerror="this.outerHTML=this.dataset.f"><span>'+n+'</span></button>';
+ $('pbody').innerHTML=
+  '<div class="pcard"><div class="big">🚩</div><h3>Find the flag</h3><div class="prd">'+t('inf_about')+'</div><div class="prd">'+t('inf_ver')+' '+esc(v)+'</div></div>'+
+  '<div class="pcard"><div class="prl2">'+t('inf_creator')+'</div><h3>Abdimamatov Jamshid</h3></div>'+
+  '<div class="pcard"><h3>'+t('inf_sup')+'</h3><div class="prd" style="margin-bottom:10px">'+t('inf_sup_d')+'</div><div class="row" style="gap:10px">'+lk('tg','tg.png','✈️','Telegram')+lk('ig','ig.png','📸','Instagram')+'</div></div>'+
+  '<div class="pcard"><div class="prl2">'+t('inf_co')+'</div><h3>MYNEX COMMUNITY</h3></div>'+
+  '<div class="pcard"><h3>'+t('inf_priv_t')+'</h3><div class="prd" style="text-align:left;margin-bottom:8px">'+t('inf_cam')+'</div><div class="prd" style="text-align:left;margin-bottom:8px">'+t('inf_ads')+'</div><div class="prd" style="text-align:left">'+t('inf_data')+'</div></div>'+
+  '<div class="pcard"><div class="prl2">'+t('inf_dev2')+'</div><h3>Omonjonov Shoxjahon</h3><div class="prd">'+t('inf_thx')+'</div></div>';
+ $('pfoot').innerHTML=''}
+$('pbody').addEventListener('click',e=>{const b=e.target.closest('[data-lk]');if(b&&pgView===infoPage){try{B.openLink(b.dataset.lk)}catch(x){}}});
 function soonPage(ic,key){return()=>{$('pbody').innerHTML='<div class="pcard"><div class="big">'+ic+'</div><h3>'+t(key)+'</h3><div class="prd">'+t('sect_d')+'</div></div>';$('pfoot').innerHTML=''}}
 let prods=null,prLoad=0,prBusy=0,prMsg='';
 function premPage(){
