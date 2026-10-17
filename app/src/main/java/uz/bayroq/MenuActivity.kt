@@ -252,6 +252,17 @@ class MenuActivity : ComponentActivity() {
             }.start()
         }
 
+        // Reytingda ID bo'yicha o'yinchini qidirish
+        @JavascriptInterface
+        fun findRating(type: String, target: String) {
+            val ty = type.filter { it.isLetterOrDigit() }
+            val tg = target.filter { it.isDigit() }.take(11)
+            Thread {
+                val raw = if (online()) Records.find(this@MenuActivity, ty, tg) else null
+                runOnUiThread { js("window.onRatingFind&&window.onRatingFind('$ty',${raw ?: "null"})") }
+            }.start()
+        }
+
         // Reyting sahifasini serverdan oladi (birinchi sahifada avval o'z natijamizni yuboramiz)
         @JavascriptInterface
         fun fetchRating(type: String, offset: Int, limit: Int, tag: Int) {

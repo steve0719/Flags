@@ -67,4 +67,19 @@ object Records {
             null
         }
     }
+
+    // Boshqa o'yinchining reytingdagi o'rnini qidirish (ID bo'yicha)
+    fun find(c: Context, type: String, target: String): String? {
+        val id = Prefs.id(c) ?: return null
+        val txt = post(
+            "/rating.php",
+            "id=" + id + "&type=" + URLEncoder.encode(type, "UTF-8") + "&find=" + target + "&offset=0&limit=1"
+        ) ?: return null
+        return try {
+            JSONObject(txt)
+            txt
+        } catch (e: Exception) {
+            null
+        }
+    }
 }
