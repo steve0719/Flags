@@ -59,9 +59,6 @@ object Prefs {
 
     fun isPremium(c: Context): Boolean = premiumLeft(c) > 0
 
-    // Botning username i (serverdan keladi)
-    fun setBot(c: Context, v: String) = sp(c).edit().putString("bot", v).apply()
-    fun bot(c: Context): String = sp(c).getString("bot", "") ?: ""
 
     // ---------- Faol o'yin vaqti (Rank tizimi) ----------
     // Jami vaqt = serverdagi asos + yuborilayotgan paket + hali yuborilmaganlar.
